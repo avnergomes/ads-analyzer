@@ -13,13 +13,28 @@ st.title("📊 Meta Ads Funnel + Ticket Sales Dashboard")
 def map_funnel(name, result_indicator=""):
     s = str(name).lower()
     ri = str(result_indicator).lower()
-    if any(x in s for x in ["conv", "purchase"]) or "conversion" in ri:
+
+    # --- Funnel 3: Conversion AddToCart
+    if ("conv" in s and "addtocart" in s) or "conv_addtocart" in s or "conv-addtocart" in s:
         return "Funnel 3 (Conv-AddToCart)"
-    if any(x in s for x in ["addtocart", "atc"]) or "add_to_cart" in ri:
+    if "conversion" in ri or "purchase" in ri:
+        return "Funnel 3 (Conv-AddToCart)"
+
+    # --- Funnel 2: AddToCart (but not conv)
+    if "addtocart" in s and "conv" not in s:
         return "Funnel 2 (AddToCart)"
-    if any(x in s for x in ["lpview", "lp_view", "landingpage", "landing_page_view"]) or "landing page view" in ri:
+    if "add_to_cart" in ri:
+        return "Funnel 2 (AddToCart)"
+
+    # --- Funnel 1: LPView
+    if any(x in s for x in ["lpview","lp_view"]) or "landing_page_view" in ri:
         return "Funnel 1 (LPView)"
+
     return "Unclassified"
+
+def detect_legacy(name):
+    s = str(name).lower()
+    return "Interest/Target" if ("interest" in s or "target" in s) else "Standard"
 
 city_map = {
     'toronto':'Toronto','calgary':'Calgary','edmonton':'Edmonton',
@@ -73,6 +88,7 @@ def compute_decay(df, metric_col):
         out.append({
             "ad_set_name": adset,
             "funnel": g["funnel"].iloc[0],
+            "legacy": g["legacy"].iloc[0],
             "country": g["country"].iloc[0],
             "good_days_before_drop": good_days
         })
@@ -103,6 +119,7 @@ if days_file and days_time_file and days_pd_file:
     for df in [days, days_time, days_pd]:
         if "result_indicator" not in df.columns: df["result_indicator"] = ""
         df["funnel"] = df.apply(lambda r: map_funnel(r.get("ad_set_name",""), r.get("result_indicator","")), axis=1)
+        df["legacy"] = df["ad_set_name"].apply(detect_legacy)
         df["city"] = df["ad_set_name"].apply(detect_city)
         df["country"] = df["ad_set_name"].apply(detect_country)
 
@@ -124,10 +141,10 @@ if days_file and days_time_file and days_pd_file:
     if metric_col:
         decay_df = compute_decay(days, metric_col)
         if not decay_df.empty:
-            fig = px.box(decay_df, x="funnel", y="good_days_before_drop", color="funnel",
+            fig = px.box(decay_df, x="funnel", y="good_days_before_drop", color="legacy",
                          title="Good Days Before Performance Drop by Funnel", points="all")
             st.plotly_chart(fig, use_container_width=True)
-            st.dataframe(decay_df.groupby("funnel")["good_days_before_drop"].describe())
+            st.dataframe(decay_df.groupby(["funnel","legacy"])["good_days_before_drop"].describe())
         else:
             st.info("Not enough data to compute decay.")
     else:
@@ -137,15 +154,16 @@ if days_file and days_time_file and days_pd_file:
     # 2. Country × Funnel
     # --------------------------------
     st.subheader("🌍 Country × Funnel Overview")
-    country_funnel = days.groupby(["country","funnel"]).agg(
+    country_funnel = days.groupby(["country","funnel","legacy"]).agg(
         spend=("amount_spent_(usd)","sum"),
         impressions=("impressions","sum"),
         results=("results","sum"),
         avg_cpr=(metric_col,"mean")
     ).reset_index()
     fig = px.scatter(country_funnel, x="spend", y="results", size="impressions",
-                     color="funnel", facet_col="country", hover_data=["avg_cpr"],
-                     title="Spend vs Results by Country & Funnel")
+                     color="funnel", facet_col="country", symbol="legacy",
+                     hover_data=["avg_cpr"],
+                     title="Spend vs Results by Country, Funnel, and Legacy flag")
     st.plotly_chart(fig, use_container_width=True)
     st.dataframe(country_funnel)
 
@@ -155,13 +173,14 @@ if days_file and days_time_file and days_pd_file:
     st.subheader("🕒 Time-of-Day Performance")
     if "time_of_day_(viewer's_time_zone)" in days_time.columns:
         days_time["hour"] = days_time["time_of_day_(viewer's_time_zone)"].apply(parse_hour)
-        hour_perf = days_time.groupby(["country","funnel","hour"]).apply(
+        hour_perf = days_time.groupby(["country","funnel","legacy","hour"]).apply(
             lambda x: np.average(x[metric_col], weights=x["results"]) if "results" in x and x["results"].sum()>0 else x[metric_col].mean()
         ).reset_index(name="avg_cpr")
         country_sel = st.selectbox("Country (Time)", hour_perf["country"].unique())
         funnel_sel = st.selectbox("Funnel (Time)", hour_perf["funnel"].unique())
         filt = hour_perf[(hour_perf["country"]==country_sel)&(hour_perf["funnel"]==funnel_sel)]
-        fig_t = px.line(filt, x="hour", y="avg_cpr", markers=True, title=f"Avg CPR by Hour ({country_sel}, {funnel_sel})")
+        fig_t = px.line(filt, x="hour", y="avg_cpr", color="legacy", markers=True,
+                        title=f"Avg CPR by Hour ({country_sel}, {funnel_sel})")
         st.plotly_chart(fig_t, use_container_width=True)
         st.dataframe(filt)
 
@@ -169,13 +188,13 @@ if days_file and days_time_file and days_pd_file:
     # 4. Placement
     # --------------------------------
     st.subheader("📱 Placement Performance")
-    placement_perf = days_pd.groupby(["country","funnel","placement"]).agg(
+    placement_perf = days_pd.groupby(["country","funnel","legacy","placement"]).agg(
         avg_cpr=(metric_col,"mean"), results=("results","sum"), spend=("amount_spent_(usd)","sum")
     ).reset_index()
     country_sel_p = st.selectbox("Country (Placement)", placement_perf["country"].unique())
     funnel_sel_p = st.selectbox("Funnel (Placement)", placement_perf["funnel"].unique())
     filt_p = placement_perf[(placement_perf["country"]==country_sel_p)&(placement_perf["funnel"]==funnel_sel_p)]
-    fig_p = px.bar(filt_p.sort_values("avg_cpr"), x="placement", y="avg_cpr", color="spend", text="results",
+    fig_p = px.bar(filt_p.sort_values("avg_cpr"), x="placement", y="avg_cpr", color="legacy", text="results",
                    title=f"Placement Efficiency ({country_sel_p}, {funnel_sel_p})")
     st.plotly_chart(fig_p, use_container_width=True)
     st.dataframe(filt_p)
@@ -184,13 +203,13 @@ if days_file and days_time_file and days_pd_file:
     # 5. Devices
     # --------------------------------
     st.subheader("💻 Device Performance")
-    device_perf = days_pd.groupby(["country","funnel","impression_device"]).agg(
+    device_perf = days_pd.groupby(["country","funnel","legacy","impression_device"]).agg(
         avg_cpr=(metric_col,"mean"), results=("results","sum"), spend=("amount_spent_(usd)","sum")
     ).reset_index()
     country_sel_d = st.selectbox("Country (Device)", device_perf["country"].unique())
     funnel_sel_d = st.selectbox("Funnel (Device)", device_perf["funnel"].unique())
     filt_d = device_perf[(device_perf["country"]==country_sel_d)&(device_perf["funnel"]==funnel_sel_d)]
-    fig_d = px.bar(filt_d.sort_values("avg_cpr"), x="impression_device", y="avg_cpr", color="spend", text="results",
+    fig_d = px.bar(filt_d.sort_values("avg_cpr"), x="impression_device", y="avg_cpr", color="legacy", text="results",
                    title=f"Device Efficiency ({country_sel_d}, {funnel_sel_d})")
     st.plotly_chart(fig_d, use_container_width=True)
     st.dataframe(filt_d)
