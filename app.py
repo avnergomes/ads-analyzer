@@ -36,24 +36,39 @@ def detect_legacy(name):
     s = str(name).lower()
     return "Interest/Target" if ("interest" in s or "target" in s) else "Standard"
 
+# Improved city detection using regex
 city_map = {
-    'toronto':'Toronto','calgary':'Calgary','edmonton':'Edmonton',
-    'portland':'Portland','seattle':'Seattle','sacramento':'Sacramento','columbus':'Columbus',
-    'pdx':'Portland','sea':'Seattle','smf':'Sacramento','cmh':'Columbus','tr':'Toronto','edm':'Edmonton'
+    r"toronto|tr_": "Toronto",
+    r"calgary": "Calgary",
+    r"edmonton|edm": "Edmonton",
+    r"portland|pdx": "Portland",
+    r"seattle|sea": "Seattle",
+    r"sacramento|smf": "Sacramento",
+    r"columbus|cmh": "Columbus"
 }
 def detect_city(name):
     s = str(name).lower()
-    for token, city in city_map.items():
-        if token in s:
+    for pattern, city in city_map.items():
+        if re.search(pattern, s):
             return city
     return "Other"
 
+# Improved country detection
 def detect_country(name):
     s = str(name).lower()
-    if any(tok in s for tok in ["toronto","calgary","edmonton","tr","edm","ca-"]):
+
+    # Explicit prefixes like IG_CA, FB_US, etc.
+    if "_ca" in s or "-ca" in s or " ca-" in s:
         return "CA"
-    if any(tok in s for tok in ["portland","seattle","sacramento","columbus","pdx","sea","smf","cmh","us-"]):
+    if "_us" in s or "-us" in s or " us-" in s:
         return "US"
+
+    # Fallback: look for city tokens
+    if re.search(r"toronto|calgary|edmonton|tr_|edm", s):
+        return "CA"
+    if re.search(r"portland|seattle|sacramento|columbus|pdx|sea|smf|cmh", s):
+        return "US"
+
     return "Unclassified"
 
 def parse_hour(s):
