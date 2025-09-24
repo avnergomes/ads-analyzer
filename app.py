@@ -1,258 +1,210 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 import plotly.express as px
-import numpy as np
+import altair as alt
 import re
 
-st.set_page_config(page_title="Meta Ads Funnel Analysis", layout="wide")
-st.title("📊 Meta Ads Funnel + Ticket Sales Dashboard")
+st.set_page_config(page_title="Meta Ads Funnel & Show Analysis", layout="wide")
 
-# --------------------------
-# Helper functions
-# --------------------------
-def map_funnel(name, result_indicator=""):
-    s = str(name).lower()
-    ri = str(result_indicator).lower()
+st.title("📊 Meta Ads Funnel & Show Analysis")
 
-    # --- Funnel 3: Conversion AddToCart
-    if ("conv" in s and "addtocart" in s) or "conv_addtocart" in s or "conv-addtocart" in s:
-        return "Funnel 3 (Conv-AddToCart)"
-    if "conversion" in ri or "purchase" in ri:
-        return "Funnel 3 (Conv-AddToCart)"
+# --- Upload Section ---
+st.sidebar.header("Upload Meta Ads Files")
+days_file = st.sidebar.file_uploader("Upload Days.csv", type="csv")
+placement_device_file = st.sidebar.file_uploader("Upload Days + Placement + Device.csv", type="csv")
+time_file = st.sidebar.file_uploader("Upload Days + Time.csv", type="csv")
 
-    # --- Funnel 2: AddToCart (but not conv)
-    if "addtocart" in s and "conv" not in s:
-        return "Funnel 2 (AddToCart)"
-    if "add_to_cart" in ri:
-        return "Funnel 2 (AddToCart)"
+# --- Google Sheet (Ticket Sales) ---
+sheet_url = "https://docs.google.com/spreadsheets/d/1hVm1OALKQ244zuJBQV0SsQT08A2_JTDlPytUNULRofA/export?format=csv"
 
-    # --- Funnel 1: LPView
-    if any(x in s for x in ["lpview","lp_view"]) or "landing_page_view" in ri:
-        return "Funnel 1 (LPView)"
-
-    return "Unclassified"
-
-def detect_legacy(name):
-    s = str(name).lower()
-    return "Interest/Target" if ("interest" in s or "target" in s) else "Standard"
-
-# Improved city detection using regex
-city_map = {
-    r"toronto|tr_": "Toronto",
-    r"calgary": "Calgary",
-    r"edmonton|edm": "Edmonton",
-    r"portland|pdx": "Portland",
-    r"seattle|sea": "Seattle",
-    r"sacramento|smf": "Sacramento",
-    r"columbus|cmh": "Columbus"
-}
-def detect_city(name):
-    s = str(name).lower()
-    for pattern, city in city_map.items():
-        if re.search(pattern, s):
-            return city
-    return "Other"
-
-# Improved country detection
-def detect_country(name):
-    s = str(name).lower()
-
-    # Explicit prefixes like IG_CA, FB_US, etc.
-    if "_ca" in s or "-ca" in s or " ca-" in s:
-        return "CA"
-    if "_us" in s or "-us" in s or " us-" in s:
-        return "US"
-
-    # Fallback: look for city tokens
-    if re.search(r"toronto|calgary|edmonton|tr_|edm", s):
-        return "CA"
-    if re.search(r"portland|seattle|sacramento|columbus|pdx|sea|smf|cmh", s):
-        return "US"
-
-    return "Unclassified"
-
-def parse_hour(s):
-    try: return int(str(s).split(":")[0])
-    except: return None
-
-def get_metric(df):
-    if "cost_per_results" in df.columns and df["cost_per_results"].notna().any():
-        return "cost_per_results"
-    if "cpm_(cost_per_1,000_impressions)_(usd)" in df.columns:
-        return "cpm_(cost_per_1,000_impressions)_(usd)"
-    if "amount_spent_(usd)" in df.columns and "results" in df.columns:
-        df["calc_cpr"] = df["amount_spent_(usd)"] / df["results"].replace(0,np.nan)
-        return "calc_cpr"
-    return None
-
-def compute_decay(df, metric_col):
-    out = []
-    for adset, g in df.groupby("ad_set_name"):
-        g = g.sort_values("reporting_starts")
-        base = g[metric_col].replace([np.inf,-np.inf],np.nan).dropna().head(3).median()
-        if pd.isna(base) or base <= 0: continue
-        g["is_good"] = g[metric_col] <= 1.3*base
-        good_days, bad_run = 0, 0
-        for ok in g["is_good"]:
-            if ok:
-                good_days += 1
-                bad_run = 0
-            else:
-                bad_run += 1
-                if bad_run >= 3: break
-        out.append({
-            "ad_set_name": adset,
-            "funnel": g["funnel"].iloc[0],
-            "legacy": g["legacy"].iloc[0],
-            "country": g["country"].iloc[0],
-            "good_days_before_drop": good_days
-        })
-    return pd.DataFrame(out)
-
-# --------------------------
-# Upload files
-# --------------------------
-st.sidebar.header("Upload Meta Exports")
-days_file = st.sidebar.file_uploader("Days.csv", type="csv")
-days_time_file = st.sidebar.file_uploader("Days + Time.csv", type="csv")
-days_pd_file = st.sidebar.file_uploader("Days + Placement + Device.csv", type="csv")
-ticket_file = st.sidebar.file_uploader("Ticket Sales CSV (optional)", type="csv")
-
-if days_file and days_time_file and days_pd_file:
-    # Load
+if days_file and placement_device_file and time_file:
+    # --- Load CSVs ---
     days = pd.read_csv(days_file)
-    days_time = pd.read_csv(days_time_file)
-    days_pd = pd.read_csv(days_pd_file)
+    placement_device = pd.read_csv(placement_device_file)
+    time_of_day = pd.read_csv(time_file)
 
-    # Clean column names
-    for df in [days, days_time, days_pd]:
-        df.columns = [c.strip().lower().replace(" ", "_").replace("/", "_per_") for c in df.columns]
-        if "reporting_starts" in df.columns:
-            df["reporting_starts"] = pd.to_datetime(df["reporting_starts"], errors="coerce")
+    # --- Clean column names ---
+    def clean_columns(df):
+        df.columns = (
+            df.columns.str.strip()
+                      .str.lower()
+                      .str.replace(" ", "_")
+                      .str.replace(r"[^a-z0-9_]", "", regex=True)
+        )
+        return df
 
-    # Funnel & geography
-    for df in [days, days_time, days_pd]:
-        if "result_indicator" not in df.columns: df["result_indicator"] = ""
-        df["funnel"] = df.apply(lambda r: map_funnel(r.get("ad_set_name",""), r.get("result_indicator","")), axis=1)
-        df["legacy"] = df["ad_set_name"].apply(detect_legacy)
-        df["city"] = df["ad_set_name"].apply(detect_city)
-        df["country"] = df["ad_set_name"].apply(detect_country)
+    days = clean_columns(days)
+    placement_device = clean_columns(placement_device)
+    time_of_day = clean_columns(time_of_day)
 
-    # Date filter
-    min_date, max_date = pd.to_datetime(days["reporting_starts"]).min(), pd.to_datetime(days["reporting_starts"]).max()
-    date_range = st.sidebar.date_input("Select analysis range", [min_date, max_date])
-    mask = (days["reporting_starts"] >= pd.to_datetime(date_range[0])) & (days["reporting_starts"] <= pd.to_datetime(date_range[1]))
-    days = days.loc[mask]
-    days_time = days_time.loc[(days_time["reporting_starts"] >= pd.to_datetime(date_range[0])) & (days_time["reporting_starts"] <= pd.to_datetime(date_range[1]))]
-    days_pd = days_pd.loc[(days_pd["reporting_starts"] >= pd.to_datetime(date_range[0])) & (days_pd["reporting_starts"] <= pd.to_datetime(date_range[1]))]
+    # --- Standardize keys ---
+    for df in [days, placement_device, time_of_day]:
+        df["ad_set_same"] = df["ad_set_name"].str.strip()
+        df["reporting_starts"] = pd.to_datetime(df["reporting_starts"], errors="coerce")
 
-    # Choose metric
-    metric_col = get_metric(days)
+    # --- Aggregations ---
+    placement_device_base = placement_device.groupby(
+        ["ad_set_same", "reporting_starts"], as_index=False
+    ).agg({
+        "impressions": "sum",
+        "link_clicks": "sum",
+        "amount_spent_usd": "sum",
+        "impression_device": lambda x: list(pd.Series(x).dropna().unique()),
+        "placement": lambda x: list(pd.Series(x).dropna().unique())
+    })
 
-    # --------------------------------
-    # 1. Funnel Decay
-    # --------------------------------
-    st.subheader("⏳ Funnel Decay Analysis")
-    if metric_col:
-        decay_df = compute_decay(days, metric_col)
-        if not decay_df.empty:
-            fig = px.box(decay_df, x="funnel", y="good_days_before_drop", color="legacy",
-                         title="Good Days Before Performance Drop by Funnel", points="all")
-            st.plotly_chart(fig, use_container_width=True)
-            st.dataframe(decay_df.groupby(["funnel","legacy"])["good_days_before_drop"].describe())
+    time_base = time_of_day.groupby(
+        ["ad_set_same", "reporting_starts"], as_index=False
+    ).agg({
+        "impressions": "sum",
+        "link_clicks": "sum",
+        "amount_spent_usd": "sum",
+        "time_of_day_viewers_time_zone": lambda x: list(pd.Series(x).dropna().unique())
+    })
+
+    merged = days.merge(
+        placement_device_base,
+        on=["ad_set_same", "reporting_starts"],
+        how="left",
+        suffixes=("", "_placement")
+    ).merge(
+        time_base,
+        on=["ad_set_same", "reporting_starts"],
+        how="left",
+        suffixes=("", "_time")
+    )
+
+    # --- Funnel classification robust ---
+    def classify_funnel_robust(name: str) -> str:
+        if pd.isna(name):
+            return "Unclassified"
+        n = str(name).lower()
+        if re.search(r"(f1|fun1|lpview|lpviews)", n):
+            return "F1_LPView"
+        elif re.search(r"(f2|fun2|addtocart)", n) and "conv" not in n:
+            return "F2_AddtoCart"
+        elif re.search(r"(f3|fun3)", n) or ("conv" in n and "addtocart" in n):
+            return "F3_Conversion"
+        elif "interest" in n:
+            return "Legacy_Interest"
+        elif "target" in n:
+            return "Legacy_Target"
         else:
-            st.info("Not enough data to compute decay.")
-    else:
-        st.warning("No valid performance metric found.")
+            return "Unclassified"
 
-    # --------------------------------
-    # 2. Country × Funnel
-    # --------------------------------
-    st.subheader("🌍 Country × Funnel Overview")
-    country_funnel = days.groupby(["country","funnel","legacy"]).agg(
-        spend=("amount_spent_(usd)","sum"),
-        impressions=("impressions","sum"),
-        results=("results","sum"),
-        avg_cpr=(metric_col,"mean")
-    ).reset_index()
-    fig = px.scatter(country_funnel, x="spend", y="results", size="impressions",
-                     color="funnel", facet_col="country", symbol="legacy",
-                     hover_data=["avg_cpr"],
-                     title="Spend vs Results by Country, Funnel, and Legacy flag")
-    st.plotly_chart(fig, use_container_width=True)
-    st.dataframe(country_funnel)
+    merged["funnel"] = merged["ad_set_name"].apply(classify_funnel_robust)
 
-    # --------------------------------
-    # 3. Time-of-Day
-    # --------------------------------
-    st.subheader("🕒 Time-of-Day Performance")
-    if "time_of_day_(viewer's_time_zone)" in days_time.columns:
-        days_time["hour"] = days_time["time_of_day_(viewer's_time_zone)"].apply(parse_hour)
-        hour_perf = days_time.groupby(["country","funnel","legacy","hour"]).apply(
-            lambda x: np.average(x[metric_col], weights=x["results"]) if "results" in x and x["results"].sum()>0 else x[metric_col].mean()
-        ).reset_index(name="avg_cpr")
-        country_sel = st.selectbox("Country (Time)", hour_perf["country"].unique())
-        funnel_sel = st.selectbox("Funnel (Time)", hour_perf["funnel"].unique())
-        filt = hour_perf[(hour_perf["country"]==country_sel)&(hour_perf["funnel"]==funnel_sel)]
-        fig_t = px.line(filt, x="hour", y="avg_cpr", color="legacy", markers=True,
-                        title=f"Avg CPR by Hour ({country_sel}, {funnel_sel})")
-        st.plotly_chart(fig_t, use_container_width=True)
-        st.dataframe(filt)
+    # --- Show parser extended ---
+    def normalize_show_id_extended(name: str) -> str:
+        if pd.isna(name):
+            return "Unknown_Show"
+        n = str(name).lower()
+        base_match = re.match(r"([A-Z]{2,3}_[0-9]{4})", str(name))
+        if base_match:
+            return base_match.group(1)
+        if "_dc_" in n or "dc" in n:
+            return "WDC"
+        if "_sea_" in n or "seattle" in n:
+            return "SEA"
+        if "_tr_" in n or "toronto" in n:
+            return "TR"
+        if "_pdx_" in n or "portland" in n:
+            return "PDX"
+        if "_edm_" in n or "edmonton" in n:
+            return "EDM"
+        if "_smf_" in n or "sacramento" in n:
+            return "SMF"
+        if "_cmh_" in n or "columbus" in n:
+            return "CMH"
+        if "sunrose" in n:
+            return "SUN"
+        if "upstairs" in n:
+            return "UPS"
+        return "Unknown_Show"
 
-    # --------------------------------
-    # 4. Placement
-    # --------------------------------
-    st.subheader("📱 Placement Performance")
-    placement_perf = days_pd.groupby(["country","funnel","legacy","placement"]).agg(
-        avg_cpr=(metric_col,"mean"), results=("results","sum"), spend=("amount_spent_(usd)","sum")
-    ).reset_index()
-    country_sel_p = st.selectbox("Country (Placement)", placement_perf["country"].unique())
-    funnel_sel_p = st.selectbox("Funnel (Placement)", placement_perf["funnel"].unique())
-    filt_p = placement_perf[(placement_perf["country"]==country_sel_p)&(placement_perf["funnel"]==funnel_sel_p)]
-    fig_p = px.bar(filt_p.sort_values("avg_cpr"), x="placement", y="avg_cpr", color="legacy", text="results",
-                   title=f"Placement Efficiency ({country_sel_p}, {funnel_sel_p})")
-    st.plotly_chart(fig_p, use_container_width=True)
-    st.dataframe(filt_p)
+    merged["show_id"] = merged["ad_set_name"].apply(normalize_show_id_extended)
 
-    # --------------------------------
-    # 5. Devices
-    # --------------------------------
-    st.subheader("💻 Device Performance")
-    device_perf = days_pd.groupby(["country","funnel","legacy","impression_device"]).agg(
-        avg_cpr=(metric_col,"mean"), results=("results","sum"), spend=("amount_spent_(usd)","sum")
-    ).reset_index()
-    country_sel_d = st.selectbox("Country (Device)", device_perf["country"].unique())
-    funnel_sel_d = st.selectbox("Funnel (Device)", device_perf["funnel"].unique())
-    filt_d = device_perf[(device_perf["country"]==country_sel_d)&(device_perf["funnel"]==funnel_sel_d)]
-    fig_d = px.bar(filt_d.sort_values("avg_cpr"), x="impression_device", y="avg_cpr", color="legacy", text="results",
-                   title=f"Device Efficiency ({country_sel_d}, {funnel_sel_d})")
-    st.plotly_chart(fig_d, use_container_width=True)
-    st.dataframe(filt_d)
+    # --- Ticket Sales Integration ---
+    ticket_sales = pd.read_csv(sheet_url)
+    ticket_sales.columns = ticket_sales.columns.str.strip().str.lower().str.replace(" ", "_")
 
-    # --------------------------------
-    # 6. Ticket Sales
-    # --------------------------------
-    if ticket_file:
-        st.subheader("🎟 Ticket Sales Integration")
-        tickets = pd.read_csv(ticket_file)
-        st.dataframe(tickets)
+    if "showid" in ticket_sales.columns:
+        merged = merged.merge(ticket_sales, how="left", left_on="show_id", right_on="showid")
 
-        city_ads = days.groupby("city").agg(
-            spend=("amount_spent_(usd)","sum"), impressions=("impressions","sum"), results=("results","sum")
-        ).reset_index()
-        merged = pd.merge(tickets, city_ads, how="left", on="city")
-        merged["tickets_per_$"] = merged["tickets_sold"] / merged["spend"].replace(0,np.nan)
-        merged["tickets_per_1k_impr"] = merged["tickets_sold"] / (merged["impressions"]/1000).replace(0,np.nan)
+        # --- KPI calculations ---
+        merged["ticket_cost"] = merged["show_budget"] / merged["total_sold"]
+        merged["daily_sales_target"] = (merged["capacity"] - merged["total_sold"]) / merged["days_to_show"]
+        merged["funnel_eff_clicks"] = merged["link_clicks"] / merged["total_sold"]
+        merged["funnel_eff_lpviews"] = merged["impressions"] / merged["total_sold"]
+        merged["cpa_daily"] = merged["amount_spent_usd"] / merged["total_sold"]
+        merged["revenue"] = merged["avg_ticket_price"] * merged["capacity"]
+        merged["roas"] = merged["revenue"] / merged["amount_spent_usd"]
 
-        st.dataframe(merged)
-        fig_ts = px.scatter(merged, x="spend", y="tickets_sold", size="impressions", color="city",
-                            hover_data=["tickets_per_$","tickets_per_1k_impr"],
-                            title="Ad Spend vs Ticket Sales by City")
-        st.plotly_chart(fig_ts, use_container_width=True)
-        fig_ts2 = px.bar(merged, x="city", y="tickets_per_$", color="tickets_sold", text="tickets_sold",
-                         title="Tickets per $ Spent by City")
-        st.plotly_chart(fig_ts2, use_container_width=True)
+    st.success("✅ Data cleaned, merged and integrated with Ticket Sales!")
 
-    st.success("✅ Analysis complete. Adjust filters in sidebar.")
+    # --- Show selector ---
+    show_list = merged["show_id"].dropna().unique().tolist()
+    selected_show = st.sidebar.selectbox("Select Show", show_list)
+
+    df_show = merged[merged["show_id"] == selected_show]
+
+    # --- Health of Show KPIs ---
+    st.subheader(f"Health of Show: {selected_show}")
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    col1.metric("🎟 Tickets Sold", int(df_show["total_sold"].dropna().mean()) if "total_sold" in df_show else 0)
+    col2.metric("💰 Ticket Cost", round(df_show["ticket_cost"].dropna().mean(), 2) if "ticket_cost" in df_show else 0)
+    col3.metric("📈 ROAS", round(df_show["roas"].dropna().mean(), 2) if "roas" in df_show else 0)
+    col4.metric("📊 CPA Daily", round(df_show["cpa_daily"].dropna().mean(), 2) if "cpa_daily" in df_show else 0)
+    col5.metric("🎯 Daily Target", round(df_show["daily_sales_target"].dropna().mean(), 2) if "daily_sales_target" in df_show else 0)
+
+    # --- Tabs ---
+    tab1, tab2, tab3, tab4 = st.tabs(
+        ["📉 Funnel Decay", "📱 Devices & Placements", "⏰ Time of Day", "🎭 Show Summary"]
+    )
+
+    # Funnel decay
+    with tab1:
+        st.subheader("Funnel Decay Over Time")
+        funnel_trend = df_show.groupby(["reporting_starts", "funnel"], as_index=False).agg({
+            "impressions": "sum",
+            "link_clicks": "sum",
+            "amount_spent_usd": "sum"
+        })
+        fig = px.line(funnel_trend, x="reporting_starts", y="impressions", color="funnel", title="Impressions over Time")
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Devices & Placements
+    with tab2:
+        st.subheader("Device & Placement Breakdown")
+        if "impression_device" in placement_device:
+            device_counts = placement_device.explode("impression_device")["impression_device"].value_counts().reset_index()
+            device_counts.columns = ["device", "count"]
+            st.bar_chart(device_counts.set_index("device"))
+        if "placement" in placement_device:
+            placement_counts = placement_device.explode("placement")["placement"].value_counts().reset_index()
+            placement_counts.columns = ["placement", "count"]
+            st.bar_chart(placement_counts.set_index("placement"))
+
+    # Time of Day
+    with tab3:
+        st.subheader("Performance by Time of Day")
+        if "time_of_day_viewers_time_zone" in time_of_day:
+            time_counts = time_of_day["time_of_day_viewers_time_zone"].value_counts().reset_index()
+            time_counts.columns = ["time_slot", "count"]
+            chart = alt.Chart(time_counts).mark_bar().encode(
+                x="time_slot", y="count", tooltip=["time_slot", "count"]
+            ).properties(width=800)
+            st.altair_chart(chart, use_container_width=True)
+
+    # Show summary
+    with tab4:
+        st.subheader("Ticket Sales by Show")
+        if "showid" in ticket_sales.columns:
+            show_sales = ticket_sales[["showid", "total_sold", "capacity", "avg_ticket_price"]]
+            st.dataframe(show_sales)
+            fig_sales = px.bar(show_sales, x="showid", y="total_sold", title="Tickets Sold per Show")
+            st.plotly_chart(fig_sales, use_container_width=True)
+
 else:
-    st.info("⬆️ Upload the three raw Meta exports to get started.")
+    st.info("⬆️ Please upload the three CSV files in the sidebar to begin.")
