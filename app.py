@@ -124,23 +124,18 @@ if days_file and placement_device_file and time_file:
 
     merged["show_id"] = merged["ad_set_name"].apply(normalize_show_id_extended)
 
-    # --- Ticket Sales Integration ---
-    ticket_sales = pd.read_csv(sheet_url)
-    ticket_sales.columns = ticket_sales.columns.str.strip().str.lower().str.replace(" ", "_")
-
-    if "showid" in ticket_sales.columns:
+    # --- Try loading Ticket Sales Sheet ---
+    try:
+        ticket_sales = pd.read_csv(sheet_url)
+        ticket_sales.columns = ticket_sales.columns.str.strip().str.lower().str.replace(" ", "_")
         merged = merged.merge(ticket_sales, how="left", left_on="show_id", right_on="showid")
+        sales_available = True
+    except Exception:
+        st.warning("⚠️ Ticket Sales Sheet not accessible. Continuing with Ads data only.")
+        ticket_sales = pd.DataFrame()
+        sales_available = False
 
-        # --- KPI calculations ---
-        merged["ticket_cost"] = merged["show_budget"] / merged["total_sold"]
-        merged["daily_sales_target"] = (merged["capacity"] - merged["total_sold"]) / merged["days_to_show"]
-        merged["funnel_eff_clicks"] = merged["link_clicks"] / merged["total_sold"]
-        merged["funnel_eff_lpviews"] = merged["impressions"] / merged["total_sold"]
-        merged["cpa_daily"] = merged["amount_spent_usd"] / merged["total_sold"]
-        merged["revenue"] = merged["avg_ticket_price"] * merged["capacity"]
-        merged["roas"] = merged["revenue"] / merged["amount_spent_usd"]
-
-    st.success("✅ Data cleaned, merged and integrated with Ticket Sales!")
+    st.success("✅ Data cleaned and merged!")
 
     # --- Show selector ---
     show_list = merged["show_id"].dropna().unique().tolist()
@@ -152,15 +147,22 @@ if days_file and placement_device_file and time_file:
     st.subheader(f"Health of Show: {selected_show}")
     col1, col2, col3, col4, col5 = st.columns(5)
 
-    col1.metric("🎟 Tickets Sold", int(df_show["total_sold"].dropna().mean()) if "total_sold" in df_show else 0)
-    col2.metric("💰 Ticket Cost", round(df_show["ticket_cost"].dropna().mean(), 2) if "ticket_cost" in df_show else 0)
-    col3.metric("📈 ROAS", round(df_show["roas"].dropna().mean(), 2) if "roas" in df_show else 0)
-    col4.metric("📊 CPA Daily", round(df_show["cpa_daily"].dropna().mean(), 2) if "cpa_daily" in df_show else 0)
-    col5.metric("🎯 Daily Target", round(df_show["daily_sales_target"].dropna().mean(), 2) if "daily_sales_target" in df_show else 0)
+    if sales_available and not df_show.empty:
+        col1.metric("🎟 Tickets Sold", int(df_show["total_sold"].dropna().mean()))
+        col2.metric("💰 Ticket Cost", round(df_show["show_budget"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2) if "show_budget" in df_show and "total_sold" in df_show else 0)
+        col3.metric("📈 ROAS", round(((df_show["avg_ticket_price"].dropna().mean() * df_show["capacity"].dropna().mean()) / df_show["amount_spent_usd"].dropna().mean()), 2) if "avg_ticket_price" in df_show and "capacity" in df_show else 0)
+        col4.metric("📊 CPA Daily", round(df_show["amount_spent_usd"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2))
+        col5.metric("🎯 Daily Target", round((df_show["capacity"].dropna().mean() - df_show["total_sold"].dropna().mean()) / df_show["days_to_show"].dropna().mean(), 2) if "days_to_show" in df_show else 0)
+    else:
+        col1.metric("🎟 Tickets Sold", "N/A")
+        col2.metric("💰 Ticket Cost", "N/A")
+        col3.metric("📈 ROAS", "N/A")
+        col4.metric("📊 CPA Daily", "N/A")
+        col5.metric("🎯 Daily Target", "N/A")
 
     # --- Tabs ---
-    tab1, tab2, tab3, tab4 = st.tabs(
-        ["📉 Funnel Decay", "📱 Devices & Placements", "⏰ Time of Day", "🎭 Show Summary"]
+    tab1, tab2, tab3 = st.tabs(
+        ["📉 Funnel Decay", "📱 Devices & Placements", "⏰ Time of Day"]
     )
 
     # Funnel decay
@@ -196,15 +198,6 @@ if days_file and placement_device_file and time_file:
                 x="time_slot", y="count", tooltip=["time_slot", "count"]
             ).properties(width=800)
             st.altair_chart(chart, use_container_width=True)
-
-    # Show summary
-    with tab4:
-        st.subheader("Ticket Sales by Show")
-        if "showid" in ticket_sales.columns:
-            show_sales = ticket_sales[["showid", "total_sold", "capacity", "avg_ticket_price"]]
-            st.dataframe(show_sales)
-            fig_sales = px.bar(show_sales, x="showid", y="total_sold", title="Tickets Sold per Show")
-            st.plotly_chart(fig_sales, use_container_width=True)
 
 else:
     st.info("⬆️ Please upload the three CSV files in the sidebar to begin.")
