@@ -33,10 +33,10 @@ def clean_number(val):
     if pd.isna(val):
         return 0.0
     s = str(val).strip()
-    s = re.sub(r"[^0-9,.-]", "", s)  # keep only digits and separators
-    if s.count(".") > 1:             # multiple dots → thousand separators
+    s = re.sub(r"[^0-9,.-]", "", s)
+    if s.count(".") > 1:
         s = s.replace(".", "")
-    s = s.replace(",", ".")          # comma → decimal point
+    s = s.replace(",", ".")
     try:
         return float(s)
     except:
@@ -138,12 +138,12 @@ if days_file and placement_device_file and time_file:
         r.raise_for_status()
         ticket_sales = pd.read_csv(StringIO(r.text))
 
-        # Cleaning sales sheet
         ticket_sales = ticket_sales.dropna(how="all")
         ticket_sales.columns = (ticket_sales.columns.str.strip()
                                 .str.lower()
                                 .str.replace(" ", "_")
                                 .str.replace(r"[^a-z0-9_]", "", regex=True))
+
         if "show_id" not in ticket_sales.columns and "showid" in ticket_sales.columns:
             ticket_sales = ticket_sales.rename(columns={"showid": "show_id"})
 
@@ -153,11 +153,13 @@ if days_file and placement_device_file and time_file:
 
         ticket_sales["show_id"] = ticket_sales["show_id"].apply(normalize_show_id_extended)
 
-        num_cols = ["sales_to_date", "atp", "total_sold", "remaining", "sold_%", "capacity"]
+        # Apenas colunas numéricas que existem
+        num_cols = ["sales_to_date", "atp", "total_sold", "remaining", "capacity"]
         for col in num_cols:
             if col in ticket_sales.columns:
                 ticket_sales[col] = ticket_sales[col].apply(clean_number)
-        ticket_sales[num_cols] = ticket_sales[num_cols].fillna(0)
+        existing_num_cols = [col for col in num_cols if col in ticket_sales.columns]
+        ticket_sales[existing_num_cols] = ticket_sales[existing_num_cols].fillna(0)
 
         for dcol in ["show_date", "report_date"]:
             if dcol in ticket_sales.columns:
@@ -169,6 +171,11 @@ if days_file and placement_device_file and time_file:
         ticket_sales = ticket_sales.reset_index(drop=True)
         merged = merged.merge(ticket_sales, how="left", on="show_id")
         sales_available = True
+
+        # Debug expander
+        with st.expander("🔎 Debug Ticket Sales Data"):
+            st.dataframe(ticket_sales.head(20))
+            st.write("Columns detected:", ticket_sales.columns.tolist())
 
     except Exception as e:
         st.warning(f"⚠️ Ticket Sales Sheet not accessible. Using Ads data only. Error: {e}")
