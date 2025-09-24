@@ -68,14 +68,20 @@ def safe_metric(col, label, func):
         val = "N/A"
     col.metric(label, val)
 
-# --- Load mapping tables ---
+# --- Load mapping tables (local fallback) ---
 @st.cache_data
 def load_reference_tables():
-    shows_ref = pd.read_excel("Shows.xlsx")
-    cities_ref = pd.read_excel("City_Country_Region_Table.xlsx")
+    try:
+        shows_ref = pd.read_excel("Shows.xlsx")
+        cities_ref = pd.read_excel("City_Country_Region_Table.xlsx")
+    except Exception:
+        shows_ref = pd.DataFrame(columns=["Show", "ShowID", "Capacity"])
+        cities_ref = pd.DataFrame(columns=["City", "City_Code"])
 
-    shows_ref["show_norm"] = shows_ref["Show"].astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
-    cities_ref["city_norm"] = cities_ref["City"].astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
+    if not shows_ref.empty and "Show" in shows_ref.columns:
+        shows_ref["show_norm"] = shows_ref["Show"].astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
+    if not cities_ref.empty and "City" in cities_ref.columns:
+        cities_ref["city_norm"] = cities_ref["City"].astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
 
     return shows_ref, cities_ref
 
@@ -118,8 +124,17 @@ if days_file and placement_device_file and time_file:
     if not time_base.empty:
         merged = merged.merge(time_base, on=["ad_set_same", "reporting_starts"], how="left", suffixes=("", "_time"))
 
-    merged["funnel"] = merged.get("ad_set_name", "").apply(classify_funnel_robust)
-    merged["show_norm"] = merged.get("ad_set_name", "").astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
+    # --- Funnel classification ---
+    if "ad_set_name" in merged.columns:
+        merged["funnel"] = merged["ad_set_name"].apply(classify_funnel_robust)
+        merged["show_norm"] = (
+            merged["ad_set_name"].astype(str)
+            .str.lower()
+            .str.replace(r"[^a-z0-9]", "", regex=True)
+        )
+    else:
+        merged["funnel"] = "Unclassified"
+        merged["show_norm"] = ""
 
     # --- Ticket Sales ---
     try:
@@ -159,11 +174,6 @@ if days_file and placement_device_file and time_file:
         ticket_sales = ticket_sales.reset_index(drop=True)
         sales_available = True
 
-        # Debug expander
-        with st.expander("🔎 Debug Ticket Sales Data"):
-            st.dataframe(ticket_sales.head(20))
-            st.write("Columns detected:", ticket_sales.columns.tolist())
-
     except Exception as e:
         st.warning(f"⚠️ Ticket Sales Sheet not accessible. Using Ads data only. Error: {e}")
         sales_available = False
@@ -171,16 +181,16 @@ if days_file and placement_device_file and time_file:
     # --- Merge with mapping tables ---
     merged["show_norm"] = merged["show_norm"].fillna("")
 
-    merged = merged.merge(
-        shows_ref[["ShowID", "show_norm", "Capacity"]],
-        on="show_norm", how="left"
-    )
-
-    merged = merged.merge(
-        cities_ref[["City_Code", "city_norm"]],
-        left_on="show_norm", right_on="city_norm", how="left"
-    )
-
+    if not shows_ref.empty:
+        merged = merged.merge(
+            shows_ref[["ShowID", "show_norm", "Capacity"]],
+            on="show_norm", how="left"
+        )
+    if not cities_ref.empty:
+        merged = merged.merge(
+            cities_ref[["City_Code", "city_norm"]],
+            left_on="show_norm", right_on="city_norm", how="left"
+        )
     if sales_available:
         merged = merged.merge(ticket_sales, how="left", on="show_norm")
 
@@ -219,12 +229,10 @@ if days_file and placement_device_file and time_file:
             if not funnel_trend.empty:
                 fig = px.line(
                     funnel_trend,
-                    x="reporting_starts",
-                    y="impressions",
-                    color="funnel",
+                    x="reporting_starts", y="impressions", color="funnel",
                     title="Impressions over Time"
                 )
-                fig.update_traces(mode="lines+markers")  # sem text
+                fig.update_traces(mode="lines+markers")  # sem labels
                 st.plotly_chart(fig, use_container_width=True)
 
     with tab2:
