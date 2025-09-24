@@ -59,30 +59,6 @@ def classify_funnel_robust(name: str) -> str:
     else:
         return "Unclassified"
 
-def normalize_show_id_extended(name: str) -> str:
-    if pd.isna(name):
-        return "Unknown_Show"
-    n = str(name).lower()
-    if "_dc_" in n or "dc" in n:
-        return "WDC"
-    if "_sea_" in n or "seattle" in n:
-        return "SEA"
-    if "_tr_" in n or "toronto" in n:
-        return "TR"
-    if "_pdx_" in n or "portland" in n:
-        return "PDX"
-    if "_edm_" in n or "edmonton" in n:
-        return "EDM"
-    if "_smf_" in n or "sacramento" in n:
-        return "SMF"
-    if "_cmh_" in n or "columbus" in n:
-        return "CMH"
-    if "sunrose" in n:
-        return "SUN"
-    if "upstairs" in n:
-        return "UPS"
-    return "Unknown_Show"
-
 def safe_metric(col, label, func):
     try:
         val = func()
@@ -91,6 +67,19 @@ def safe_metric(col, label, func):
     except Exception:
         val = "N/A"
     col.metric(label, val)
+
+# --- Load mapping tables ---
+@st.cache_data
+def load_reference_tables():
+    shows_ref = pd.read_excel("Shows.xlsx")
+    cities_ref = pd.read_excel("City_Country_Region_Table.xlsx")
+
+    shows_ref["show_norm"] = shows_ref["Show"].astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
+    cities_ref["city_norm"] = cities_ref["City"].astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
+
+    return shows_ref, cities_ref
+
+shows_ref, cities_ref = load_reference_tables()
 
 # --- Main App ---
 if days_file and placement_device_file and time_file:
@@ -130,7 +119,7 @@ if days_file and placement_device_file and time_file:
         merged = merged.merge(time_base, on=["ad_set_same", "reporting_starts"], how="left", suffixes=("", "_time"))
 
     merged["funnel"] = merged.get("ad_set_name", "").apply(classify_funnel_robust)
-    merged["show_id"] = merged.get("ad_set_name", "").apply(normalize_show_id_extended)
+    merged["show_norm"] = merged.get("ad_set_name", "").astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
 
     # --- Ticket Sales ---
     try:
@@ -151,9 +140,8 @@ if days_file and placement_device_file and time_file:
         ticket_sales = ticket_sales[~ticket_sales["show_id"]
             .str.contains("report|total|endrow|summary", case=False, na=False)]
 
-        ticket_sales["show_id"] = ticket_sales["show_id"].apply(normalize_show_id_extended)
+        ticket_sales["show_norm"] = ticket_sales["show_id"].astype(str).str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
 
-        # Apenas colunas numéricas que existem
         num_cols = ["sales_to_date", "atp", "total_sold", "remaining", "capacity"]
         for col in num_cols:
             if col in ticket_sales.columns:
@@ -169,7 +157,6 @@ if days_file and placement_device_file and time_file:
             ticket_sales["days_to_show"] = (ticket_sales["show_date"] - ticket_sales["report_date"]).dt.days
 
         ticket_sales = ticket_sales.reset_index(drop=True)
-        merged = merged.merge(ticket_sales, how="left", on="show_id")
         sales_available = True
 
         # Debug expander
@@ -181,11 +168,27 @@ if days_file and placement_device_file and time_file:
         st.warning(f"⚠️ Ticket Sales Sheet not accessible. Using Ads data only. Error: {e}")
         sales_available = False
 
-    st.success("✅ Data cleaned and merged!")
+    # --- Merge with mapping tables ---
+    merged["show_norm"] = merged["show_norm"].fillna("")
 
-    show_list = merged["show_id"].dropna().unique().tolist()
+    merged = merged.merge(
+        shows_ref[["ShowID", "show_norm", "Capacity"]],
+        on="show_norm", how="left"
+    )
+
+    merged = merged.merge(
+        cities_ref[["City_Code", "city_norm"]],
+        left_on="show_norm", right_on="city_norm", how="left"
+    )
+
+    if sales_available:
+        merged = merged.merge(ticket_sales, how="left", on="show_norm")
+
+    st.success("✅ Data cleaned, mapped, and merged!")
+
+    show_list = merged["show_norm"].dropna().unique().tolist()
     selected_show = st.sidebar.selectbox("Select Show", show_list)
-    df_show = merged[merged["show_id"] == selected_show]
+    df_show = merged[merged["show_norm"] == selected_show]
 
     # --- KPIs ---
     st.subheader(f"Health of Show: {selected_show}")
@@ -248,9 +251,9 @@ if days_file and placement_device_file and time_file:
     with tab4:
         if sales_available:
             st.subheader("Ticket Sales by Show")
-            sales_summary = ticket_sales[["show_id", "capacity", "total_sold", "remaining", "atp", "sales_to_date"]]
+            sales_summary = ticket_sales[["show_norm", "capacity", "total_sold", "remaining", "atp", "sales_to_date"]]
             st.dataframe(sales_summary)
-            fig_sales = px.bar(sales_summary, x="show_id", y="total_sold", text="total_sold",
+            fig_sales = px.bar(sales_summary, x="show_norm", y="total_sold", text="total_sold",
                                title="Tickets Sold per Show")
             fig_sales.update_traces(textposition="outside")
             st.plotly_chart(fig_sales, use_container_width=True)
