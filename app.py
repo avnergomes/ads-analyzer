@@ -217,9 +217,14 @@ if days_file and placement_device_file and time_file:
                 "amount_spent_usd": "sum"
             })
             if not funnel_trend.empty:
-                fig = px.line(funnel_trend, x="reporting_starts", y="impressions", color="funnel",
-                              title="Impressions over Time", text="impressions")
-                fig.update_traces(mode="lines+markers+text", textposition="top center")
+                fig = px.line(
+                    funnel_trend,
+                    x="reporting_starts",
+                    y="impressions",
+                    color="funnel",
+                    title="Impressions over Time"
+                )
+                fig.update_traces(mode="lines+markers")  # sem text
                 st.plotly_chart(fig, use_container_width=True)
 
     with tab2:
