@@ -17,170 +17,164 @@ time_file = st.sidebar.file_uploader("Upload Days + Time.csv", type="csv")
 # --- Google Sheet (Ticket Sales) ---
 sheet_url = "https://docs.google.com/spreadsheets/d/1hVm1OALKQ244zuJBQV0SsQT08A2_JTDlPytUNULRofA/export?format=csv"
 
+# --- Helper to clean column names ---
+def clean_columns(df):
+    df.columns = (
+        df.columns.str.strip()
+                  .str.lower()
+                  .str.replace(" ", "_")
+                  .str.replace(r"[^a-z0-9_]", "", regex=True)
+    )
+    return df
+
+# --- Funnel classification robust ---
+def classify_funnel_robust(name: str) -> str:
+    if pd.isna(name):
+        return "Unclassified"
+    n = str(name).lower()
+    if re.search(r"(f1|fun1|lpview|lpviews)", n):
+        return "F1_LPView"
+    elif re.search(r"(f2|fun2|addtocart)", n) and "conv" not in n:
+        return "F2_AddtoCart"
+    elif re.search(r"(f3|fun3)", n) or ("conv" in n and "addtocart" in n):
+        return "F3_Conversion"
+    elif "interest" in n:
+        return "Legacy_Interest"
+    elif "target" in n:
+        return "Legacy_Target"
+    else:
+        return "Unclassified"
+
+# --- Show parser extended ---
+def normalize_show_id_extended(name: str) -> str:
+    if pd.isna(name):
+        return "Unknown_Show"
+    n = str(name).lower()
+    base_match = re.match(r"([A-Z]{2,3}_[0-9]{4})", str(name))
+    if base_match:
+        return base_match.group(1)
+    if "_dc_" in n or "dc" in n:
+        return "WDC"
+    if "_sea_" in n or "seattle" in n:
+        return "SEA"
+    if "_tr_" in n or "toronto" in n:
+        return "TR"
+    if "_pdx_" in n or "portland" in n:
+        return "PDX"
+    if "_edm_" in n or "edmonton" in n:
+        return "EDM"
+    if "_smf_" in n or "sacramento" in n:
+        return "SMF"
+    if "_cmh_" in n or "columbus" in n:
+        return "CMH"
+    if "sunrose" in n:
+        return "SUN"
+    if "upstairs" in n:
+        return "UPS"
+    return "Unknown_Show"
+
+# --- Safe metric helper ---
+def safe_metric(col, label, func):
+    try:
+        val = func()
+        if pd.isna(val):
+            val = "N/A"
+    except Exception:
+        val = "N/A"
+    col.metric(label, val)
+
+# --- Main App ---
 if days_file and placement_device_file and time_file:
-    # --- Load CSVs ---
+    # Load CSVs
     days = pd.read_csv(days_file)
     placement_device = pd.read_csv(placement_device_file)
     time_of_day = pd.read_csv(time_file)
-
-    # --- Clean column names ---
-    def clean_columns(df):
-        df.columns = (
-            df.columns.str.strip()
-                      .str.lower()
-                      .str.replace(" ", "_")
-                      .str.replace(r"[^a-z0-9_]", "", regex=True)
-        )
-        return df
 
     days = clean_columns(days)
     placement_device = clean_columns(placement_device)
     time_of_day = clean_columns(time_of_day)
 
-    # --- Standardize keys ---
     for df in [days, placement_device, time_of_day]:
-        df["ad_set_same"] = df["ad_set_name"].str.strip()
-        df["reporting_starts"] = pd.to_datetime(df["reporting_starts"], errors="coerce")
+        if "ad_set_name" in df.columns:
+            df["ad_set_same"] = df["ad_set_name"].astype(str).str.strip()
+        if "reporting_starts" in df.columns:
+            df["reporting_starts"] = pd.to_datetime(df["reporting_starts"], errors="coerce")
 
-    # --- Aggregations ---
-    placement_device_base = placement_device.groupby(
-        ["ad_set_same", "reporting_starts"], as_index=False
-    ).agg({
-        "impressions": "sum",
-        "link_clicks": "sum",
-        "amount_spent_usd": "sum",
-        "impression_device": lambda x: list(pd.Series(x).dropna().unique()),
-        "placement": lambda x: list(pd.Series(x).dropna().unique())
-    })
+    # Aggregations
+    def safe_groupby(df, cols, agg_dict):
+        if all(col in df.columns for col in cols):
+            return df.groupby(cols, as_index=False).agg(agg_dict)
+        return pd.DataFrame()
 
-    time_base = time_of_day.groupby(
-        ["ad_set_same", "reporting_starts"], as_index=False
-    ).agg({
-        "impressions": "sum",
-        "link_clicks": "sum",
-        "amount_spent_usd": "sum",
-        "time_of_day_viewers_time_zone": lambda x: list(pd.Series(x).dropna().unique())
-    })
-
-    merged = days.merge(
-        placement_device_base,
-        on=["ad_set_same", "reporting_starts"],
-        how="left",
-        suffixes=("", "_placement")
-    ).merge(
-        time_base,
-        on=["ad_set_same", "reporting_starts"],
-        how="left",
-        suffixes=("", "_time")
+    placement_device_base = safe_groupby(
+        placement_device, ["ad_set_same", "reporting_starts"],
+        {"impressions": "sum", "link_clicks": "sum", "amount_spent_usd": "sum"}
+    )
+    time_base = safe_groupby(
+        time_of_day, ["ad_set_same", "reporting_starts"],
+        {"impressions": "sum", "link_clicks": "sum", "amount_spent_usd": "sum"}
     )
 
-    # --- Funnel classification robust ---
-    def classify_funnel_robust(name: str) -> str:
-        if pd.isna(name):
-            return "Unclassified"
-        n = str(name).lower()
-        if re.search(r"(f1|fun1|lpview|lpviews)", n):
-            return "F1_LPView"
-        elif re.search(r"(f2|fun2|addtocart)", n) and "conv" not in n:
-            return "F2_AddtoCart"
-        elif re.search(r"(f3|fun3)", n) or ("conv" in n and "addtocart" in n):
-            return "F3_Conversion"
-        elif "interest" in n:
-            return "Legacy_Interest"
-        elif "target" in n:
-            return "Legacy_Target"
-        else:
-            return "Unclassified"
+    merged = days.copy()
+    if not placement_device_base.empty:
+        merged = merged.merge(placement_device_base, on=["ad_set_same", "reporting_starts"], how="left", suffixes=("", "_placement"))
+    if not time_base.empty:
+        merged = merged.merge(time_base, on=["ad_set_same", "reporting_starts"], how="left", suffixes=("", "_time"))
 
-    merged["funnel"] = merged["ad_set_name"].apply(classify_funnel_robust)
+    merged["funnel"] = merged.get("ad_set_name", "").apply(classify_funnel_robust)
+    merged["show_id"] = merged.get("ad_set_name", "").apply(normalize_show_id_extended)
 
-    # --- Show parser extended ---
-    def normalize_show_id_extended(name: str) -> str:
-        if pd.isna(name):
-            return "Unknown_Show"
-        n = str(name).lower()
-        base_match = re.match(r"([A-Z]{2,3}_[0-9]{4})", str(name))
-        if base_match:
-            return base_match.group(1)
-        if "_dc_" in n or "dc" in n:
-            return "WDC"
-        if "_sea_" in n or "seattle" in n:
-            return "SEA"
-        if "_tr_" in n or "toronto" in n:
-            return "TR"
-        if "_pdx_" in n or "portland" in n:
-            return "PDX"
-        if "_edm_" in n or "edmonton" in n:
-            return "EDM"
-        if "_smf_" in n or "sacramento" in n:
-            return "SMF"
-        if "_cmh_" in n or "columbus" in n:
-            return "CMH"
-        if "sunrose" in n:
-            return "SUN"
-        if "upstairs" in n:
-            return "UPS"
-        return "Unknown_Show"
-
-    merged["show_id"] = merged["ad_set_name"].apply(normalize_show_id_extended)
-
-    # --- Try loading Ticket Sales Sheet ---
+    # Try to load Ticket Sales Sheet
     try:
         ticket_sales = pd.read_csv(sheet_url)
+        ticket_sales = ticket_sales.dropna(how="all")
 
-        # --- Clean sales data ---
-        ticket_sales = ticket_sales.dropna(how="all")                     # remove linhas vazias
-        ticket_sales = ticket_sales[ticket_sales["Show ID"].notna()]      # mantém só linhas com Show ID válido
+        # Normalização de colunas
+        ticket_sales.columns = ticket_sales.columns.str.strip().str.lower().str.replace(" ", "_")
 
-        # Limpar símbolos de dólar e vírgula em colunas financeiras
-        to_clean = ["Sales to date", "ATP"]
-        for col in to_clean:
+        if "show_id" not in ticket_sales.columns and "showid" in ticket_sales.columns:
+            ticket_sales = ticket_sales.rename(columns={"showid": "show_id"})
+
+        # Limpeza numérica
+        for col in ["sales_to_date", "atp"]:
             if col in ticket_sales.columns:
                 ticket_sales[col] = (ticket_sales[col].astype(str)
                                      .str.replace(r"[^0-9.]", "", regex=True)
                                      .replace("", "0")
                                      .astype(float))
-
-        # Converter colunas numéricas
-        numeric_cols = ["Total Sold", "Remaining", "Sold %", "Capacity"]
-        for col in numeric_cols:
+        for col in ["total_sold", "remaining", "sold_%", "capacity"]:
             if col in ticket_sales.columns:
                 ticket_sales[col] = pd.to_numeric(ticket_sales[col], errors="coerce")
 
-        # Calcular days_to_show
-        ticket_sales["Show Date"] = pd.to_datetime(ticket_sales["Show Date"], errors="coerce")
-        ticket_sales["Report Date"] = pd.to_datetime(ticket_sales["Report Date"], errors="coerce")
-        ticket_sales["days_to_show"] = (ticket_sales["Show Date"] - ticket_sales["Report Date"]).dt.days
+        # Datas
+        if "show_date" in ticket_sales.columns and "report_date" in ticket_sales.columns:
+            ticket_sales["show_date"] = pd.to_datetime(ticket_sales["show_date"], errors="coerce")
+            ticket_sales["report_date"] = pd.to_datetime(ticket_sales["report_date"], errors="coerce")
+            ticket_sales["days_to_show"] = (ticket_sales["show_date"] - ticket_sales["report_date"]).dt.days
 
-        # Padronizar colunas
-        ticket_sales.columns = ticket_sales.columns.str.strip().str.lower().str.replace(" ", "_")
-
-        # Merge
-        merged = merged.merge(ticket_sales, how="left", left_on="show_id", right_on="show_id")
+        merged = merged.merge(ticket_sales, how="left", on="show_id")
         sales_available = True
-    except Exception as e:
+    except Exception:
         st.warning("⚠️ Ticket Sales Sheet not accessible. Continuing with Ads data only.")
-        ticket_sales = pd.DataFrame()
         sales_available = False
 
     st.success("✅ Data cleaned and merged!")
 
-    # --- Show selector ---
+    # Show selector
     show_list = merged["show_id"].dropna().unique().tolist()
     selected_show = st.sidebar.selectbox("Select Show", show_list)
-
     df_show = merged[merged["show_id"] == selected_show]
 
-    # --- Health of Show KPIs ---
+    # Health of Show KPIs
     st.subheader(f"Health of Show: {selected_show}")
     col1, col2, col3, col4, col5 = st.columns(5)
 
     if sales_available and not df_show.empty:
-        col1.metric("🎟 Tickets Sold", int(df_show["total_sold"].dropna().mean()))
-        col2.metric("💰 Ticket Cost", round(df_show["sales_to_date"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2) if "sales_to_date" in df_show and "total_sold" in df_show else 0)
-        col3.metric("📈 ROAS", round(((df_show["atp"].dropna().mean() * df_show["capacity"].dropna().mean()) / df_show["amount_spent_usd"].dropna().mean()), 2) if "atp" in df_show and "capacity" in df_show else 0)
-        col4.metric("📊 CPA Daily", round(df_show["amount_spent_usd"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2))
-        col5.metric("🎯 Daily Target", round((df_show["capacity"].dropna().mean() - df_show["total_sold"].dropna().mean()) / df_show["days_to_show"].dropna().mean(), 2) if "days_to_show" in df_show else 0)
+        safe_metric(col1, "🎟 Tickets Sold", lambda: int(df_show["total_sold"].dropna().mean()))
+        safe_metric(col2, "💰 Ticket Cost", lambda: round(df_show["sales_to_date"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2))
+        safe_metric(col3, "📈 ROAS", lambda: round(((df_show["atp"].dropna().mean() * df_show["capacity"].dropna().mean()) / df_show["amount_spent_usd"].dropna().mean()), 2))
+        safe_metric(col4, "📊 CPA Daily", lambda: round(df_show["amount_spent_usd"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2))
+        safe_metric(col5, "🎯 Daily Target", lambda: round((df_show["capacity"].dropna().mean() - df_show["total_sold"].dropna().mean()) / df_show["days_to_show"].dropna().mean(), 2))
     else:
         col1.metric("🎟 Tickets Sold", "N/A")
         col2.metric("💰 Ticket Cost", "N/A")
@@ -188,20 +182,22 @@ if days_file and placement_device_file and time_file:
         col4.metric("📊 CPA Daily", "N/A")
         col5.metric("🎯 Daily Target", "N/A")
 
-    # --- Tabs ---
-    tab1, tab2, tab3 = st.tabs(
-        ["📉 Funnel Decay", "📱 Devices & Placements", "⏰ Time of Day"]
+    # Tabs
+    tab1, tab2, tab3, tab4 = st.tabs(
+        ["📉 Funnel Decay", "📱 Devices & Placements", "⏰ Time of Day", "🎭 Sales Summary"]
     )
 
     with tab1:
         st.subheader("Funnel Decay Over Time")
-        funnel_trend = df_show.groupby(["reporting_starts", "funnel"], as_index=False).agg({
-            "impressions": "sum",
-            "link_clicks": "sum",
-            "amount_spent_usd": "sum"
-        })
-        fig = px.line(funnel_trend, x="reporting_starts", y="impressions", color="funnel", title="Impressions over Time")
-        st.plotly_chart(fig, use_container_width=True)
+        if not df_show.empty:
+            funnel_trend = df_show.groupby(["reporting_starts", "funnel"], as_index=False).agg({
+                "impressions": "sum",
+                "link_clicks": "sum",
+                "amount_spent_usd": "sum"
+            })
+            if not funnel_trend.empty:
+                fig = px.line(funnel_trend, x="reporting_starts", y="impressions", color="funnel", title="Impressions over Time")
+                st.plotly_chart(fig, use_container_width=True)
 
     with tab2:
         st.subheader("Device & Placement Breakdown")
@@ -223,6 +219,16 @@ if days_file and placement_device_file and time_file:
                 x="time_slot", y="count", tooltip=["time_slot", "count"]
             ).properties(width=800)
             st.altair_chart(chart, use_container_width=True)
+
+    with tab4:
+        if sales_available:
+            st.subheader("Ticket Sales by Show")
+            sales_summary = ticket_sales[["show_id", "capacity", "total_sold", "remaining", "atp", "sales_to_date"]]
+            st.dataframe(sales_summary)
+            fig_sales = px.bar(sales_summary, x="show_id", y="total_sold", title="Tickets Sold per Show")
+            st.plotly_chart(fig_sales, use_container_width=True)
+        else:
+            st.info("Sales data not available.")
 
 else:
     st.info("⬆️ Please upload the three CSV files in the sidebar to begin.")
