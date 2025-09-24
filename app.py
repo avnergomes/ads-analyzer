@@ -29,6 +29,20 @@ def clean_columns(df):
     )
     return df
 
+# --- Numeric cleaning robust ---
+def clean_number(val):
+    if pd.isna(val):
+        return 0.0
+    s = str(val).strip()
+    s = re.sub(r"[^0-9,.-]", "", s)  # keep only digits and separators
+    if s.count(".") > 1:             # multiple dots → thousand separators
+        s = s.replace(".", "")
+    s = s.replace(",", ".")          # comma → decimal point
+    try:
+        return float(s)
+    except:
+        return 0.0
+
 # --- Funnel classification robust ---
 def classify_funnel_robust(name: str) -> str:
     if pd.isna(name):
@@ -148,21 +162,10 @@ if days_file and placement_device_file and time_file:
         # 4. Padronizar show_id
         ticket_sales["show_id"] = ticket_sales["show_id"].apply(normalize_show_id_extended)
 
-        # 5. Limpar numéricos com vírgula decimal
-        for col in ["sales_to_date", "atp"]:
+        # 5. Limpar numéricos com função robusta
+        for col in ["sales_to_date", "atp", "total_sold", "remaining", "sold_%", "capacity"]:
             if col in ticket_sales.columns:
-                ticket_sales[col] = (
-                    ticket_sales[col].astype(str)
-                    .str.replace(".", "", regex=False)    # remove milhar
-                    .str.replace(",", ".", regex=False)   # vírgula → ponto
-                    .str.replace(r"[^0-9.]", "", regex=True)
-                    .replace("", "0")
-                    .astype(float)
-                )
-
-        for col in ["total_sold", "remaining", "sold_%", "capacity"]:
-            if col in ticket_sales.columns:
-                ticket_sales[col] = pd.to_numeric(ticket_sales[col], errors="coerce")
+                ticket_sales[col] = ticket_sales[col].apply(clean_number)
 
         # 6. Datas
         if "show_date" in ticket_sales.columns and "report_date" in ticket_sales.columns:
