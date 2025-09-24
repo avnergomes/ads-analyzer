@@ -127,33 +127,45 @@ if days_file and placement_device_file and time_file:
     # Try to load Ticket Sales Sheet
     try:
         ticket_sales = pd.read_csv(sheet_url)
+
+        # 1. Remover linhas vazias
         ticket_sales = ticket_sales.dropna(how="all")
 
-        # Normalização de colunas
+        # 2. Normalizar colunas
         ticket_sales.columns = ticket_sales.columns.str.strip().str.lower().str.replace(" ", "_")
 
         if "show_id" not in ticket_sales.columns and "showid" in ticket_sales.columns:
             ticket_sales = ticket_sales.rename(columns={"showid": "show_id"})
 
-        # Limpeza numérica
+        # 3. Remover linhas sem show_id ou cabeçalhos soltos
+        ticket_sales = ticket_sales[ticket_sales["show_id"].notna()]
+        ticket_sales = ticket_sales[~ticket_sales["show_id"].str.contains("report|total|september", case=False, na=False)]
+
+        # 4. Limpar numéricos
         for col in ["sales_to_date", "atp"]:
             if col in ticket_sales.columns:
-                ticket_sales[col] = (ticket_sales[col].astype(str)
-                                     .str.replace(r"[^0-9.]", "", regex=True)
-                                     .replace("", "0")
-                                     .astype(float))
+                ticket_sales[col] = (
+                    ticket_sales[col].astype(str)
+                    .str.replace(r"[^0-9.]", "", regex=True)
+                    .replace("", "0")
+                    .astype(float)
+                )
         for col in ["total_sold", "remaining", "sold_%", "capacity"]:
             if col in ticket_sales.columns:
                 ticket_sales[col] = pd.to_numeric(ticket_sales[col], errors="coerce")
 
-        # Datas
+        # 5. Datas
         if "show_date" in ticket_sales.columns and "report_date" in ticket_sales.columns:
             ticket_sales["show_date"] = pd.to_datetime(ticket_sales["show_date"], errors="coerce")
             ticket_sales["report_date"] = pd.to_datetime(ticket_sales["report_date"], errors="coerce")
             ticket_sales["days_to_show"] = (ticket_sales["show_date"] - ticket_sales["report_date"]).dt.days
 
+        # 6. Reset index para evitar buracos
+        ticket_sales = ticket_sales.reset_index(drop=True)
+
         merged = merged.merge(ticket_sales, how="left", on="show_id")
         sales_available = True
+
     except Exception:
         st.warning("⚠️ Ticket Sales Sheet not accessible. Continuing with Ads data only.")
         sales_available = False
@@ -202,11 +214,11 @@ if days_file and placement_device_file and time_file:
     with tab2:
         st.subheader("Device & Placement Breakdown")
         if "impression_device" in placement_device:
-            device_counts = placement_device.explode("impression_device")["impression_device"].value_counts().reset_index()
+            device_counts = placement_device["impression_device"].value_counts().reset_index()
             device_counts.columns = ["device", "count"]
             st.bar_chart(device_counts.set_index("device"))
         if "placement" in placement_device:
-            placement_counts = placement_device.explode("placement")["placement"].value_counts().reset_index()
+            placement_counts = placement_device["placement"].value_counts().reset_index()
             placement_counts.columns = ["placement", "count"]
             st.bar_chart(placement_counts.set_index("placement"))
 
