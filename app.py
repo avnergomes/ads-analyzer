@@ -7,7 +7,6 @@ import requests
 from io import StringIO
 
 st.set_page_config(page_title="Meta Ads Funnel & Show Analysis", layout="wide")
-
 st.title("📊 Meta Ads Funnel & Show Analysis")
 
 # --- Upload Section ---
@@ -68,7 +67,7 @@ def safe_metric(col, label, func):
         val = "N/A"
     col.metric(label, val)
 
-# --- Load mapping tables (local fallback) ---
+# --- Load mapping tables ---
 @st.cache_data
 def load_reference_tables():
     try:
@@ -264,11 +263,46 @@ if days_file and placement_device_file and time_file:
     with tab4:
         if sales_available:
             st.subheader("Ticket Sales by Show")
-            sales_summary = ticket_sales[["show_norm", "capacity", "total_sold", "remaining", "atp", "sales_to_date"]]
-            st.dataframe(sales_summary)
-            fig_sales = px.bar(sales_summary, x="show_norm", y="total_sold", text="total_sold",
-                               title="Tickets Sold per Show")
-            fig_sales.update_traces(textposition="outside")
+
+            base_cols = ["show_norm", "capacity", "total_sold", "remaining", "atp", "sales_to_date", "report_date"]
+            sales_df = ticket_sales[[c for c in base_cols if c in ticket_sales.columns]].copy()
+
+            # garantir 1 linha por show
+            if "report_date" in sales_df.columns:
+                idx = sales_df.sort_values("report_date").groupby("show_norm")["report_date"].idxmax()
+                sales_latest = sales_df.loc[idx].copy()
+            else:
+                agg_map = {}
+                if "total_sold" in sales_df.columns:   agg_map["total_sold"] = "max"
+                if "capacity" in sales_df.columns:     agg_map["capacity"] = "max"
+                if "remaining" in sales_df.columns:    agg_map["remaining"] = "min"
+                if "sales_to_date" in sales_df.columns:agg_map["sales_to_date"] = "max"
+                if "atp" in sales_df.columns:          agg_map["atp"] = "mean"
+                sales_latest = sales_df.groupby("show_norm", as_index=False).agg(agg_map)
+
+            if "total_sold" in sales_latest.columns:
+                sales_latest = sales_latest.sort_values("total_sold", ascending=False)
+                sales_latest["label"] = sales_latest["total_sold"].apply(lambda v: f"{int(v):,}" if v > 0 else "")
+            else:
+                sales_latest["label"] = ""
+
+            st.dataframe(sales_latest)
+
+            fig_sales = px.bar(
+                sales_latest,
+                x="show_norm",
+                y="total_sold" if "total_sold" in sales_latest.columns else None,
+                text="label",
+                title="Tickets Sold per Show (latest snapshot)"
+            )
+            fig_sales.update_traces(textposition="outside", cliponaxis=False)
+            fig_sales.update_layout(
+                xaxis_tickangle=-45,
+                yaxis_tickformat=",",
+                uniformtext_minsize=8,
+                uniformtext_mode="hide",
+                margin=dict(t=60, b=120)
+            )
             st.plotly_chart(fig_sales, use_container_width=True)
         else:
             st.info("Sales data not available.")
