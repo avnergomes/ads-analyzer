@@ -127,10 +127,38 @@ if days_file and placement_device_file and time_file:
     # --- Try loading Ticket Sales Sheet ---
     try:
         ticket_sales = pd.read_csv(sheet_url)
+
+        # --- Clean sales data ---
+        ticket_sales = ticket_sales.dropna(how="all")                     # remove linhas vazias
+        ticket_sales = ticket_sales[ticket_sales["Show ID"].notna()]      # mantém só linhas com Show ID válido
+
+        # Limpar símbolos de dólar e vírgula em colunas financeiras
+        to_clean = ["Sales to date", "ATP"]
+        for col in to_clean:
+            if col in ticket_sales.columns:
+                ticket_sales[col] = (ticket_sales[col].astype(str)
+                                     .str.replace(r"[^0-9.]", "", regex=True)
+                                     .replace("", "0")
+                                     .astype(float))
+
+        # Converter colunas numéricas
+        numeric_cols = ["Total Sold", "Remaining", "Sold %", "Capacity"]
+        for col in numeric_cols:
+            if col in ticket_sales.columns:
+                ticket_sales[col] = pd.to_numeric(ticket_sales[col], errors="coerce")
+
+        # Calcular days_to_show
+        ticket_sales["Show Date"] = pd.to_datetime(ticket_sales["Show Date"], errors="coerce")
+        ticket_sales["Report Date"] = pd.to_datetime(ticket_sales["Report Date"], errors="coerce")
+        ticket_sales["days_to_show"] = (ticket_sales["Show Date"] - ticket_sales["Report Date"]).dt.days
+
+        # Padronizar colunas
         ticket_sales.columns = ticket_sales.columns.str.strip().str.lower().str.replace(" ", "_")
-        merged = merged.merge(ticket_sales, how="left", left_on="show_id", right_on="showid")
+
+        # Merge
+        merged = merged.merge(ticket_sales, how="left", left_on="show_id", right_on="show_id")
         sales_available = True
-    except Exception:
+    except Exception as e:
         st.warning("⚠️ Ticket Sales Sheet not accessible. Continuing with Ads data only.")
         ticket_sales = pd.DataFrame()
         sales_available = False
@@ -149,8 +177,8 @@ if days_file and placement_device_file and time_file:
 
     if sales_available and not df_show.empty:
         col1.metric("🎟 Tickets Sold", int(df_show["total_sold"].dropna().mean()))
-        col2.metric("💰 Ticket Cost", round(df_show["show_budget"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2) if "show_budget" in df_show and "total_sold" in df_show else 0)
-        col3.metric("📈 ROAS", round(((df_show["avg_ticket_price"].dropna().mean() * df_show["capacity"].dropna().mean()) / df_show["amount_spent_usd"].dropna().mean()), 2) if "avg_ticket_price" in df_show and "capacity" in df_show else 0)
+        col2.metric("💰 Ticket Cost", round(df_show["sales_to_date"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2) if "sales_to_date" in df_show and "total_sold" in df_show else 0)
+        col3.metric("📈 ROAS", round(((df_show["atp"].dropna().mean() * df_show["capacity"].dropna().mean()) / df_show["amount_spent_usd"].dropna().mean()), 2) if "atp" in df_show and "capacity" in df_show else 0)
         col4.metric("📊 CPA Daily", round(df_show["amount_spent_usd"].dropna().mean() / df_show["total_sold"].dropna().mean(), 2))
         col5.metric("🎯 Daily Target", round((df_show["capacity"].dropna().mean() - df_show["total_sold"].dropna().mean()) / df_show["days_to_show"].dropna().mean(), 2) if "days_to_show" in df_show else 0)
     else:
@@ -165,7 +193,6 @@ if days_file and placement_device_file and time_file:
         ["📉 Funnel Decay", "📱 Devices & Placements", "⏰ Time of Day"]
     )
 
-    # Funnel decay
     with tab1:
         st.subheader("Funnel Decay Over Time")
         funnel_trend = df_show.groupby(["reporting_starts", "funnel"], as_index=False).agg({
@@ -176,7 +203,6 @@ if days_file and placement_device_file and time_file:
         fig = px.line(funnel_trend, x="reporting_starts", y="impressions", color="funnel", title="Impressions over Time")
         st.plotly_chart(fig, use_container_width=True)
 
-    # Devices & Placements
     with tab2:
         st.subheader("Device & Placement Breakdown")
         if "impression_device" in placement_device:
@@ -188,7 +214,6 @@ if days_file and placement_device_file and time_file:
             placement_counts.columns = ["placement", "count"]
             st.bar_chart(placement_counts.set_index("placement"))
 
-    # Time of Day
     with tab3:
         st.subheader("Performance by Time of Day")
         if "time_of_day_viewers_time_zone" in time_of_day:
