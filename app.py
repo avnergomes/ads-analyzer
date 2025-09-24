@@ -3,6 +3,8 @@ import streamlit as st
 import plotly.express as px
 import altair as alt
 import re
+import requests
+from io import StringIO
 
 st.set_page_config(page_title="Meta Ads Funnel & Show Analysis", layout="wide")
 
@@ -126,7 +128,9 @@ if days_file and placement_device_file and time_file:
 
     # --- Ticket Sales ---
     try:
-        ticket_sales = pd.read_csv(sheet_url)
+        r = requests.get(sheet_url)
+        r.raise_for_status()
+        ticket_sales = pd.read_csv(StringIO(r.text))
 
         # 1. Remover linhas vazias
         ticket_sales = ticket_sales.dropna(how="all")
@@ -173,8 +177,8 @@ if days_file and placement_device_file and time_file:
         merged = merged.merge(ticket_sales, how="left", on="show_id")
         sales_available = True
 
-    except Exception:
-        st.warning("⚠️ Ticket Sales Sheet not accessible. Continuing with Ads data only.")
+    except Exception as e:
+        st.warning(f"⚠️ Ticket Sales Sheet not accessible. Continuing with Ads data only. Error: {e}")
         sales_available = False
 
     st.success("✅ Data cleaned and merged!")
