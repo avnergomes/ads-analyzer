@@ -124,7 +124,7 @@ if days_file and placement_device_file and time_file:
     merged["funnel"] = merged.get("ad_set_name", "").apply(classify_funnel_robust)
     merged["show_id"] = merged.get("ad_set_name", "").apply(normalize_show_id_extended)
 
-    # Try to load Ticket Sales Sheet
+    # --- Ticket Sales ---
     try:
         ticket_sales = pd.read_csv(sheet_url)
 
@@ -137,32 +137,39 @@ if days_file and placement_device_file and time_file:
         if "show_id" not in ticket_sales.columns and "showid" in ticket_sales.columns:
             ticket_sales = ticket_sales.rename(columns={"showid": "show_id"})
 
-        # 3. Remover linhas sem show_id ou cabeçalhos soltos
+        # 3. Remover linhas sem show_id, cabeçalhos soltos ou 'endrow'
         ticket_sales = ticket_sales[ticket_sales["show_id"].notna()]
-        ticket_sales = ticket_sales[~ticket_sales["show_id"].str.contains("report|total|september", case=False, na=False)]
+        ticket_sales = ticket_sales[~ticket_sales["show_id"].str.contains("report|total|september|endrow", case=False, na=False)]
 
-        # 4. Limpar numéricos
+        # 4. Padronizar show_id
+        ticket_sales["show_id"] = ticket_sales["show_id"].apply(normalize_show_id_extended)
+
+        # 5. Limpar numéricos com vírgula decimal
         for col in ["sales_to_date", "atp"]:
             if col in ticket_sales.columns:
                 ticket_sales[col] = (
                     ticket_sales[col].astype(str)
+                    .str.replace(".", "", regex=False)    # remove milhar
+                    .str.replace(",", ".", regex=False)   # vírgula → ponto
                     .str.replace(r"[^0-9.]", "", regex=True)
                     .replace("", "0")
                     .astype(float)
                 )
+
         for col in ["total_sold", "remaining", "sold_%", "capacity"]:
             if col in ticket_sales.columns:
                 ticket_sales[col] = pd.to_numeric(ticket_sales[col], errors="coerce")
 
-        # 5. Datas
+        # 6. Datas
         if "show_date" in ticket_sales.columns and "report_date" in ticket_sales.columns:
             ticket_sales["show_date"] = pd.to_datetime(ticket_sales["show_date"], errors="coerce")
             ticket_sales["report_date"] = pd.to_datetime(ticket_sales["report_date"], errors="coerce")
             ticket_sales["days_to_show"] = (ticket_sales["show_date"] - ticket_sales["report_date"]).dt.days
 
-        # 6. Reset index para evitar buracos
+        # 7. Reset index
         ticket_sales = ticket_sales.reset_index(drop=True)
 
+        # 8. Merge
         merged = merged.merge(ticket_sales, how="left", on="show_id")
         sales_available = True
 
@@ -177,7 +184,7 @@ if days_file and placement_device_file and time_file:
     selected_show = st.sidebar.selectbox("Select Show", show_list)
     df_show = merged[merged["show_id"] == selected_show]
 
-    # Health of Show KPIs
+    # --- Health of Show KPIs ---
     st.subheader(f"Health of Show: {selected_show}")
     col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -194,7 +201,7 @@ if days_file and placement_device_file and time_file:
         col4.metric("📊 CPA Daily", "N/A")
         col5.metric("🎯 Daily Target", "N/A")
 
-    # Tabs
+    # --- Tabs ---
     tab1, tab2, tab3, tab4 = st.tabs(
         ["📉 Funnel Decay", "📱 Devices & Placements", "⏰ Time of Day", "🎭 Sales Summary"]
     )
