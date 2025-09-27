@@ -1,0 +1,15 @@
+regex_pattern,mapping_type,mapping_value
+(Toronto|TR[_-]?\d{4}(_S\d+)?),show,Toronto
+(Ottawa|OTW[_-]?\d{4}(_S\d+)?),show,Ottawa
+(Washington|Wash(\.?|ington)? ?DC|WDC[_-]?\d{4}(_S\d+)?),show,WashingtonDC
+(New.?York|NYC[_-]?\d{4}(_S\d+)?),show,NewYork
+(Los.?Angeles|LA[_-]?\d{4}(_S\d+)?),show,LosAngeles
+(Chicago|CHI[_-]?\d{4}(_S\d+)?),show,Chicago
+(Boston|BOS[_-]?\d{4}(_S\d+)?),show,Boston
+(Miami|MIA[_-]?\d{4}(_S\d+)?),show,Miami
+(San.?Francisco|SF[_-]?\d{4}(_S\d+)?),show,SanFrancisco
+(F1|Fun1|LPViews?|LP_View|LPV|Landing[_ ]?Page[_ ]?View),funnel,F1
+(F2|Fun2|Add[_ ]?To[_ ]?Cart|ATC|Cart),funnel,F2
+(F3|Fun3|Purchase|Sales?|Checkout|CONV|Conversion),funnel,F3
+.*Interest.*,legacy,Interest
+.*Target.*,legacy,Target
