@@ -80,6 +80,19 @@ MAPPING_RULES = build_mapping_rules(mapping_df)
 # ---------------------------------------------------------------------------
 # Classification helpers
 # ---------------------------------------------------------------------------
+
+CLASSIFICATION_TEXT_FIELDS = (
+    "ad_set_name",
+    "campaign_name",
+    "ad_name",
+    "result_type",
+    "result_indicator",
+    "objective",
+    "optimization_goal",
+    "optimization_event",
+    "campaign_objective",
+    "adset_objective",
+)
 def normalize_text_parts(row: pd.Series, fields: Iterable[str]) -> str:
     """Concatenate selected fields into a single lowercase string."""
 
@@ -94,7 +107,7 @@ def normalize_text_parts(row: pd.Series, fields: Iterable[str]) -> str:
 def apply_classification(row: pd.Series) -> pd.Series:
     """Return a Series with classification fields derived from mapping rules."""
 
-    text = normalize_text_parts(row, ("ad_set_name", "campaign_name", "ad_name"))
+    text = normalize_text_parts(row, CLASSIFICATION_TEXT_FIELDS)
 
     show: Optional[str] = None
     funnel: Optional[str] = None
