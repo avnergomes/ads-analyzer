@@ -18,19 +18,71 @@ if not MAPPING_FILE.exists():
 
 mapping_df = pd.read_csv(MAPPING_FILE)
 
-def classify_row(row):
-    """Classify using mapping regex across multiple columns (ad_set, campaign, ad)."""
-    text = " ".join([
-        str(row.get("ad_set_name", "")),
-        str(row.get("campaign_name", "")),
-        str(row.get("ad_name", ""))
-    ])
-    for _, r in mapping_df.iterrows():
-        if re.search(r["regex_pattern"], text, re.IGNORECASE):
-            if r["mapping_type"] == "funnel":
-                return f"Funnel {r['mapping_value']}"
-            return r["mapping_value"]
-    return "Unclassified"
+
+def _prepare_mapping_rules():
+    rules = []
+    for _, rule in mapping_df.iterrows():
+        pattern = rule.get("regex_pattern")
+        if not isinstance(pattern, str) or not pattern.strip():
+            continue
+        try:
+            compiled = re.compile(pattern, re.IGNORECASE)
+        except re.error:
+            continue
+        rules.append({
+            "compiled": compiled,
+            "mapping_type": rule.get("mapping_type", ""),
+            "mapping_value": rule.get("mapping_value", "")
+        })
+    return rules
+
+
+MAPPING_RULES = _prepare_mapping_rules()
+
+
+def apply_classification(row):
+    """Return a Series with classification fields derived from mapping rules."""
+    parts = []
+    for field in ("ad_set_name", "campaign_name", "ad_name"):
+        value = row.get(field)
+        if pd.notna(value) and value != "":
+            parts.append(str(value))
+    text = " ".join(parts)
+
+    show, funnel = None, None
+    legacy_labels = []
+    for rule in MAPPING_RULES:
+        if not text or not rule["compiled"].search(text):
+            continue
+        mapping_type = str(rule["mapping_type"]).lower()
+        mapping_value = str(rule["mapping_value"]).strip()
+        if mapping_type == "show" and not show:
+            show = mapping_value
+        elif mapping_type == "funnel":
+            funnel = f"Funnel {mapping_value}" if not mapping_value.startswith("Funnel") else mapping_value
+        elif mapping_type == "legacy":
+            if mapping_value:
+                legacy_labels.append(mapping_value)
+
+    funnel = funnel or "Unclassified"
+    show = show or "Unknown"
+    legacy = ", ".join(sorted(set(legacy_labels))) if legacy_labels else None
+
+    labels = [
+        label for label in (
+            show if show != "Unknown" else None,
+            funnel if funnel != "Unclassified" else None,
+            legacy
+        ) if label
+    ]
+    classification = " | ".join(labels) if labels else "Unclassified"
+
+    return pd.Series({
+        "classification": classification,
+        "funnel": funnel,
+        "show": show,
+        "legacy_label": legacy
+    })
 
 def parse_hour(s):
     try:
@@ -56,11 +108,7 @@ def compute_decay(df):
                 good_days += 1
                 bad_run = 0
             else:
-                bad_run += 1
-                if bad_run >= 3:
-                    break
-        out.append({
-            "ad_set_name": adset,
+@@ -64,56 +116,54 @@ def compute_decay(df):
             "funnel": g["funnel"].iloc[0] if "funnel" in g else "Unclassified",
             "show": g["show"].iloc[0] if "show" in g else None,
             "good_days_before_drop": good_days
@@ -86,12 +134,10 @@ def load_csv(uploaded_file, name):
         df.columns = [c.strip().lower().replace(" ", "_").replace("/", "_per_") for c in df.columns]
         if "reporting_starts" in df.columns:
             df["reporting_starts"] = pd.to_datetime(df["reporting_starts"], errors="coerce")
-        # Apply classification
-        df["classification"] = df.apply(classify_row, axis=1)
-        df["funnel"] = df["classification"].apply(lambda x: x if "Funnel" in x else "Unclassified")
-        df["show"] = df["classification"].apply(
-            lambda x: x if "Funnel" not in x and x not in ["Interest", "Target", "Unclassified"] else None
-        )
+        # Apply classification and unpack results
+        classified = df.apply(apply_classification, axis=1)
+        for col in classified.columns:
+            df[col] = classified[col]
         uploaded_dfs[name] = df
 
 # Load files
