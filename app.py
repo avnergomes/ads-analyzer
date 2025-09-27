@@ -112,7 +112,7 @@ def compute_decay(df):
                     "funnel": g["funnel"].iloc[0] if "funnel" in g else "Unclassified",
                     "show": g["show"].iloc[0] if "show" in g else None,
                     "good_days_before_drop": good_days
-        })
+        )
     return pd.DataFrame(out)
 
 # --------------------------------
