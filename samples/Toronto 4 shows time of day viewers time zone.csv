@@ -1,0 +1,385 @@
+"Reporting starts","Reporting ends","Campaign name","Time of day (viewer's time zone)","Campaign Delivery","Ad set budget","Ad set budget type","Attribution setting",Results,"Result indicator",Reach,Impressions,"Cost per results","Amount spent (USD)",Ends
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","00:00:00 - 00:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2466,2684,,7.847273,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"00:00:00 - 00:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4807,5179,,17.40388,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"00:00:00 - 00:59:59",inactive,20,Daily,"7-day click or 1-day view",,,8992,9479,,53.554191,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","00:00:00 - 00:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,8578,8672,,29.41308,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","00:00:00 - 00:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,13920,14601,,46.864233,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"00:00:00 - 00:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2350,reach,2350,2360,1.69551996,3.984472,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"00:00:00 - 00:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3345,reach,3345,3437,1.3200487,4.415563,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"00:00:00 - 00:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4362,reach,4362,4435,1.2372342,5.396816,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"00:00:00 - 00:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3197,reach,3197,3296,2.17675848,6.959097,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"00:00:00 - 00:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2888,2915,,8.06,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"00:00:00 - 00:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1735,1796,,6.01,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"00:00:00 - 00:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,10300,11527,,51.08114,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"00:00:00 - 00:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,9092,10365,,54.84,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"00:00:00 - 00:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1801,2072,,11.371562,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"00:00:00 - 00:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,10803,12026,,50.164705,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","00:00:00 - 00:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6798,7813,,39.707972,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","01:00:00 - 01:59:59",inactive,10,Daily,"7-day click or 1-day view",,,1106,1147,,3.32308,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"01:00:00 - 01:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2451,2593,,8.681936,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"01:00:00 - 01:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1765,1816,,8.192171,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","01:00:00 - 01:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,6588,6869,,22.87017,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","01:00:00 - 01:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,7209,7299,,23.122089,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"01:00:00 - 01:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1366,reach,1366,1394,1.72228437,2.35264,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"01:00:00 - 01:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2124,reach,2124,2124,1.28221803,2.723431,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"01:00:00 - 01:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2379,reach,2379,2397,1.20791471,2.873629,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"01:00:00 - 01:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2807,reach,2807,2821,1.81926448,5.106675,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"01:00:00 - 01:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1917,1964,,5.39,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"01:00:00 - 01:59:59",inactive,20,Daily,"7-day click or 1-day view",,,951,954,,3.08,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"01:00:00 - 01:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,6587,7259,,32.100716,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"01:00:00 - 01:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,7239,8002,,44.13,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"01:00:00 - 01:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1351,1515,,7.361011,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"01:00:00 - 01:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6819,7660,,34.649436,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","01:00:00 - 01:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,3787,4300,,20.183886,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","02:00:00 - 02:59:59",inactive,10,Daily,"7-day click or 1-day view",,,639,658,,2.091939,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"02:00:00 - 02:59:59",inactive,20,Daily,"7-day click or 1-day view",,,906,930,,2.820629,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"02:00:00 - 02:59:59",inactive,20,Daily,"7-day click or 1-day view",,,937,987,,3.971052,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","02:00:00 - 02:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,4788,4976,,11.725214,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","02:00:00 - 02:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,4349,4501,,12.871163,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"02:00:00 - 02:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",594,reach,594,601,1.5,0.891,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"02:00:00 - 02:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",844,reach,844,872,1.3761413,1.161463,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"02:00:00 - 02:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1115,reach,1115,1158,1.44577204,1.612036,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"02:00:00 - 02:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2009,reach,2009,2028,1.81920233,3.654777,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"02:00:00 - 02:59:59",inactive,20,Daily,"7-day click or 1-day view",,,929,991,,2.96,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"02:00:00 - 02:59:59",inactive,20,Daily,"7-day click or 1-day view",,,539,556,,2.12,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"02:00:00 - 02:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4010,4344,,19.560436,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"02:00:00 - 02:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4434,4911,,27.51,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"02:00:00 - 02:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,797,875,,4.480615,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"02:00:00 - 02:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,3775,4052,,17.404693,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","02:00:00 - 02:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,1656,1833,,8.307484,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","03:00:00 - 03:59:59",inactive,10,Daily,"7-day click or 1-day view",,,962,1076,,2.972755,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"03:00:00 - 03:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2124,2198,,6.991559,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"03:00:00 - 03:59:59",inactive,20,Daily,"7-day click or 1-day view",,,746,784,,3.630962,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","03:00:00 - 03:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,2292,2395,,6.45287,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","03:00:00 - 03:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,3090,3298,,9.000813,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"03:00:00 - 03:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",761,reach,761,799,1.09189564,0.830933,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"03:00:00 - 03:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1245,reach,1245,1270,1.27871942,1.592006,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"03:00:00 - 03:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1830,reach,1830,1898,1.2310629,2.252845,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"03:00:00 - 03:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1110,reach,1110,1198,0.73068487,0.81106,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"03:00:00 - 03:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1312,1378,,3.71,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"03:00:00 - 03:59:59",inactive,20,Daily,"7-day click or 1-day view",,,740,799,,2.53,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"03:00:00 - 03:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,3770,4197,,17.860398,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"03:00:00 - 03:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4616,5541,,32.35,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"03:00:00 - 03:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,407,434,,2.100289,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"03:00:00 - 03:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,11626,12811,,64.110453,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","03:00:00 - 03:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,8951,9958,,73.987589,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","04:00:00 - 04:59:59",inactive,10,Daily,"7-day click or 1-day view",,,700,747,,2.202041,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"04:00:00 - 04:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1309,1375,,4.561017,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"04:00:00 - 04:59:59",inactive,20,Daily,"7-day click or 1-day view",,,832,866,,4.061076,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","04:00:00 - 04:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,1705,1755,,5.832594,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","04:00:00 - 04:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,2623,2760,,8.760791,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"04:00:00 - 04:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",808,reach,808,848,1.02838191,0.830933,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"04:00:00 - 04:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",485,reach,485,485,1.30060763,0.630795,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"04:00:00 - 04:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",676,reach,676,687,1.36266765,0.921163,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"04:00:00 - 04:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2598,reach,2598,2728,0.80937209,2.102749,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"04:00:00 - 04:59:59",inactive,20,Daily,"7-day click or 1-day view",,,785,828,,2.26,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"04:00:00 - 04:59:59",inactive,20,Daily,"7-day click or 1-day view",,,609,647,,2.2,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"04:00:00 - 04:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,2115,2363,,11.000245,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"04:00:00 - 04:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,3412,3825,,23.81,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"04:00:00 - 04:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,277,301,,1.570216,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"04:00:00 - 04:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,2979,3271,,15.305333,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","04:00:00 - 04:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,2171,2400,,11.056651,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","05:00:00 - 05:59:59",inactive,10,Daily,"7-day click or 1-day view",,,701,780,,2.282115,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"05:00:00 - 05:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1416,1447,,5.161151,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"05:00:00 - 05:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1495,1559,,7.421967,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","05:00:00 - 05:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,3119,3284,,11.315032,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","05:00:00 - 05:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,4046,4431,,15.531403,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"05:00:00 - 05:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",873,reach,873,910,0.91740994,0.800899,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"05:00:00 - 05:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",393,reach,393,410,1.22291473,0.480605,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"05:00:00 - 05:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",602,reach,602,612,1.18089333,0.710898,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"05:00:00 - 05:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",9409,reach,9409,10445,0.60127487,5.657395,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"05:00:00 - 05:59:59",inactive,20,Daily,"7-day click or 1-day view",,,963,1015,,2.85,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"05:00:00 - 05:59:59",inactive,20,Daily,"7-day click or 1-day view",,,731,759,,2.74,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"05:00:00 - 05:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,2347,2598,,13.120293,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"05:00:00 - 05:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,2980,3436,,19.82,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"05:00:00 - 05:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,412,477,,2.390328,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"05:00:00 - 05:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,2830,3177,,13.655836,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","05:00:00 - 05:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,2558,2846,,12.576191,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","06:00:00 - 06:59:59",inactive,10,Daily,"7-day click or 1-day view",,,1230,1340,,4.364045,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"06:00:00 - 06:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2475,2573,,9.542128,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"06:00:00 - 06:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2214,2399,,11.222974,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","06:00:00 - 06:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,6272,6569,,23.41041,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","06:00:00 - 06:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,7204,7561,,28.962616,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"06:00:00 - 06:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1768,reach,1768,1823,0.66817073,1.181326,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"06:00:00 - 06:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",553,reach,553,553,1.12257159,0.620782,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"06:00:00 - 06:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",956,reach,956,964,1.00545388,0.961214,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"06:00:00 - 06:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4363,reach,4363,4827,0.32589013,1.421859,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"06:00:00 - 06:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1460,1516,,4.26,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"06:00:00 - 06:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1503,1645,,6.4,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"06:00:00 - 06:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,3355,3508,,17.880399,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"06:00:00 - 06:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,3654,4073,,22.91,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"06:00:00 - 06:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,811,894,,4.670642,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"06:00:00 - 06:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,4258,4664,,20.773666,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","06:00:00 - 06:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,3987,4544,,23.412908,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","07:00:00 - 07:59:59",inactive,10,Daily,"7-day click or 1-day view",,,1945,2101,,6.415947,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"07:00:00 - 07:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3619,3924,,15.083363,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"07:00:00 - 07:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3141,3343,,15.794185,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","07:00:00 - 07:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,19332,20301,,59.776582,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","07:00:00 - 07:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,10043,10640,,38.723498,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"07:00:00 - 07:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2049,reach,2049,2131,0.73288697,1.501685,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"07:00:00 - 07:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",997,reach,997,1032,1.07457345,1.07135,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"07:00:00 - 07:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1470,reach,1470,1495,1.09662301,1.612036,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"07:00:00 - 07:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3049,reach,3049,3165,0.35796218,1.091427,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"07:00:00 - 07:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2255,2344,,6.57,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"07:00:00 - 07:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2216,2363,,8.73,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"07:00:00 - 07:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4694,5078,,25.000558,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"07:00:00 - 07:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4157,4603,,24.85,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"07:00:00 - 07:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1258,1446,,7.541036,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"07:00:00 - 07:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6399,7629,,37.548552,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","07:00:00 - 07:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6279,6998,,31.260531,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","08:00:00 - 08:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2312,2463,,7.526977,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"08:00:00 - 08:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4011,4360,,16.113593,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"08:00:00 - 08:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3341,3514,,16.194291,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","08:00:00 - 08:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,17793,18045,,52.953548,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","08:00:00 - 08:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,9893,10251,,35.553212,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"08:00:00 - 08:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1580,reach,1580,1607,0.78569194,1.241393,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"08:00:00 - 08:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2025,reach,2025,2058,1.30040374,2.633318,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"08:00:00 - 08:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2490,reach,2490,2508,1.15808905,2.883642,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"08:00:00 - 08:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1938,reach,1938,2071,0.43917057,0.851113,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"08:00:00 - 08:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2740,2740,,7.25,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"08:00:00 - 08:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2258,2416,,8.42,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"08:00:00 - 08:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,5936,6581,,31.640706,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"08:00:00 - 08:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4382,5075,,26.69,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"08:00:00 - 08:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1366,1638,,11.28155,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"08:00:00 - 08:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,7727,8839,,44.846327,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","08:00:00 - 08:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6832,7656,,32.760077,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","09:00:00 - 09:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2257,2441,,7.456912,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"09:00:00 - 09:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4106,4373,,15.843532,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"09:00:00 - 09:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2668,2854,,11.77312,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","09:00:00 - 09:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,45020,45020,,123.845072,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","09:00:00 - 09:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,8191,8439,,28.032532,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"09:00:00 - 09:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1386,reach,1386,1452,1.09791332,1.521708,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"09:00:00 - 09:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2033,reach,2033,2055,1.25096116,2.543204,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"09:00:00 - 09:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2659,reach,2659,2666,1.22004398,3.244097,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"09:00:00 - 09:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2904,reach,2904,3253,0.39997187,1.161518,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"09:00:00 - 09:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2366,2537,,6.94,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"09:00:00 - 09:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2172,2217,,7.32,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"09:00:00 - 09:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,6097,6735,,30.410678,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"09:00:00 - 09:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4173,4607,,23.66,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"09:00:00 - 09:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1426,1607,,9.741338,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"09:00:00 - 09:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,8039,8813,,48.055348,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","09:00:00 - 09:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6497,7218,,31.680404,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","10:00:00 - 10:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2337,2577,,7.747181,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"10:00:00 - 10:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4181,4596,,16.293633,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"10:00:00 - 10:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2468,2625,,10.992913,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","10:00:00 - 10:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,10333,10789,,30.563591,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","10:00:00 - 10:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,7532,7874,,26.652408,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"10:00:00 - 10:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1707,reach,1707,1722,1.19055706,2.032281,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"10:00:00 - 10:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3702,reach,3702,3702,1.27929945,4.735967,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"10:00:00 - 10:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2847,reach,2847,2925,1.34697682,3.834843,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"10:00:00 - 10:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1670,reach,1670,1733,0.47367307,0.791034,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"10:00:00 - 10:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2376,2465,,6.73,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"10:00:00 - 10:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2090,2159,,7.33,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"10:00:00 - 10:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,6378,7033,,30.820688,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"10:00:00 - 10:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,4142,4580,,22.82,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"10:00:00 - 10:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1543,1808,,10.661464,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"10:00:00 - 10:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,7909,8890,,39.497957,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","10:00:00 - 10:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,5426,5957,,27.0718,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","11:00:00 - 11:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2315,2538,,7.496949,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"11:00:00 - 11:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4047,4371,,15.683497,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"11:00:00 - 11:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2624,2719,,11.022921,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","11:00:00 - 11:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,7322,7750,,24.260788,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","11:00:00 - 11:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,8081,8356,,30.892791,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"11:00:00 - 11:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2099,reach,2099,2140,1.3354674,2.803146,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"11:00:00 - 11:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3279,reach,3279,3409,1.39242212,4.565752,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"11:00:00 - 11:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3564,reach,3564,3628,1.28669791,4.585791,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"11:00:00 - 11:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1419,reach,1419,1419,1.00201454,1.421859,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"11:00:00 - 11:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2276,2333,,5.99,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"11:00:00 - 11:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1580,1648,,5.51,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"11:00:00 - 11:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,6545,7072,,31.920712,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"11:00:00 - 11:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,3954,4645,,23.23,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"11:00:00 - 11:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1499,1776,,11.681605,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"11:00:00 - 11:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,8127,8785,,40.387686,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","11:00:00 - 11:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,5497,5920,,29.790976,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","12:00:00 - 12:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2533,2718,,8.007422,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"12:00:00 - 12:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3935,4262,,15.853535,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"12:00:00 - 12:59:59",inactive,20,Daily,"7-day click or 1-day view",,,7434,7723,,39.970591,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","12:00:00 - 12:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,7448,7845,,25.451318,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","12:00:00 - 12:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,11769,12049,,43.373918,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"12:00:00 - 12:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2888,reach,2888,2979,1.27913645,3.694146,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"12:00:00 - 12:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3635,reach,3635,3795,1.36072393,4.946231,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"12:00:00 - 12:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4304,reach,4304,4324,1.23064339,5.296689,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"12:00:00 - 12:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1564,reach,1564,1597,0.97954132,1.532003,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"12:00:00 - 12:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2222,2354,,6.04,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"12:00:00 - 12:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1416,1496,,5.06,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"12:00:00 - 12:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,6715,7028,,31.090694,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"12:00:00 - 12:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,3975,4292,,19.99,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"12:00:00 - 12:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1388,1655,,11.94164,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"12:00:00 - 12:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,8892,9792,,40.937518,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","12:00:00 - 12:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,5975,6683,,28.981222,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","13:00:00 - 13:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2403,2584,,7.577023,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"13:00:00 - 13:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4292,4525,,16.033575,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"13:00:00 - 13:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2872,3028,,12.893417,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","13:00:00 - 13:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,8080,8480,,30.153409,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","13:00:00 - 13:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,13022,13804,,52.644755,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"13:00:00 - 13:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2297,reach,2297,2353,1.55158903,3.564,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"13:00:00 - 13:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3859,reach,3859,3885,1.26357688,4.876143,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"13:00:00 - 13:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3890,reach,3890,3890,1.25351107,4.876158,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"13:00:00 - 13:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1456,reach,1456,1489,1.12784794,1.642147,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"13:00:00 - 13:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2376,2516,,6.8,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"13:00:00 - 13:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1309,1433,,5.04,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"13:00:00 - 13:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,6630,6993,,29.12065,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"13:00:00 - 13:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,3880,4234,,19.57,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"13:00:00 - 13:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1223,1467,,10.071383,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"13:00:00 - 13:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,9053,9731,,41.087473,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","13:00:00 - 13:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6406,6940,,28.431388,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","14:00:00 - 14:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2702,2873,,8.627997,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"14:00:00 - 14:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4685,4901,,17.863983,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"14:00:00 - 14:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3544,3700,,16.834461,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","14:00:00 - 14:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,8781,9234,,34.795473,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","14:00:00 - 14:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,12855,13723,,54.764947,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"14:00:00 - 14:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1738,reach,1738,1747,1.53797468,2.673,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"14:00:00 - 14:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4052,reach,4052,4070,1.27258055,5.156496,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"14:00:00 - 14:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4137,reach,4137,4137,1.29000235,5.33674,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"14:00:00 - 14:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1236,reach,1236,1241,1.02075179,1.261649,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"14:00:00 - 14:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2601,2698,,7.26,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"14:00:00 - 14:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1458,1516,,5.73,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"14:00:00 - 14:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,8340,8768,,36.140806,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"14:00:00 - 14:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,5247,5884,,29.68,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"14:00:00 - 14:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1290,1512,,10.141393,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"14:00:00 - 14:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,9610,10702,,43.546723,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","14:00:00 - 14:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,6777,7435,,31.490462,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","15:00:00 - 15:59:59",inactive,10,Daily,"7-day click or 1-day view",,,2887,3143,,9.568869,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"15:00:00 - 15:59:59",inactive,20,Daily,"7-day click or 1-day view",,,5213,5638,,20.574587,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"15:00:00 - 15:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3590,3638,,16.074259,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","15:00:00 - 15:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,8070,8251,,30.813702,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","15:00:00 - 15:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,10924,11646,,46.834231,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"15:00:00 - 15:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3515,reach,3515,3556,1.17913277,4.144652,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"15:00:00 - 15:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3762,reach,3762,3809,1.3068032,4.916194,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"15:00:00 - 15:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3839,reach,3839,3945,1.3040694,5.006322,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"15:00:00 - 15:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1198,reach,1198,1203,1.2453675,1.49195,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"15:00:00 - 15:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2491,2611,,6.83,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"15:00:00 - 15:59:59",inactive,20,Daily,"7-day click or 1-day view",,,1485,1625,,6.15,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"15:00:00 - 15:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,9276,10612,,44.36099,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"15:00:00 - 15:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,6343,7219,,39.31,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"15:00:00 - 15:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1294,1549,,10.711471,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"15:00:00 - 15:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,10037,11088,,47.075647,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","15:00:00 - 15:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,7103,7725,,33.30991,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","16:00:00 - 16:59:59",inactive,10,Daily,"7-day click or 1-day view",,,3379,3746,,11.230409,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"16:00:00 - 16:59:59",inactive,20,Daily,"7-day click or 1-day view",,,6202,6658,,24.765522,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"16:00:00 - 16:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4228,4389,,19.905275,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","16:00:00 - 16:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,6631,6799,,25.391291,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","16:00:00 - 16:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,10120,10409,,41.263727,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"16:00:00 - 16:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3032,reach,3032,3065,1.33725282,4.054551,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"16:00:00 - 16:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3683,reach,3683,3820,1.43814091,5.296673,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"16:00:00 - 16:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3707,reach,3707,3755,1.23706268,4.585791,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"16:00:00 - 16:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1533,reach,1533,1539,1.2671489,1.942539,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"16:00:00 - 16:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2921,2990,,8.01,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"16:00:00 - 16:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2202,2251,,8.64,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"16:00:00 - 16:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,8530,9378,,38.820866,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"16:00:00 - 16:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,5545,6380,,30.16,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"16:00:00 - 16:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1119,1276,,8.061107,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"16:00:00 - 16:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,10324,11262,,48.595184,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","16:00:00 - 16:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,8048,8879,,38.128451,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","17:00:00 - 17:59:59",inactive,10,Daily,"7-day click or 1-day view",,,3824,4063,,12.141253,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"17:00:00 - 17:59:59",inactive,20,Daily,"7-day click or 1-day view",,,7131,7596,,28.276305,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"17:00:00 - 17:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4796,4963,,21.795775,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","17:00:00 - 17:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,6758,7195,,27.342159,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","17:00:00 - 17:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,9662,10112,,38.163447,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"17:00:00 - 17:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2503,reach,2503,2503,1.41589194,3.543978,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"17:00:00 - 17:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4147,reach,4147,4147,1.24825696,5.176522,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"17:00:00 - 17:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4066,reach,4066,4193,1.26820269,5.156512,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"17:00:00 - 17:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1355,reach,1355,1380,1.50011592,2.032657,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"17:00:00 - 17:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3201,3493,,9.28,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"17:00:00 - 17:59:59",inactive,20,Daily,"7-day click or 1-day view",,,2734,2898,,10.76,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"17:00:00 - 17:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,9591,10815,,44.881001,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"17:00:00 - 17:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,7363,8226,,37.87,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"17:00:00 - 17:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1161,1315,,9.841352,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"17:00:00 - 17:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,11065,12380,,50.44462,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","17:00:00 - 17:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,9256,10504,,49.864896,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","18:00:00 - 18:59:59",inactive,10,Daily,"7-day click or 1-day view",,,3598,4039,,12.381476,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"18:00:00 - 18:59:59",inactive,20,Daily,"7-day click or 1-day view",,,7461,8200,,29.276528,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"18:00:00 - 18:59:59",inactive,20,Daily,"7-day click or 1-day view",,,5880,6099,,26.136926,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","18:00:00 - 18:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,6809,7116,,25.931531,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","18:00:00 - 18:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,9189,9304,,34.583124,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"18:00:00 - 18:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2505,reach,2505,2551,1.71449909,4.29482,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"18:00:00 - 18:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4006,reach,4006,4006,1.31468675,5.266635,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"18:00:00 - 18:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3605,reach,3605,3730,1.36649689,4.926221,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"18:00:00 - 18:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1785,reach,1785,1825,1.3631264,2.433181,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"18:00:00 - 18:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3418,3463,,9.06,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"18:00:00 - 18:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3289,3493,,12.35,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"18:00:00 - 18:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,10070,11370,,47.141052,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"18:00:00 - 18:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,8184,9246,,42.4,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"18:00:00 - 18:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1216,1384,,8.921225,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"18:00:00 - 18:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,10674,12384,,52.843888,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","18:00:00 - 18:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,8829,10331,,45.066349,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","19:00:00 - 19:59:59",inactive,10,Daily,"7-day click or 1-day view",,,3792,4355,,13.43245,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"19:00:00 - 19:59:59",inactive,20,Daily,"7-day click or 1-day view",,,8467,9059,,32.367217,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"19:00:00 - 19:59:59",inactive,20,Daily,"7-day click or 1-day view",,,7726,7969,,33.418855,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","19:00:00 - 19:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,7639,8115,,28.602719,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","19:00:00 - 19:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,9578,9763,,36.283277,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"19:00:00 - 19:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2529,reach,2529,2582,1.59926426,4.044539,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"19:00:00 - 19:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3981,reach,3981,4060,1.40594107,5.597051,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"19:00:00 - 19:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3865,reach,3865,4044,1.31343104,5.076411,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"19:00:00 - 19:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2532,reach,2532,2555,1.54230044,3.905105,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"19:00:00 - 19:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3745,3987,,10.5,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"19:00:00 - 19:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3113,3375,,11.85,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"19:00:00 - 19:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,10688,11937,,47.731065,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"19:00:00 - 19:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,8738,10141,,47.64,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"19:00:00 - 19:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1382,1516,,8.66119,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"19:00:00 - 19:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,12934,14308,,55.59305,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","19:00:00 - 19:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,10663,12267,,51.764321,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","20:00:00 - 20:59:59",inactive,10,Daily,"7-day click or 1-day view",,,4718,5093,,16.845614,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"20:00:00 - 20:59:59",inactive,20,Daily,"7-day click or 1-day view",,,9924,11130,,40.719079,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"20:00:00 - 20:59:59",inactive,20,Daily,"7-day click or 1-day view",,,9568,10388,,42.941379,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","20:00:00 - 20:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,9083,9341,,33.444872,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","20:00:00 - 20:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,10209,11299,,42.783865,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"20:00:00 - 20:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2663,reach,2663,2677,1.7969849,4.785371,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"20:00:00 - 20:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4520,reach,4520,4520,1.32024737,5.967518,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"20:00:00 - 20:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4095,reach,4095,4175,1.28367242,5.256639,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"20:00:00 - 20:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2240,reach,2240,2275,1.74335032,3.905105,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"20:00:00 - 20:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4514,4693,,12.76,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"20:00:00 - 20:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3264,3397,,12.19,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"20:00:00 - 20:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,11405,12562,,52.051161,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"20:00:00 - 20:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,8927,10392,,50.71,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"20:00:00 - 20:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,1791,1991,,11.291551,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"20:00:00 - 20:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,15171,17281,,68.5491,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","20:00:00 - 20:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,12929,15439,,63.130878,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","21:00:00 - 21:59:59",inactive,10,Daily,"7-day click or 1-day view",,,5659,6220,,19.728286,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"21:00:00 - 21:59:59",inactive,20,Daily,"7-day click or 1-day view",,,12028,13806,,50.821331,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"21:00:00 - 21:59:59",inactive,20,Daily,"7-day click or 1-day view",,,9742,10353,,42.611291,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","21:00:00 - 21:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,11543,12218,,48.161417,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","21:00:00 - 21:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,13615,14129,,57.035152,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"21:00:00 - 21:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3045,reach,3045,3142,1.70963635,5.205843,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"21:00:00 - 21:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5336,reach,5336,5336,1.30411674,6.958767,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"21:00:00 - 21:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4466,reach,4466,4672,1.30034349,5.807334,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"21:00:00 - 21:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2958,reach,2958,2958,1.71285431,5.066623,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"21:00:00 - 21:59:59",inactive,20,Daily,"7-day click or 1-day view",,,6023,6059,,16.58,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"21:00:00 - 21:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4408,4700,,17.07,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"21:00:00 - 21:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,13610,15188,,64.301435,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"21:00:00 - 21:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,11693,13914,,66.96,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"21:00:00 - 21:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,2178,2625,,15.322105,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"21:00:00 - 21:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,18944,22354,,88.612982,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","21:00:00 - 21:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,13925,16487,,65.620124,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","22:00:00 - 22:59:59",inactive,10,Daily,"7-day click or 1-day view",,,5744,6371,,19.838388,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"22:00:00 - 22:59:59",inactive,20,Daily,"7-day click or 1-day view",,,12440,13813,,48.980921,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"22:00:00 - 22:59:59",inactive,20,Daily,"7-day click or 1-day view",,,9058,9450,,39.070353,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","22:00:00 - 22:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,12277,13178,,51.993121,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","22:00:00 - 22:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,15511,16641,,64.775851,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"22:00:00 - 22:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3370,reach,3370,3445,1.72003134,5.796506,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"22:00:00 - 22:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5394,reach,5394,5536,1.38847525,7.489436,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"22:00:00 - 22:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4822,reach,4822,4999,1.33931065,6.458156,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"22:00:00 - 22:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3334,reach,3334,3367,1.66384262,5.547251,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"22:00:00 - 22:59:59",inactive,20,Daily,"7-day click or 1-day view",,,6017,6415,,17.44,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"22:00:00 - 22:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4754,5188,,17.55,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"22:00:00 - 22:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,15560,17322,,72.401615,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"22:00:00 - 22:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,13538,16261,,80.1,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"22:00:00 - 22:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,2441,2808,,14.902047,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"22:00:00 - 22:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,23470,28135,,133.74922,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","22:00:00 - 22:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,15282,18228,,75.86702,Ongoing
+2025-05-01,2025-09-20,"CA-Toronto-SignUp-EN-MAY2025-Target - Copy","23:00:00 - 23:59:59",inactive,10,Daily,"7-day click or 1-day view",,,4279,4871,,14.673601,2025-06-10
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Target-2ND,"23:00:00 - 23:59:59",inactive,20,Daily,"7-day click or 1-day view",,,9042,9820,,33.647502,2025-10-04
+2025-05-01,2025-09-20,CA-Toronto-Traffic-OCT2025-Interest-2ND,"23:00:00 - 23:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4506,4843,,21.115595,2025-10-04
+2025-05-01,2025-09-20,"IT-Rome-Traffic-EN-Jun2025-Target - Story-FB-IG","23:00:00 - 23:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,11766,12138,,45.060038,2025-06-09
+2025-05-01,2025-09-20,"IT-Rome-EN-Traffic-MAY2025-Interest - Story-FB-IG","23:00:00 - 23:59:59",completed,"Using ad set budget",0,"7-day click or 1-day view",,,18163,19839,,68.166157,2025-06-09
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"23:00:00 - 23:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3110,reach,3110,3110,1.77047581,5.50618,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_W_AW_EN_Feed_6-27-25,"23:00:00 - 23:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5118,reach,5118,5118,1.25597858,6.428098,2025-07-07
+2025-05-01,2025-09-20,IG_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"23:00:00 - 23:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4861,reach,4861,4861,1.3059076,6.348017,2025-07-07
+2025-05-01,2025-09-20,FB_CA_Toronto_Oct4_9PM_C25_M_AW_EN_Feed_6-27-25,"23:00:00 - 23:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3421,reach,3421,3421,2.06349832,7.059228,2025-07-07
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"23:00:00 - 23:59:59",inactive,20,Daily,"7-day click or 1-day view",,,4754,4809,,13.36,2025-07-31
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT4_9PM_C25_M/W_LPView_EN_Feed_7-8-25,"23:00:00 - 23:59:59",inactive,20,Daily,"7-day click or 1-day view",,,3350,3641,,12.53,2025-07-31
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_7PM_C25_M/W_AddtoCart_EN_Feed_7-18-25,"23:00:00 - 23:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,15377,17854,,76.011696,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_7PM_C25_M/W_LPView_EN_Feed_7-18-25,"23:00:00 - 23:59:59",inactive,30,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,13635,16294,,84.72,Ongoing
+2025-05-01,2025-09-20,FB_CA_Toronto_OCT5_4PM_C25_M/W_LPView_EN_Feed_8-20-25-4th,"23:00:00 - 23:59:59",inactive,40,Daily,"7-day click, 1-day view, or 1-day engaged-view",,,2316,2581,,13.681879,Ongoing
+2025-05-01,2025-09-20,IG_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th,"23:00:00 - 23:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,17476,20358,,83.254616,Ongoing
+2025-05-01,2025-09-20,"FB_CA-Toronto_OCT5_4PM_C25_M/W_AddtoCart_EN_Feed_8-20-25-4th - Copy","23:00:00 - 23:59:59",active,"Using ad set budget",0,"7-day click, 1-day view, or 1-day engaged-view",,,16783,19362,,103.958511,Ongoing
