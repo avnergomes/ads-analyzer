@@ -8,6 +8,31 @@ regex_pattern,mapping_type,mapping_value
 (Boston|BOS[_-]?\d{4}(_S\d+)?),show,Boston
 (Miami|MIA[_-]?\d{4}(_S\d+)?),show,Miami
 (San.?Francisco|SF[_-]?\d{4}(_S\d+)?),show,SanFrancisco
+(Calgary|YYC|CA[-_ ]?Calgary),show,Calgary
+(Edmonton|YEG|CA[-_ ]?Edmonton),show,Edmonton
+(Columbus|CMH|US[-_ ]?Columbus),show,Columbus
+(Portland|PDX|US[-_ ]?Portland),show,Portland
+(Sacramento|SMF|SAC),show,Sacramento
+(Seattle|SEA),show,Seattle
+(Vancouver|YVR|CA[-_ ]?Vancouver),show,Vancouver
+(Phoenix|PHX),show,Phoenix
+(San.?Antonio|SAT|SanAntonio),show,SanAntonio
+(San.?Jose|SJC|SanJose),show,SanJose
+(Houston|IAH|HOU),show,Houston
+(Dallas|DAL|DFW),show,Dallas
+(Denver|DEN),show,Denver
+(Austin|AUS),show,Austin
+(Fresno),show,Fresno
+(Madrid),show,Madrid
+(Paris),show,Paris
+(Stockholm),show,Stockholm
+(Oslo),show,Oslo
+(Gothenburg),show,Gothenburg
+(Rome),show,Rome
+(Mumbai),show,Mumbai
+(Nassau),show,Nassau
+(Sun.?Rose),show,SunRose
+(Up.?Stairs),show,Upstairs
 (F1|Fun1|LPViews?|LP_View|LPV|Landing[_ ]?Page[_ ]?View),funnel,F1
 (F2|Fun2|Add[_ ]?To[_ ]?Cart|ATC|Cart),funnel,F2
 (F3|Fun3|Purchase|Sales?|Checkout|CONV|Conversion),funnel,F3
