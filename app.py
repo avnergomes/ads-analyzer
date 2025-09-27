@@ -108,7 +108,7 @@ def compute_decay(df):
                 good_days += 1
                 bad_run = 0
             else:
-@@ -64,56 +116,54 @@ def compute_decay(df):
+def compute_decay(df):
             "funnel": g["funnel"].iloc[0] if "funnel" in g else "Unclassified",
             "show": g["show"].iloc[0] if "show" in g else None,
             "good_days_before_drop": good_days
