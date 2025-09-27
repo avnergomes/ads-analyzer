@@ -9,23 +9,27 @@ st.set_page_config(page_title="Meta Ads Funnel Analysis", layout="wide")
 st.title("📊 Meta Ads Funnel Analysis Dashboard")
 
 # --------------------------------
-# Load mapping file
+# Load mapping file (corrigido)
 # --------------------------------
-MAPPING_FILE = Path("campaign_mapping_refined.csv")
+MAPPING_FILE = Path("campaign_mapping_fixed.csv")
 if not MAPPING_FILE.exists():
-    st.error("❌ Mapping file 'campaign_mapping_refined.csv' not found in repo.")
+    st.error("❌ Mapping file 'campaign_mapping_fixed.csv' not found in repo.")
     st.stop()
 
 mapping_df = pd.read_csv(MAPPING_FILE)
 
-def classify_name(name):
-    """Classify campaign/adset/ad name using regex mapping."""
-    s = str(name)
-    for _, row in mapping_df.iterrows():
-        if re.search(row["regex_pattern"], s, re.IGNORECASE):
-            if row["mapping_type"] == "funnel":
-                return f"Funnel {row['mapping_value']}"
-            return row["mapping_value"]
+def classify_row(row):
+    """Classify using mapping regex across multiple columns (ad_set, campaign, ad)."""
+    text = " ".join([
+        str(row.get("ad_set_name", "")),
+        str(row.get("campaign_name", "")),
+        str(row.get("ad_name", ""))
+    ])
+    for _, r in mapping_df.iterrows():
+        if re.search(r["regex_pattern"], text, re.IGNORECASE):
+            if r["mapping_type"] == "funnel":
+                return f"Funnel {r['mapping_value']}"
+            return r["mapping_value"]
     return "Unclassified"
 
 def parse_hour(s):
@@ -35,7 +39,6 @@ def parse_hour(s):
         return None
 
 def compute_decay(df):
-    """Compute funnel decay (number of good days before drop) per adset."""
     out = []
     if "ad_set_name" not in df.columns:
         return pd.DataFrame()
@@ -84,12 +87,11 @@ def load_csv(uploaded_file, name):
         if "reporting_starts" in df.columns:
             df["reporting_starts"] = pd.to_datetime(df["reporting_starts"], errors="coerce")
         # Apply classification
-        if "ad_set_name" in df.columns:
-            df["classification"] = df["ad_set_name"].apply(classify_name)
-            df["funnel"] = df["classification"].apply(lambda x: x if "Funnel" in x else "Unclassified")
-            df["show"] = df["classification"].apply(
-                lambda x: x if "Funnel" not in x and x not in ["Interest", "Target", "Unclassified"] else None
-            )
+        df["classification"] = df.apply(classify_row, axis=1)
+        df["funnel"] = df["classification"].apply(lambda x: x if "Funnel" in x else "Unclassified")
+        df["show"] = df["classification"].apply(
+            lambda x: x if "Funnel" not in x and x not in ["Interest", "Target", "Unclassified"] else None
+        )
         uploaded_dfs[name] = df
 
 # Load files
@@ -118,7 +120,7 @@ if "days" in uploaded_dfs:
     else:
         st.info("Not enough data to compute funnel decay.")
 
-# 2. Country/Show × Funnel Overview
+# 2. Show × Funnel Overview
 if "days" in uploaded_dfs:
     st.subheader("🌍 Show × Funnel Overview")
     df = uploaded_dfs["days"]
@@ -144,11 +146,12 @@ if "days_time" in uploaded_dfs:
     df = uploaded_dfs["days_time"]
     if "time_of_day_(viewer's_time_zone)" in df.columns and "cost_per_results" in df.columns:
         df["hour"] = df["time_of_day_(viewer's_time_zone)"].apply(parse_hour)
+        if "funnel" not in df.columns:
+            df["funnel"] = "Unclassified"
         hour_perf = df.groupby(["funnel", "hour"]).apply(
             lambda x: np.average(x["cost_per_results"], weights=x.get("results", None))
             if "results" in x and x["results"].sum() > 0 else x["cost_per_results"].mean()
         ).reset_index(name="avg_cpr")
-
         funnel_sel = st.selectbox("Funnel (Time)", hour_perf["funnel"].unique())
         filt = hour_perf[hour_perf["funnel"] == funnel_sel]
         fig_t = px.line(filt, x="hour", y="avg_cpr", markers=True,
