@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Mapping
 
-import matplotlib.pyplot as plt
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -66,35 +66,44 @@ def plot_daily_sales(sales_df: pd.DataFrame, show_id: str) -> None:
         st.info("No valid sales dates to display.")
         return
 
-    fig, ax = plt.subplots(figsize=(6, 3))
-    ax.plot(df["date"], df["daily_sales"], marker="o", linewidth=2)
-    ax.set_title("Daily sales trend")
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Tickets sold")
-    ax.grid(True, alpha=0.3)
-    fig.autofmt_xdate()
-    st.pyplot(fig)
+    base_chart = (
+        alt.Chart(df)
+        .mark_line(point=True)
+        .encode(
+            x=alt.X("date:T", title="Date"),
+            y=alt.Y("daily_sales:Q", title="Tickets sold"),
+            tooltip=[alt.Tooltip("date:T", title="Date"), alt.Tooltip("daily_sales:Q", title="Tickets sold")],
+        )
+        .properties(title="Daily sales trend", height=260)
+    )
+
+    st.altair_chart(base_chart, use_container_width=True)
 
 
 def plot_funnel_efficiency(funnel_metrics: Mapping[str, float | None]) -> None:
     st.subheader("🔁 Funnel efficiency")
 
-    labels = list(funnel_metrics.keys())
-    values = [value if value is not None else 0 for value in funnel_metrics.values()]
+    data = pd.DataFrame(
+        [
+            {"metric": label, "value": value if value is not None else 0}
+            for label, value in funnel_metrics.items()
+        ]
+    )
 
-    fig, ax = plt.subplots(figsize=(6, 3))
-    bars = ax.bar(labels, values, color="#5DADE2")
-    ax.set_ylabel("Value")
-    ax.set_title("Per-ticket indicators")
-    ax.grid(axis="y", alpha=0.3)
-    ax.tick_params(axis="x", rotation=20)
+    bars = (
+        alt.Chart(data)
+        .mark_bar(color="#5DADE2")
+        .encode(
+            x=alt.X("metric:N", title="Metric", sort=None),
+            y=alt.Y("value:Q", title="Value"),
+            tooltip=[alt.Tooltip("metric:N", title="Metric"), alt.Tooltip("value:Q", title="Value")],
+        )
+        .properties(title="Per-ticket indicators", height=260)
+    )
 
-    for bar, value in zip(bars, funnel_metrics.values()):
-        if value is not None:
-            ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f"{value}",
-                    ha="center", va="bottom", fontsize=8)
+    labels = bars.mark_text(align="center", baseline="bottom", dy=-4).encode(text=alt.Text("value:Q", format=".2f"))
 
-    st.pyplot(fig)
+    st.altair_chart(bars + labels, use_container_width=True)
 
 
 def plot_campaign_spend(df_ads: pd.DataFrame, show_id: str) -> None:
@@ -112,9 +121,19 @@ def plot_campaign_spend(df_ads: pd.DataFrame, show_id: str) -> None:
         .head(10)
     )
 
-    fig, ax = plt.subplots(figsize=(6, 4))
-    chart_data.sort_values().plot(kind="barh", ax=ax, color="#58D68D")
-    ax.set_xlabel("Spend (USD)")
-    ax.set_ylabel("Campaign")
-    ax.set_title("Top 10 campaigns by spend")
-    st.pyplot(fig)
+    chart_df = chart_data.reset_index().rename(columns={"campaign_name": "campaign", "amount_spent": "spend"})
+
+    bars = (
+        alt.Chart(chart_df)
+        .mark_bar(color="#58D68D")
+        .encode(
+            x=alt.X("spend:Q", title="Spend (USD)"),
+            y=alt.Y("campaign:N", sort="-x", title="Campaign"),
+            tooltip=[alt.Tooltip("campaign:N", title="Campaign"), alt.Tooltip("spend:Q", title="Spend (USD)")],
+        )
+        .properties(title="Top 10 campaigns by spend", height=320)
+    )
+
+    labels = bars.mark_text(align="left", dx=3).encode(text=alt.Text("spend:Q", format="$.2f"))
+
+    st.altair_chart(bars + labels, use_container_width=True)
