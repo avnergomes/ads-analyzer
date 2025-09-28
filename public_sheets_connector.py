@@ -24,43 +24,44 @@ class PublicSheetsConnector:
             print(f"Error fetching Google Sheet: {e}")
             return None
 
-    def _clean_sales_data(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Standardize and clean sales DataFrame"""
+        def _clean_sales_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Clean and standardize sales data from Google Sheets"""
         if df is None or df.empty:
             return df
 
         # Normalize column names
         df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
 
-        # Expected final schema
-        col_map = {
-            "show_date": ["show_date", "date", "data"],
-            "city": ["city", "cidade", "local"],
-            "capacity": ["capacity", "capacidade"],
-            "total_sold": ["total_sold", "vendidos"],
-            "sales_to_date": ["sales_to_date", "receita", "revenue"],
-            "today_sold": ["today_sold", "vendidos_hoje"],
-            "occupancy_rate": ["occupancy_rate", "ocupacao"],
-            "avg_ticket_price": ["avg_ticket_price", "ticket_medio", "preco_medio"]
-        }
+        # Remove section headers like "September", "October" etc.
+        if "show_id" in df.columns:
+            df = df[df["show_id"].notna() & (df["show_id"] != "None")]
 
-        clean_df = df.copy()
-        for std_col, aliases in col_map.items():
-            for alias in aliases:
-                if alias in clean_df.columns and std_col not in clean_df.columns:
-                    clean_df = clean_df.rename(columns={alias: std_col})
-                    break
+        # Drop completely empty rows
+        df = df.dropna(how="all")
 
         # Convert dates
-        if "show_date" in clean_df.columns:
-            clean_df["show_date"] = pd.to_datetime(clean_df["show_date"], errors="coerce")
+        for col in ["show_date", "report_date"]:
+            if col in df.columns:
+                df[col] = pd.to_datetime(df[col], errors="coerce")
 
-        # Numeric conversions
-        for col in ["capacity","total_sold","sales_to_date","today_sold","occupancy_rate","avg_ticket_price"]:
-            if col in clean_df.columns:
-                clean_df[col] = pd.to_numeric(clean_df[col], errors="coerce")
+        # Convert numerics
+        num_cols = ["capacity", "venue_holds", "wheelchair_&_companions", "camera",
+                    "artist's_hold", "kills", "yesterday", "today's_sold",
+                    "sales_to_date", "total_sold", "remaining"]
+        for col in num_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors="coerce")
 
-        return clean_df
+        # Create occupancy_rate if missing
+        if "sales_to_date" in df.columns and "capacity" in df.columns:
+            df["occupancy_rate"] = np.where(
+                df["capacity"] > 0,
+                (df["sales_to_date"] / df["capacity"]) * 100,
+                None
+            )
+
+        return df.reset_index(drop=True)
+
 
     def get_data_summary(self, df: pd.DataFrame) -> dict:
         """Quick summary of sales data"""
