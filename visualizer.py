@@ -1,4 +1,3 @@
-"""Visualization helpers rendered inside the Streamlit UI."""
 from __future__ import annotations
 
 from typing import Mapping
