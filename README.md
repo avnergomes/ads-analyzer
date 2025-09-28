@@ -1,71 +1,30 @@
-# 🎯 Ads Performance Analyzer
+# Ads Analyzer
 
-This Streamlit app helps visualize and analyze ads performance from Facebook/Meta campaign exports.
+## Overview
+Ads Analyzer is a Streamlit-based application designed to integrate **sales data from Google Sheets** with **Meta Ads performance data** uploaded by the user.  
+It provides a unified dashboard to monitor KPIs, analyze trends, and visualize funnel performance.
 
----
+## Features
+- Load sales data automatically from Google Sheets.
+- Upload Meta Ads performance files (CSV/XLSX).
+- Automatic normalization of column names across different file formats.
+- KPI computation (Impressions, Clicks, Spend, Conversions, CTR, CPC, CPA, ROAS).
+- Interactive visualizations using Plotly (time series and funnel charts).
+- Ready for deployment on Streamlit Community Cloud.
 
-## 🚀 Features
+## How to Run
+1. Clone this repository.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the Streamlit app:
+   ```bash
+   streamlit run app.py
+   ```
 
-- 🧠 **Smart Show ID Parsing** – handles formats like `WDC_0927`, `S3`, `CA-Calgary-Traffic`
-- 🧼 **Funnel Normalization** – auto-detects: clicks, LP views, add-to-cart, conversions
-- 📊 **Visual Dashboard** – includes:
-  - Total Spend / Conversions / CPA
-  - ROAS by Show
-  - CPA by Show
-  - Funnel Breakdown Chart
-
----
-
-## 📁 Folder Structure
-
-```
-rewrite_ads_analyzer/
-├── app.py               # Streamlit frontend
-├── data_loader.py       # Data loading and cleaning logic
-├── parser.py            # Show & funnel normalization logic
-├── visualizer.py        # Summary metrics and plots
-├── requirements.txt     # Dependencies
-```
-
----
-
-## 🛠️ How to Run
-
-1. 🔽 Download the folder
-2. 📦 Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-3. ▶️ Start the app:
-
-```bash
-streamlit run app.py
-```
-
-4. 📂 Provide the path to your ads `.csv` folder when prompted (e.g., `/mnt/data/samples/samples`)
+## Requirements
+See `requirements.txt` for Python dependencies.
 
 ---
-
-## 📦 Input Format
-
-Supports campaign CSVs from Meta Ads Manager with columns like:
-- `Campaign name`
-- `Amount spent`
-- `Link clicks`
-- `Landing page views`
-- `Adds to cart`
-- `Results`
-
----
-
-## 🧩 Client Requests Implemented
-- Health-of-Show indicators
-- Flexible show parsing
-- Legacy funnel mapping
-- Integrated with Google Sheet metrics
-
----
-
-Built with ❤️ by CodeNinja 🥷
+Developed as **v_zero** release of Ads Analyzer.
