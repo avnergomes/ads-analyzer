@@ -1,36 +1,45 @@
+"""Utility helpers to normalize campaign and show identifiers."""
+from __future__ import annotations
 
 import re
+from typing import Iterable, Set
 
-def normalize_show_id(raw_name: str) -> str:
-    """Extract consistent show ID from raw campaign or show name"""
-    if not isinstance(raw_name, str):
+_CAMPAIGN_SUFFIX_PATTERN = re.compile(r"(_S\d+|\s*S\d+|\s*Show\s*\d+)$", re.IGNORECASE)
+_CAMPAIGN_SANITIZE_PATTERN = re.compile(r"[^A-Za-z0-9]+")
+_CITY_TOKEN_PATTERN = re.compile(r"[A-Za-z]{3,}")
+
+
+def normalize_show_id(raw_name: str | None) -> str:
+    """Return a canonical identifier extracted from the campaign or show name.
+
+    The function keeps alphanumeric characters, removes common suffixes such as
+    ``_S2`` or ``Show 3`` and uppercases the result. If *raw_name* is empty the
+    function returns an empty string.
+    """
+    if not raw_name or not isinstance(raw_name, str):
         return ""
 
-    # Common show ID patterns: CITY_DATE(_S2), remove suffixes
-    base = re.sub(r"_S\d+$", "", raw_name)  # Remove _S2, _S3 etc
-    base = re.sub(r"[^\w\-]", "", base)    # Remove special characters
-    base = base.upper().strip()
+    cleaned = raw_name.strip()
+    cleaned = _CAMPAIGN_SUFFIX_PATTERN.sub("", cleaned)
+    cleaned = _CAMPAIGN_SANITIZE_PATTERN.sub("", cleaned)
+    return cleaned.upper()
 
-    # Try fallback patterns
-    fallback = re.findall(r"[A-Z]{2,}-[A-Z]{2,}-\w+", raw_name)
-    if fallback:
-        return fallback[0]
 
-    return base
+def extract_city_tokens(text: str | None) -> Set[str]:
+    """Extract potential city/location tokens used to match campaigns.
 
-def normalize_funnel_label(raw_label: str) -> str:
-    """Normalize funnel step naming to consistent format"""
-    if not isinstance(raw_label, str):
-        return ""
+    Tokens are returned in lowercase to simplify comparisons.
+    """
+    if not text or not isinstance(text, str):
+        return set()
 
-    raw = raw_label.lower()
-    if "click" in raw:
-        return "Clicks"
-    elif "lpview" in raw or "landing" in raw:
-        return "LP Views"
-    elif "add" in raw and "cart" in raw:
-        return "Add to Cart"
-    elif "conversion" in raw or "result" in raw:
-        return "Conversions"
-    return raw_label.title()
+    return {token.lower() for token in _CITY_TOKEN_PATTERN.findall(text)}
 
+
+def contains_any(text: str | None, tokens: Iterable[str]) -> bool:
+    """Check whether *text* contains any of the provided *tokens* (case-insensitive)."""
+    if not text or not isinstance(text, str):
+        return False
+
+    lowered = text.lower()
+    return any(token.lower() in lowered for token in tokens if token)
