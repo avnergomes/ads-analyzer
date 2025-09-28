@@ -1,4 +1,3 @@
-"""Utility helpers to normalize campaign and show identifiers."""
 from __future__ import annotations
 
 import re
