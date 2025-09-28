@@ -1,3 +1,4 @@
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -27,7 +28,7 @@ def plot_roas(df: pd.DataFrame):
         "conversions": "sum"
     }).reset_index()
     df_grouped["ROAS"] = df_grouped["conversions"] / df_grouped["spend"]
-    
+
     fig, ax = plt.subplots()
     ax.bar(df_grouped["show_id"], df_grouped["ROAS"])
     ax.set_ylabel("ROAS")
@@ -41,7 +42,7 @@ def plot_cpa(df: pd.DataFrame):
         "conversions": "sum"
     }).reset_index()
     df_grouped["CPA"] = df_grouped["spend"] / df_grouped["conversions"].replace(0, 1)
-    
+
     fig, ax = plt.subplots()
     ax.bar(df_grouped["show_id"], df_grouped["CPA"])
     ax.set_ylabel("CPA")

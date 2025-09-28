@@ -1,9 +1,10 @@
+
 import os
 import pandas as pd
 from parser import normalize_show_id, normalize_funnel_label
 
 def load_ads_data(folder_path: str) -> pd.DataFrame:
-    \"\"\"Load and merge all campaign CSVs in a folder\"\"\"
+    """Load and merge all campaign CSVs in a folder"""
     all_data = []
     for filename in os.listdir(folder_path):
         if filename.endswith(".csv"):
@@ -19,7 +20,7 @@ def load_ads_data(folder_path: str) -> pd.DataFrame:
     df = pd.concat(all_data, ignore_index=True)
 
     # Normalize field names
-    df.columns = [col.strip().lower().replace('\\n', '').replace('  ', ' ') for col in df.columns]
+    df.columns = [col.strip().lower().replace('\n', '').replace('  ', ' ') for col in df.columns]
 
     # Create normalized show ID
     if 'campaign name' in df.columns:
