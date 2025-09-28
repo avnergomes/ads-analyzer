@@ -1,44 +1,45 @@
 regex_pattern,mapping_type,mapping_value
-(Toronto|TR[_-]?\d{4}(_S\d+)?),show,Toronto
-(Ottawa|OTW[_-]?\d{4}(_S\d+)?),show,Ottawa
-(Washington|Wash(\.?|ington)? ?DC|WDC[_-]?\d{4}(_S\d+)?),show,WashingtonDC
-(New.?York|NYC[_-]?\d{4}(_S\d+)?),show,NewYork
-(Los.?Angeles|US[-_]?LA|LA[_-]?\d{4}(_S\d+)?),show,LosAngeles
-(Chicago|CHI[_-]?\d{4}(_S\d+)?),show,Chicago
-(Boston|BOS[_-]?\d{4}(_S\d+)?),show,Boston
-(Miami|MIA[_-]?\d{4}(_S\d+)?),show,Miami
-(San.?Francisco|US[-_]?SF|SF[_-]?\d{4}(_S\d+)?),show,SanFrancisco
-(Calgary|YYC|CA[-_ ]?Calgary),show,Calgary
-(Edmonton|YEG|CA[-_ ]?Edmonton),show,Edmonton
-(Columbus|CMH|US[-_ ]?Columbus),show,Columbus
-(Portland|PDX|US[-_ ]?Portland),show,Portland
-(Sacramento|SMF|SAC),show,Sacramento
-(Seattle|SEA),show,Seattle
-(Vancouver|YVR|CA[-_ ]?Vancouver),show,Vancouver
-(Phoenix|PHX),show,Phoenix
-(San.?Antonio|SAT|SanAntonio),show,SanAntonio
-(San.?Jose|SJC|SanJose),show,SanJose
-(Houston|IAH|HOU),show,Houston
-(Dallas|DAL|DFW),show,Dallas
-(Denver|DEN),show,Denver
-(Austin|AUS),show,Austin
-(Fresno),show,Fresno
-(Madrid),show,Madrid
-(Paris),show,Paris
-(Stockholm),show,Stockholm
-(Oslo),show,Oslo
-(Gothenburg),show,Gothenburg
-(Istanbul|TR[-_]?Istanbul),show,Istanbul
-(Athens?|GR[-_]?Athen),show,Athens
-(Belo.?Horizonte|BHZ),show,BeloHorizonte
-(Rome),show,Rome
-(Mumbai),show,Mumbai
-(Nassau),show,Nassau
-(Sun.?Rose),show,SunRose
-(Up.?Stairs),show,Upstairs
-(F1|Fun1|Funnel ?1|Top[_ ]?Of[_ ]?Funnel|TOF|LPViews?|LP_View|LPV|Landing[_ ]?Page[_ ]?Views?),funnel,F1
-(Traffic|Reach|Awareness|Thru ?Play|Video ?Views?|View ?Content|Content ?Views?|Page ?Views?|Impressions?),funnel,F1
-(F2|Fun2|Funnel ?2|Middle[_ ]?Of[_ ]?Funnel|MOF|Lead(?!ership)|Lead[_ ]?Gen|Lead[_ ]?Generation|Instant ?Forms?|Form ?Fills?|Add[_ ]?To[_ ]?Cart|ATC|Cart|Sign ?-? ?Ups?|Signups|Registration(?!s?\s*Closed)|Subscribe|Opt ?-?Ins?|Messages?|Inbox),funnel,F2
-(F3|Fun3|Funnel ?3|Bottom[_ ]?Of[_ ]?Funnel|BOF|Purchase|Sales?|Checkout|CONV|Conversion|Orders?|Book(ing)?s?|Tickets?|Deposits?|Payments?|Enroll(ment)?s?|Schedule|Appointments?),funnel,F3
-.*Interest.*,legacy,Interest
-.*Target.*,legacy,Target
+\bCalgary\b|\bYYC\b,show,Calgary
+\bColumbus\b|\bCMH\b,show,Columbus
+\bEdmonton\b|\bYEG\b|\bEDM\b,show,Edmonton
+\bPortland\b|\bPDX\b,show,Portland
+\bSeattle\b|\bSEA\b,show,Seattle
+\bSacramento\b|\bSMF\b,show,Sacramento
+\bToronto\b|\bYYZ\b,show,Toronto
+\bVancouver\b|\bYVR\b,show,Vancouver
+\bAustin\b|\bAUS\b,show,Austin
+\bBoston\b|\bBOS\b,show,Boston
+\bDC\b|\bD\.C\.\b|\bWashington ?DC\b|\bDCA\b|\bIAD\b,show,Washington DC
+\bHouston\b|\bHOU\b|\bIAH\b,show,Houston
+\bSan ?Antonio\b|\bSAT\b,show,San Antonio
+\bDenver\b|\bDEN\b,show,Denver
+\bDallas\b|\bDFW\b,show,Dallas
+\bDetroit\b|\bDTW\b,show,Detroit
+\bOttawa\b|\bYOW\b|OTTAWA,show,Ottawa
+\bNYC\b|\bNew ?York\b|\bLGA\b|\bJFK\b|\bEWR\b,show,New York
+\bNashville\b|\bBNA\b,show,Nashville
+\bLos ?Angeles\b|\bLA\b,show,Los Angeles
+\bSan ?Jose\b|\bSJC\b,show,San Jose
+\bSan ?Francisco\b|\bSF\b|\bSFO\b,show,San Francisco
+\bFresno\b|\bFAT\b,show,Fresno
+\bPhoenix\b|\bPHX\b,show,Phoenix
+\bSun\s*Rose\b|\bSunRose\b,show,SunRose
+\bUp\s*Stairs\b|\bUpstairs\b|\bUpStairs\b,show,Upstairs
+\b(CONV(ersion)?s?[-_ ]?(Add ?to ?Cart|Purchase)|Add ?to ?Cart|Purchases?|Purchase)\b,funnel,Conversion
+\b(Sign ?Up|Signup|Leads?)\b,funnel,Leads
+\b(Traffic|LP ?View(s)?|Landing ?Page ?View(s)?)\b,funnel,Traffic
+\b(Video ?Views?|Engagement|ThruPlay|Reach|FBIGEngagement)\b,funnel,Awareness
+\bFB\b|Facebook,legacy,Platform: FB
+\bIG\b|Instagram,legacy,Platform: IG
+\bFB/IG\b|\bIG/FB\b|\bFB_IG\b,legacy,Platform: FB+IG
+\bEN\b,legacy,Lang: EN
+\bES\b|Spanish,legacy,Lang: ES
+\bFA\b|Farsi,legacy,Lang: FA
+\bFeed(s)?\b,legacy,Placement: Feed
+\bReels?\b,legacy,Placement: Reels
+\bStories?\b,legacy,Placement: Stories
+\bExplore\b,legacy,Placement: Explore
+(^|[_ -])M([_ -]|$),legacy,Gender: M
+(^|[_ -])W([_ -]|$),legacy,Gender: W
+\bM/W\b|\bMW\b,legacy,Gender: MW
+\bW/M\b|\bWM\b,legacy,Gender: WM
