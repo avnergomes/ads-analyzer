@@ -1,0 +1,950 @@
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import numpy as np
+import re
+from datetime import datetime, timedelta
+import requests
+import io
+
+# Streamlit Cloud Configuration
+st.set_page_config(
+    page_title="DiA - Show Analytics Dashboard",
+    page_icon="🎭",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Custom CSS optimized for cloud deployment
+st.markdown("""
+<style>
+    .metric-card {
+        background-color: #f0f2f6;
+        border: 1px solid #e6e9ef;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 0.25rem 0;
+    }
+    .health-good { color: #28a745; }
+    .health-warning { color: #ffc107; }
+    .health-critical { color: #dc3545; }
+    .show-header {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .stMetric > label { font-weight: bold; }
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+        .show-header h2 { font-size: 1.2rem; }
+        .metric-card { padding: 0.5rem; }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ================================
+# CLOUD-OPTIMIZED DATA PROCESSING
+# ================================
+
+@st.cache_data(ttl=3600)  # Cache for 1 hour
+def load_google_sheet_data(sheet_url):
+    """Load data from Google Sheets URL - Cloud optimized with error handling"""
+    try:
+        if 'docs.google.com' not in sheet_url:
+            st.error("Please provide a valid Google Sheets URL")
+            return None
+        
+        # Extract sheet ID
+        if '/d/' in sheet_url:
+            sheet_id = sheet_url.split('/d/')[1].split('/')[0]
+        else:
+            st.error("Invalid Google Sheets URL format")
+            return None
+        
+        # Convert to CSV export URL
+        csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid=0"
+        
+        # Load with timeout and error handling
+        response = requests.get(csv_url, timeout=30)
+        response.raise_for_status()
+        
+        # Parse CSV data
+        df = pd.read_csv(io.StringIO(response.text))
+        
+        # Basic data validation
+        if df.empty:
+            st.error("Loaded data is empty. Please check the Google Sheet.")
+            return None
+        
+        return df
+        
+    except requests.exceptions.Timeout:
+        st.error("⏰ Request timed out. Please try again or check your connection.")
+        return None
+    except requests.exceptions.RequestException as e:
+        st.error(f"🌐 Error loading Google Sheet: {str(e)}")
+        return None
+    except Exception as e:
+        st.error(f"❌ Unexpected error: {str(e)}")
+        return None
+
+@st.cache_data
+def parse_show_id_enhanced(campaign_name):
+    """Enhanced show ID parsing - optimized for cloud performance"""
+    if pd.isna(campaign_name):
+        return None
+    
+    name = str(campaign_name).upper().strip()
+    
+    # High-priority exact matches (most common patterns)
+    exact_patterns = {
+        'WDC': 'WDC_0927', 'TR': 'TR_0410', 'OTW': 'OTW_1006',
+        'BLR': 'BLR_1126', 'MOB': 'MOB_1128', 'DEL': 'DEL_1130',
+        'DAL': 'DAL_1022', 'IAH': 'IAH_1026', 'SMF': 'SMF_1108'
+    }
+    
+    # Quick exact match check
+    for code, base_id in exact_patterns.items():
+        if name.startswith(f"{code}_"):
+            # Extract show number if present
+            show_match = re.search(r'_S(\d+)', name)
+            if show_match:
+                return f"{base_id}_S{show_match.group(1)}"
+            return base_id
+    
+    # City name patterns (with caching-friendly regex)
+    city_patterns = [
+        (r'WASHINGTON|WASH[\s\-]?DC', 'WDC_0927'),
+        (r'TORONTO', 'TR_0410'),
+        (r'OTTAWA', 'OTW_1006'),
+        (r'BENGALURU|BANGALORE', 'BLR_1126'),
+        (r'MUMBAI', 'MOB_1128'),
+        (r'DELHI', 'DEL_1130'),
+        (r'DALLAS', 'DAL_1022'),
+        (r'HOUSTON', 'IAH_1026'),
+        (r'SACRAMENTO', 'SMF_1108')
+    ]
+    
+    for pattern, base_id in city_patterns:
+        if re.search(pattern, name):
+            # Look for show numbers
+            show_num_patterns = [r'S(\d+)', r'#(\d+)', r'(\d)(?:ND|RD|TH)']
+            for num_pattern in show_num_patterns:
+                show_match = re.search(num_pattern, name)
+                if show_match:
+                    return f"{base_id}_S{show_match.group(1)}"
+            return base_id
+    
+    return None
+
+@st.cache_data
+def parse_funnel_enhanced(campaign_name, result_indicator=""):
+    """Enhanced funnel parsing - cloud optimized"""
+    if pd.isna(campaign_name):
+        return "Unclassified"
+    
+    name = str(campaign_name).upper()
+    result = str(result_indicator).upper()
+    
+    # Quick exact matches first (most performant)
+    funnel_keywords = {
+        'F1': ['F1', 'FUN1', 'LPVIEW', 'LANDING'],
+        'F2': ['F2', 'FUN2', 'ADDTOCART', 'ATC', 'CART'],
+        'F3': ['F3', 'FUN3', 'PURCHASE', 'CONV', 'CHECKOUT', 'SALES']
+    }
+    
+    # Check result indicator first
+    for funnel, keywords in funnel_keywords.items():
+        for keyword in keywords:
+            if keyword in result:
+                return funnel
+    
+    # Check campaign name
+    for funnel, keywords in funnel_keywords.items():
+        for keyword in keywords:
+            if keyword in name:
+                return funnel
+    
+    # Legacy patterns
+    if 'INTEREST' in name or 'TARGET' in name:
+        return 'Legacy'
+    
+    return "Unclassified"
+
+@st.cache_data
+def process_data_optimized(sales_df, meta_df):
+    """Optimized data processing for cloud deployment"""
+    try:
+        # Process sales data
+        sales_clean = sales_df.copy()
+        
+        # Optimize date parsing
+        date_columns = ['Show Date', 'Report Date']
+        for col in date_columns:
+            if col in sales_clean.columns:
+                sales_clean[col] = pd.to_datetime(sales_clean[col], errors='coerce')
+        
+        # Optimize numeric conversion
+        numeric_cols = ['Capacity', 'Total Sold', 'Remaining', 'ATP']
+        for col in numeric_cols:
+            if col in sales_clean.columns:
+                if col == 'ATP':
+                    sales_clean[col] = sales_clean[col].astype(str).str.replace(r'[$,₹£€]', '', regex=True)
+                sales_clean[col] = pd.to_numeric(sales_clean[col], errors='coerce')
+        
+        # Process meta data efficiently
+        if not meta_df.empty:
+            meta_clean = meta_df.copy()
+            meta_clean.columns = [c.strip().lower().replace(' ', '_').replace('/', '_per_') for c in meta_clean.columns]
+            
+            # Apply optimized mapping
+            if 'ad_set_name' in meta_clean.columns:
+                meta_clean['show_id'] = meta_clean['ad_set_name'].apply(parse_show_id_enhanced)
+                meta_clean['funnel'] = meta_clean.apply(
+                    lambda row: parse_funnel_enhanced(
+                        row.get('ad_set_name', ''),
+                        row.get('result_indicator', '')
+                    ), axis=1
+                )
+                
+                # Filter mapped data efficiently
+                meta_mapped = meta_clean[meta_clean['show_id'].notna()].copy()
+                
+                # Add country classification
+                meta_mapped['country'] = meta_mapped['show_id'].apply(classify_country)
+                
+                return sales_clean, meta_mapped
+        
+        return sales_clean, pd.DataFrame()
+        
+    except Exception as e:
+        st.error(f"Error processing data: {str(e)}")
+        return sales_df, pd.DataFrame()
+
+def classify_country(show_id):
+    """Optimized country classification"""
+    if pd.isna(show_id):
+        return "Unknown"
+    
+    city_code = str(show_id).split('_')[0]
+    
+    country_mapping = {
+        'WDC': 'US', 'DAL': 'US', 'IAH': 'US', 'SMF': 'US',
+        'TR': 'CA', 'OTW': 'CA',
+        'BLR': 'IN', 'MOB': 'IN', 'DEL': 'IN'
+    }
+    
+    return country_mapping.get(city_code, "Unknown")
+
+def calculate_metrics_optimized(show_sales, show_ads):
+    """Optimized metrics calculation for cloud performance"""
+    if show_sales.empty:
+        return None
+    
+    try:
+        latest = show_sales.iloc[-1]
+        
+        # Basic metrics with error handling
+        capacity = float(latest.get('Capacity', 0) or 0)
+        total_sold = float(latest.get('Total Sold', 0) or 0)
+        remaining = float(latest.get('Remaining', 0) or 0)
+        atp = float(latest.get('ATP', 0) or 0)
+        
+        # Calculate derived metrics safely
+        sold_pct = (total_sold / capacity * 100) if capacity > 0 else 0
+        revenue = atp * total_sold if atp > 0 else 0
+        
+        # Days to show calculation
+        show_date = latest.get('Show Date')
+        if pd.notna(show_date):
+            days_to_show = max(0, (show_date - pd.Timestamp.now()).days)
+        else:
+            days_to_show = 0
+        
+        # Ads metrics with error handling
+        if not show_ads.empty:
+            numeric_columns = ['amount_spent_(usd)', 'results', 'impressions']
+            for col in numeric_columns:
+                if col in show_ads.columns:
+                    show_ads[col] = pd.to_numeric(show_ads[col], errors='coerce').fillna(0)
+            
+            total_spend = show_ads.get('amount_spent_(usd)', pd.Series([0])).sum()
+            total_results = show_ads.get('results', pd.Series([0])).sum()
+            total_impressions = show_ads.get('impressions', pd.Series([0])).sum()
+            
+            # Calculate efficiency metrics safely
+            cost_per_ticket = total_spend / total_sold if total_sold > 0 else 0
+            roas = revenue / total_spend if total_spend > 0 else 0
+            
+            # Funnel metrics
+            if 'funnel' in show_ads.columns:
+                funnel_data = show_ads.groupby('funnel')['results'].sum()
+                f1_results = funnel_data.get('F1', 0)
+                f2_results = funnel_data.get('F2', 0)
+                f3_results = funnel_data.get('F3', 0)
+            else:
+                f1_results = f2_results = f3_results = 0
+        else:
+            total_spend = total_results = total_impressions = 0
+            cost_per_ticket = roas = 0
+            f1_results = f2_results = f3_results = 0
+        
+        # Daily sales calculation
+        daily_target = remaining / days_to_show if days_to_show > 0 else 0
+        avg_daily_sales = 0
+        if len(show_sales) > 1:
+            try:
+                recent_sales = show_sales.tail(7)['Total Sold'].diff().mean()
+                avg_daily_sales = recent_sales if not pd.isna(recent_sales) else 0
+            except:
+                avg_daily_sales = 0
+        
+        return {
+            'show_id': latest.get('Show ID'),
+            'show_name': latest.get('Show Name'),
+            'capacity': capacity,
+            'total_sold': total_sold,
+            'remaining': remaining,
+            'sold_percentage': sold_pct,
+            'atp': atp,
+            'revenue': revenue,
+            'days_to_show': days_to_show,
+            'total_spend': total_spend,
+            'total_results': total_results,
+            'total_impressions': total_impressions,
+            'cost_per_ticket': cost_per_ticket,
+            'roas': roas,
+            'daily_target': daily_target,
+            'avg_daily_sales': avg_daily_sales,
+            'lp_views_per_ticket': f1_results / total_sold if total_sold > 0 else 0,
+            'cart_adds_per_ticket': f2_results / total_sold if total_sold > 0 else 0,
+            'conversions_per_ticket': f3_results / total_sold if total_sold > 0 else 0,
+        }
+        
+    except Exception as e:
+        st.error(f"Error calculating metrics: {str(e)}")
+        return None
+
+# ================================
+# CLOUD-OPTIMIZED VISUALIZATIONS
+# ================================
+
+def create_health_dashboard_optimized(metrics):
+    """Create health dashboard optimized for mobile and cloud"""
+    if not metrics:
+        return None
+    
+    try:
+        # Calculate health score
+        health_score = 0
+        
+        # Sales performance (30 points max)
+        if metrics['sold_percentage'] > 85: health_score += 30
+        elif metrics['sold_percentage'] > 70: health_score += 20
+        elif metrics['sold_percentage'] > 50: health_score += 10
+        
+        # ROAS performance (25 points max)
+        if metrics['roas'] > 3: health_score += 25
+        elif metrics['roas'] > 2: health_score += 15
+        elif metrics['roas'] > 1: health_score += 5
+        
+        # Time factor (25 points max)
+        if metrics['days_to_show'] > 14: health_score += 25
+        elif metrics['days_to_show'] > 7: health_score += 15
+        elif metrics['days_to_show'] > 0: health_score += 5
+        
+        # Sales velocity (20 points max)
+        if metrics['daily_target'] > 0 and metrics['avg_daily_sales'] >= metrics['daily_target']:
+            health_score += 20
+        elif metrics['avg_daily_sales'] > 0:
+            health_score += 10
+        
+        # Create responsive subplot layout
+        fig = make_subplots(
+            rows=1, cols=5,
+            specs=[[{"type": "indicator"} for _ in range(5)]],
+            subplot_titles=[
+                "Show Health", "Sales Velocity", "Ad Efficiency", 
+                "Funnel Health", "Revenue Pace"
+            ],
+            horizontal_spacing=0.15
+        )
+        
+        # 1. Show Health Gauge
+        health_color = "green" if health_score > 70 else "orange" if health_score > 40 else "red"
+        
+        fig.add_trace(go.Indicator(
+            mode="gauge+number",
+            value=health_score,
+            domain={'x': [0, 1], 'y': [0, 1]},
+            gauge={
+                'axis': {'range': [0, 100]},
+                'bar': {'color': health_color},
+                'steps': [
+                    {'range': [0, 40], 'color': "lightcoral"},
+                    {'range': [40, 70], 'color': "yellow"},
+                    {'range': [70, 100], 'color': "lightgreen"}
+                ]
+            }
+        ), row=1, col=1)
+        
+        # 2. Sales Velocity
+        velocity_ratio = (metrics['avg_daily_sales'] / metrics['daily_target'] * 100) if metrics['daily_target'] > 0 else 100
+        velocity_color = "green" if velocity_ratio >= 100 else "orange" if velocity_ratio >= 70 else "red"
+        
+        fig.add_trace(go.Indicator(
+            mode="number+delta",
+            value=velocity_ratio,
+            number={'suffix': "%", 'font': {'size': 24}},
+            delta={'reference': 100, 'position': "top"},
+        ), row=1, col=2)
+        
+        # 3. Ad Efficiency (ROAS)
+        roas_color = "green" if metrics['roas'] >= 3 else "orange" if metrics['roas'] >= 1.5 else "red"
+        
+        fig.add_trace(go.Indicator(
+            mode="number",
+            value=metrics['roas'],
+            number={'suffix': "x", 'font': {'color': roas_color, 'size': 24}}
+        ), row=1, col=3)
+        
+        # 4. Funnel Health
+        funnel_efficiency = 0
+        if metrics['lp_views_per_ticket'] > 0:
+            f2_to_f1 = (metrics['cart_adds_per_ticket'] / metrics['lp_views_per_ticket']) * 100
+            f3_to_f2 = (metrics['conversions_per_ticket'] / metrics['cart_adds_per_ticket']) * 100 if metrics['cart_adds_per_ticket'] > 0 else 0
+            funnel_efficiency = (f2_to_f1 + f3_to_f2) / 2
+        
+        funnel_color = "green" if funnel_efficiency > 15 else "orange" if funnel_efficiency > 8 else "red"
+        
+        fig.add_trace(go.Indicator(
+            mode="number",
+            value=funnel_efficiency,
+            number={'suffix': "%", 'font': {'color': funnel_color, 'size': 24}}
+        ), row=1, col=4)
+        
+        # 5. Revenue Pace
+        target_revenue = metrics['atp'] * metrics['capacity'] if metrics['atp'] > 0 and metrics['capacity'] > 0 else 0
+        revenue_pct = (metrics['revenue'] / target_revenue * 100) if target_revenue > 0 else 0
+        revenue_color = "green" if revenue_pct > 80 else "orange" if revenue_pct > 60 else "red"
+        
+        fig.add_trace(go.Indicator(
+            mode="gauge+number",
+            value=min(revenue_pct, 100),  # Cap at 100% for display
+            domain={'x': [0, 1], 'y': [0, 1]},
+            gauge={
+                'axis': {'range': [0, 100]},
+                'bar': {'color': revenue_color},
+                'steps': [
+                    {'range': [0, 60], 'color': "lightcoral"},
+                    {'range': [60, 80], 'color': "yellow"},
+                    {'range': [80, 100], 'color': "lightgreen"}
+                ]
+            },
+            number={'suffix': "%"}
+        ), row=1, col=5)
+        
+        # Optimize layout for mobile
+        fig.update_layout(
+            height=300,
+            showlegend=False,
+            title_text="🏥 Show Health Dashboard - Quick Decision Indicators",
+            title_x=0.5,
+            title_font_size=16,
+            margin=dict(l=20, r=20, t=60, b=20)
+        )
+        
+        return fig
+        
+    except Exception as e:
+        st.error(f"Error creating health dashboard: {str(e)}")
+        return None
+
+def create_funnel_analysis_optimized(show_ads):
+    """Create funnel analysis optimized for cloud deployment"""
+    if show_ads.empty or 'funnel' not in show_ads.columns:
+        return None
+    
+    try:
+        # Ensure numeric columns
+        numeric_cols = ['amount_spent_(usd)', 'results', 'impressions']
+        for col in numeric_cols:
+            if col in show_ads.columns:
+                show_ads[col] = pd.to_numeric(show_ads[col], errors='coerce').fillna(0)
+        
+        funnel_data = show_ads.groupby('funnel').agg({
+            'amount_spent_(usd)': 'sum',
+            'results': 'sum',
+            'impressions': 'sum',
+        }).reset_index()
+        
+        # Calculate derived metrics safely
+        funnel_data['cpr'] = funnel_data.apply(
+            lambda row: row['amount_spent_(usd)'] / row['results'] if row['results'] > 0 else 0, 
+            axis=1
+        )
+        
+        # Create responsive subplot
+        fig = make_subplots(
+            rows=2, cols=2,
+            subplot_titles=['Spend Distribution', 'Results by Funnel', 'Cost per Result', 'Impressions'],
+            specs=[[{"type": "bar"}, {"type": "bar"}],
+                   [{"type": "bar"}, {"type": "bar"}]],
+            vertical_spacing=0.12
+        )
+        
+        # Define colors
+        colors = {'F1': '#3498db', 'F2': '#e74c3c', 'F3': '#2ecc71', 'Legacy': '#95a5a6', 'Unclassified': '#34495e'}
+        
+        # Add traces with error handling
+        metrics = [
+            ('amount_spent_(usd)', 'Spend ($)', 1, 1),
+            ('results', 'Results', 1, 2),
+            ('cpr', 'Cost per Result ($)', 2, 1),
+            ('impressions', 'Impressions', 2, 2)
+        ]
+        
+        for col, title, row, col_pos in metrics:
+            fig.add_trace(go.Bar(
+                x=funnel_data['funnel'],
+                y=funnel_data[col],
+                name=title,
+                marker_color=[colors.get(f, '#34495e') for f in funnel_data['funnel']],
+                showlegend=False,
+                text=funnel_data[col].round(2),
+                textposition='auto'
+            ), row=row, col=col_pos)
+        
+        fig.update_layout(
+            height=600, 
+            title_text="🔄 Funnel Performance Analysis",
+            margin=dict(l=20, r=20, t=60, b=20)
+        )
+        
+        return fig
+        
+    except Exception as e:
+        st.error(f"Error creating funnel analysis: {str(e)}")
+        return None
+
+def create_performance_timeline_optimized(show_ads):
+    """Create performance timeline optimized for cloud"""
+    if show_ads.empty or 'reporting_starts' not in show_ads.columns:
+        return None
+    
+    try:
+        # Ensure date column is datetime
+        show_ads['reporting_starts'] = pd.to_datetime(show_ads['reporting_starts'], errors='coerce')
+        show_ads = show_ads.dropna(subset=['reporting_starts'])
+        
+        if show_ads.empty:
+            return None
+        
+        # Ensure numeric columns
+        numeric_cols = ['amount_spent_(usd)', 'results', 'cost_per_results']
+        for col in numeric_cols:
+            if col in show_ads.columns:
+                show_ads[col] = pd.to_numeric(show_ads[col], errors='coerce').fillna(0)
+        
+        # Group by date and funnel
+        daily_perf = show_ads.groupby(['reporting_starts', 'funnel']).agg({
+            'amount_spent_(usd)': 'sum',
+            'results': 'sum',
+            'cost_per_results': 'mean'
+        }).reset_index()
+        
+        # Create timeline chart
+        fig = px.line(
+            daily_perf,
+            x='reporting_starts',
+            y='amount_spent_(usd)',
+            color='funnel',
+            title="📈 Daily Spend by Funnel",
+            markers=True,
+            color_discrete_map={'F1': '#3498db', 'F2': '#e74c3c', 'F3': '#2ecc71', 'Legacy': '#95a5a6'}
+        )
+        
+        fig.update_layout(
+            height=400,
+            margin=dict(l=20, r=20, t=60, b=20),
+            xaxis_title="Date",
+            yaxis_title="Spend ($)"
+        )
+        
+        return fig
+        
+    except Exception as e:
+        st.error(f"Error creating timeline: {str(e)}")
+        return None
+
+# ================================
+# MAIN APPLICATION
+# ================================
+
+def main():
+    """Main application optimized for Streamlit Cloud"""
+    
+    # Header
+    st.title("🎭 DiA - Advanced Show Analytics Dashboard")
+    st.markdown("*Enhanced show performance analytics with intelligent mapping and health indicators*")
+    
+    # Initialize session state
+    if 'data_loaded' not in st.session_state:
+        st.session_state.data_loaded = False
+    
+    # Sidebar
+    with st.sidebar:
+        st.header("📁 Data Sources")
+        
+        # Google Sheets Integration
+        st.subheader("🌐 Google Sheets Integration")
+        sheet_url = st.text_input(
+            "Online Ticket Sale Sheet URL",
+            value="https://docs.google.com/spreadsheets/d/1hVm1OALKQ244zuJBQV0SsQT08A2_JTDlPytUNULRofA/edit?gid=0#gid=0",
+            help="Paste the Google Sheets URL for sales data"
+        )
+        
+        if st.button("🔄 Load from Google Sheets", type="primary"):
+            with st.spinner("Loading data from Google Sheets..."):
+                sales_data = load_google_sheet_data(sheet_url)
+                if sales_data is not None:
+                    st.session_state['sales_data'] = sales_data
+                    st.session_state.data_loaded = True
+                    st.success("✅ Sales data loaded successfully!")
+                    st.rerun()
+        
+        st.divider()
+        
+        # File Upload
+        st.subheader("📁 File Upload")
+        meta_file = st.file_uploader(
+            "Upload Meta Ads Data (CSV)", 
+            type="csv", 
+            key="meta",
+            help="Upload your Meta Ads campaign data"
+        )
+        
+        if meta_file is not None:
+            try:
+                meta_data = pd.read_csv(meta_file)
+                st.session_state['meta_data'] = meta_data
+                st.success("✅ Meta Ads data uploaded!")
+            except Exception as e:
+                st.error(f"Error reading file: {str(e)}")
+        
+        # Data status
+        st.subheader("📊 Data Status")
+        sales_status = "✅ Loaded" if 'sales_data' in st.session_state else "❌ Not loaded"
+        meta_status = "✅ Loaded" if 'meta_data' in st.session_state else "❌ Not loaded"
+        
+        st.write(f"**Sales Data:** {sales_status}")
+        st.write(f"**Meta Ads Data:** {meta_status}")
+        
+        if st.button("🗑️ Clear All Data"):
+            for key in ['sales_data', 'meta_data']:
+                if key in st.session_state:
+                    del st.session_state[key]
+            st.session_state.data_loaded = False
+            st.rerun()
+    
+    # Main content
+    if 'sales_data' in st.session_state and 'meta_data' in st.session_state:
+        sales_data = st.session_state['sales_data']
+        meta_data = st.session_state['meta_data']
+        
+        # Process data
+        with st.spinner("🔄 Processing and mapping data..."):
+            sales_clean, meta_mapped = process_data_optimized(sales_data, meta_data)
+        
+        # Show mapping results
+        if not meta_mapped.empty:
+            total_campaigns = len(meta_data)
+            mapped_campaigns = len(meta_mapped)
+            mapping_rate = mapped_campaigns / total_campaigns * 100
+            
+            # Mapping status in columns
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("Total Campaigns", f"{total_campaigns:,}")
+            with col2:
+                st.metric("Mapped", f"{mapped_campaigns:,}")
+            with col3:
+                st.metric("Mapping Rate", f"{mapping_rate:.1f}%")
+            with col4:
+                unique_shows = meta_mapped['show_id'].nunique()
+                st.metric("Unique Shows", unique_shows)
+            
+            # Show selection
+            available_shows = sorted(meta_mapped['show_id'].unique())
+            
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                selected_show = st.selectbox(
+                    "🎪 Select Show for Analysis", 
+                    available_shows, 
+                    key="show_select"
+                )
+            with col2:
+                if st.button("🔄 Refresh"):
+                    st.cache_data.clear()
+                    st.rerun()
+            
+            if selected_show:
+                # Filter data for selected show
+                show_sales = sales_clean[sales_clean['Show ID'] == selected_show].copy()
+                show_ads = meta_mapped[meta_mapped['show_id'] == selected_show].copy()
+                
+                # Calculate metrics
+                metrics = calculate_metrics_optimized(show_sales, show_ads)
+                
+                if metrics:
+                    # Show header
+                    country = show_ads['country'].iloc[0] if not show_ads.empty else 'Unknown'
+                    st.markdown(f"""
+                    <div class="show-header">
+                        <h2>🎭 {metrics['show_name']} ({metrics['show_id']})</h2>
+                        <p><strong>Capacity:</strong> {metrics['capacity']:,} | 
+                           <strong>Days to Show:</strong> {metrics['days_to_show']} | 
+                           <strong>Country:</strong> {country}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Health Dashboard
+                    st.subheader("🏥 Show Health Dashboard")
+                    health_fig = create_health_dashboard_optimized(metrics)
+                    if health_fig:
+                        st.plotly_chart(health_fig, use_container_width=True)
+                    
+                    # Key metrics
+                    col1, col2, col3, col4, col5 = st.columns(5)
+                    
+                    with col1:
+                        st.metric(
+                            "📊 Sold", 
+                            f"{metrics['total_sold']:,}", 
+                            f"{metrics['sold_percentage']:.1f}%"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "💰 Revenue", 
+                            f"${metrics['revenue']:,.0f}",
+                            f"ATP: ${metrics['atp']:.0f}" if metrics['atp'] > 0 else None
+                        )
+                    
+                    with col3:
+                        roas_delta = f"{metrics['roas']:.1f}x ROAS" if metrics['roas'] > 0 else None
+                        st.metric(
+                            "💸 Ad Spend", 
+                            f"${metrics['total_spend']:,.0f}",
+                            roas_delta
+                        )
+                    
+                    with col4:
+                        st.metric(
+                            "🎫 Cost/Ticket", 
+                            f"${metrics['cost_per_ticket']:.0f}",
+                            "⚠️ High" if metrics['cost_per_ticket'] > metrics['atp'] * 0.3 else "✅ Good"
+                        )
+                    
+                    with col5:
+                        velocity_indicator = "📈" if metrics['avg_daily_sales'] >= metrics['daily_target'] else "📉"
+                        st.metric(
+                            "🎯 Daily Target", 
+                            f"{metrics['daily_target']:.0f}",
+                            f"{velocity_indicator} Avg: {metrics['avg_daily_sales']:.0f}"
+                        )
+                    
+                    # Core metrics from Online Ticket Sale Sheet
+                    st.subheader("📋 Key Metrics from Online Ticket Sale Sheet")
+                    
+                    tab1, tab2, tab3 = st.tabs(["🎫 Ticket Metrics", "🔄 Funnel Efficiency", "💰 Financial Performance"])
+                    
+                    with tab1:
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.metric("Ticket Cost", f"${metrics['cost_per_ticket']:.2f}", 
+                                    "Show Budget ÷ Total Sold")
+                            st.metric("Capacity", f"{metrics['capacity']:,}")
+                        with col2:
+                            st.metric("Remaining", f"{metrics['remaining']:,}")
+                            st.metric("Daily Sales Target", f"{metrics['daily_target']:.0f}",
+                                    f"vs Avg: {metrics['avg_daily_sales']:.0f}")
+                    
+                    with tab2:
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.metric("LP Views per Ticket", f"{metrics['lp_views_per_ticket']:.1f}")
+                            st.metric("Add to Cart per Ticket", f"{metrics['cart_adds_per_ticket']:.1f}")
+                        with col2:
+                            st.metric("Conversions per Ticket", f"{metrics['conversions_per_ticket']:.1f}")
+                            st.metric("Total Results per Ticket", f"{metrics['total_results'] / metrics['total_sold']:.1f}" if metrics['total_sold'] > 0 else "0")
+                    
+                    with tab3:
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.metric("Daily Sales CPA", f"${metrics['cost_per_ticket']:.2f}",
+                                    "Total Spend ÷ Total Sold")
+                            st.metric("Total Spend", f"${metrics['total_spend']:,.2f}")
+                        with col2:
+                            st.metric("ROAS", f"{metrics['roas']:.2f}x",
+                                    "Revenue ÷ Spend")
+                            
+                            # Revenue progress
+                            potential_revenue = metrics['atp'] * metrics['capacity'] if metrics['atp'] > 0 else 0
+                            revenue_completion = (metrics['revenue'] / potential_revenue * 100) if potential_revenue > 0 else 0
+                            st.metric("Revenue Progress", f"{revenue_completion:.1f}%",
+                                    f"${metrics['revenue']:,.0f} / ${potential_revenue:,.0f}")
+                    
+                    # Funnel Analysis
+                    if not show_ads.empty:
+                        st.subheader("🔄 Funnel Performance Analysis")
+                        funnel_fig = create_funnel_analysis_optimized(show_ads)
+                        if funnel_fig:
+                            st.plotly_chart(funnel_fig, use_container_width=True)
+                        
+                        # Performance Timeline
+                        st.subheader("📈 Performance Over Time")
+                        timeline_fig = create_performance_timeline_optimized(show_ads)
+                        if timeline_fig:
+                            st.plotly_chart(timeline_fig, use_container_width=True)
+                    
+                    # Advanced Analytics
+                    with st.expander("📊 Advanced Analytics & Raw Data"):
+                        tab1, tab2, tab3 = st.tabs(["🗺️ Mapping Report", "📈 Sales Data", "📱 Ads Data"])
+                        
+                        with tab1:
+                            st.subheader("Data Mapping Analysis")
+                            
+                            if not meta_data.empty:
+                                col1, col2 = st.columns(2)
+                                with col1:
+                                    # Show distribution
+                                    show_distribution = meta_mapped['show_id'].value_counts().head(10)
+                                    st.subheader("Show Distribution (Top 10)")
+                                    st.bar_chart(show_distribution)
+                                
+                                with col2:
+                                    # Funnel distribution
+                                    funnel_distribution = meta_mapped['funnel'].value_counts()
+                                    st.subheader("Funnel Distribution")
+                                    st.bar_chart(funnel_distribution)
+                                
+                                # Unmapped campaigns sample
+                                if 'ad_set_name' in meta_data.columns:
+                                    unmapped = meta_data[~meta_data['ad_set_name'].isin(meta_mapped['ad_set_name'])]
+                                    if not unmapped.empty:
+                                        st.subheader("Unmapped Campaigns (Sample)")
+                                        sample_size = min(10, len(unmapped))
+                                        st.dataframe(unmapped[['ad_set_name']].head(sample_size))
+                        
+                        with tab2:
+                            st.subheader("Sales Data")
+                            st.dataframe(show_sales)
+                        
+                        with tab3:
+                            st.subheader("Ads Data") 
+                            st.dataframe(show_ads)
+                
+                else:
+                    st.error("❌ Unable to calculate metrics for this show. Please check data quality.")
+        
+        else:
+            st.warning("⚠️ No shows found in Meta ads data. Please check mapping configuration.")
+            
+            # Debug information
+            if not meta_data.empty and 'ad_set_name' in meta_data.columns:
+                st.subheader("🔍 Campaign Mapping Debug")
+                st.write("Sample campaign names and their mapping results:")
+                
+                sample_campaigns = meta_data['ad_set_name'].unique()[:10]
+                debug_data = []
+                
+                for campaign in sample_campaigns:
+                    parsed_id = parse_show_id_enhanced(campaign)
+                    parsed_funnel = parse_funnel_enhanced(campaign)
+                    debug_data.append({
+                        'Campaign Name': campaign,
+                        'Show ID': parsed_id,
+                        'Funnel': parsed_funnel
+                    })
+                
+                st.dataframe(pd.DataFrame(debug_data))
+    
+    else:
+        # Welcome screen with instructions
+        st.info("""
+        ## 🚀 Welcome to DiA v2.0 - Enhanced Show Analytics
+        
+        ### 📋 Quick Start Guide
+        
+        #### Step 1: Load Your Data
+        1. **Google Sheets**: Use the provided URL in the sidebar for automatic loading
+        2. **File Upload**: Upload your Meta Ads CSV data
+        
+        #### Step 2: Analyze Your Shows
+        - View **Health Dashboard** with 5 key indicators
+        - Monitor **Sales Velocity** vs daily targets  
+        - Track **ROAS** and **Cost per Ticket**
+        - Analyze **Funnel Performance**
+        
+        ### 🎯 Key Features
+        
+        #### 🏥 Health Dashboard
+        **5 Quick Visual Indicators** for instant decision making:
+        - 🟢 **Green**: Excellent performance
+        - 🟡 **Yellow**: Needs attention
+        - 🔴 **Red**: Immediate action required
+        
+        #### 📊 Enhanced Metrics
+        All metrics from **Online Ticket Sale Sheet (Column N)**:
+        - **Ticket Cost** = Show Budget ÷ Total Tickets Sold
+        - **Daily Sales Target** vs Last 7-day Average
+        - **Funnel Efficiency**: LP Views/Cart Adds/Conversions per ticket
+        - **ROAS**: Revenue ÷ Ad Spend
+        
+        #### 🗺️ Smart Mapping
+        Automatically recognizes show variations:
+        - `WDC_0927`, `WDC_0927_S2`, `S3`, `S4`
+        - "Washington DC #2" → `WDC_0927_S2`
+        - Legacy patterns: "US-DC-Sales-2024 - Interest"
+        
+        ### 💡 Pro Tips
+        - **Health Dashboard** gives instant go/no-go decisions
+        - **Red indicators** = immediate action needed
+        - **Yellow indicators** = monitor closely
+        - **Green indicators** = performing well
+        
+        ---
+        *Ready to get started? Load your data using the sidebar! 🚀*
+        """)
+    
+    # Footer
+    st.markdown("---")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("**DiA v2.0** - Cloud Analytics")
+    with col2:
+        st.markdown("🎭 Show Performance Dashboard")
+    with col3:
+        if st.button("ℹ️ About"):
+            st.info("""
+            **DiA v2.0** - Enhanced Show Analytics Dashboard
+            
+            ✨ **New in v2.0:**
+            - 🏥 Health Dashboard with 5 visual indicators
+            - 🎯 Metrics from Online Ticket Sale Sheet
+            - 🗺️ Enhanced show ID parsing with fallback logic
+            - 🔄 Improved funnel detection for legacy campaigns
+            - ☁️ Optimized for Streamlit Community Cloud
+            - 📱 Mobile-responsive design
+            
+            Built for fast decisions and actionable insights.
+            """)
+
+if __name__ == "__main__":
+    main()

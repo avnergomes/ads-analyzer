@@ -1,0 +1,97 @@
+"Reporting starts","Reporting ends","Campaign name","Time of day (viewer's time zone)","Campaign Delivery","Ad set budget","Ad set budget type","Attribution setting",Results,"Result indicator",Reach,Impressions,"Cost per results","Amount spent (USD)",Ends
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"00:00:00 - 00:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3,actions:onsite_conversion.lead_grouped,728,797,3.32,9.96,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"00:00:00 - 00:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5,actions:onsite_conversion.lead_grouped,900,1024,3.44861705,17.243085,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","00:00:00 - 00:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1825,2213,,11.573845,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"00:00:00 - 00:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,1598,1928,,23.218945,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"01:00:00 - 01:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1,actions:onsite_conversion.lead_grouped,375,425,5.57,5.57,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"01:00:00 - 01:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5,actions:onsite_conversion.lead_grouped,401,452,1.56628025,7.831401,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","01:00:00 - 01:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1159,1396,,7.092356,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"01:00:00 - 01:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,743,830,,10.270687,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"02:00:00 - 02:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1,actions:onsite_conversion.lead_grouped,206,218,2.75,2.75,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"02:00:00 - 02:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3,actions:onsite_conversion.lead_grouped,223,244,1.37691303,4.130739,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","02:00:00 - 02:59:59",inactive,50,Daily,"7-day click or 1-day view",,,786,924,,4.251412,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"02:00:00 - 02:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,439,493,,5.924628,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"03:00:00 - 03:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1,actions:onsite_conversion.lead_grouped,159,175,2.14,2.14,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"03:00:00 - 03:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1,actions:onsite_conversion.lead_grouped,142,156,2.54045456,2.540455,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","03:00:00 - 03:59:59",inactive,50,Daily,"7-day click or 1-day view",,,587,671,,3.13104,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"03:00:00 - 03:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,273,303,,2.907364,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"04:00:00 - 04:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2,actions:onsite_conversion.lead_grouped,242,266,1.805,3.61,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"04:00:00 - 04:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1,actions:onsite_conversion.lead_grouped,130,134,2.0203615,2.020362,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","04:00:00 - 04:59:59",inactive,50,Daily,"7-day click or 1-day view",,,521,579,,2.710901,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"04:00:00 - 04:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,283,304,,4.835615,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"05:00:00 - 05:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2,actions:onsite_conversion.lead_grouped,366,398,2.96,5.92,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"05:00:00 - 05:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",1,actions:onsite_conversion.lead_grouped,181,187,3.25058162,3.250582,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","05:00:00 - 05:59:59",inactive,50,Daily,"7-day click or 1-day view",,,681,766,,3.49116,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"05:00:00 - 05:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,439,508,,6.074492,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"06:00:00 - 06:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4,actions:onsite_conversion.lead_grouped,838,932,2.9925,11.97,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"06:00:00 - 06:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3,actions:onsite_conversion.lead_grouped,454,486,2.83384038,8.501521,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","06:00:00 - 06:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1036,1215,,5.711897,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"06:00:00 - 06:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,830,975,,12.079047,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"07:00:00 - 07:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4,actions:onsite_conversion.lead_grouped,1085,1205,4.12,16.48,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"07:00:00 - 07:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4,actions:onsite_conversion.lead_grouped,672,757,3.22057625,12.882305,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","07:00:00 - 07:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1646,1897,,9.42313,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"07:00:00 - 07:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,1366,1583,,19.702134,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"08:00:00 - 08:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",6,actions:onsite_conversion.lead_grouped,1143,1291,2.75833333,16.55,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"08:00:00 - 08:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",6,actions:onsite_conversion.lead_grouped,855,966,2.61713494,15.70281,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","08:00:00 - 08:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1772,2061,,9.953306,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"08:00:00 - 08:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,1757,2137,,25.556825,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"09:00:00 - 09:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",9,actions:onsite_conversion.lead_grouped,1169,1300,1.65666667,14.91,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"09:00:00 - 09:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",3,actions:onsite_conversion.lead_grouped,985,1089,6.09442379,18.283271,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","09:00:00 - 09:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1442,1606,,7.972648,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"09:00:00 - 09:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,1784,2218,,25.846563,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"10:00:00 - 10:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",10,actions:onsite_conversion.lead_grouped,1063,1213,1.491,14.91,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"10:00:00 - 10:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",13,actions:onsite_conversion.lead_grouped,939,1079,1.33408486,17.343103,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","10:00:00 - 10:59:59",inactive,50,Daily,"7-day click or 1-day view",,,932,1011,,4.641542,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"10:00:00 - 10:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2000,2339,,27.325222,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"11:00:00 - 11:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",8,actions:onsite_conversion.lead_grouped,1180,1315,2.01375,16.11,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"11:00:00 - 11:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",6,actions:onsite_conversion.lead_grouped,950,1083,3.02387439,18.143246,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","11:00:00 - 11:59:59",inactive,50,Daily,"7-day click or 1-day view",,,646,707,,3.10103,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"11:00:00 - 11:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2203,2635,,30.152658,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"12:00:00 - 12:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2,actions:onsite_conversion.lead_grouped,1102,1210,7.08,14.16,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"12:00:00 - 12:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4,actions:onsite_conversion.lead_grouped,1008,1179,4.44829592,17.793184,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","12:00:00 - 12:59:59",inactive,50,Daily,"7-day click or 1-day view",,,596,621,,2.700897,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"12:00:00 - 12:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2192,2592,,29.023682,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"13:00:00 - 13:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",10,actions:onsite_conversion.lead_grouped,1038,1112,1.382,13.82,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"13:00:00 - 13:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",6,actions:onsite_conversion.lead_grouped,869,966,2.48044382,14.882663,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","13:00:00 - 13:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1024,1135,,5.351778,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"13:00:00 - 13:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2242,2691,,30.012785,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"14:00:00 - 14:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5,actions:onsite_conversion.lead_grouped,1168,1313,3.204,16.02,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"14:00:00 - 14:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",7,actions:onsite_conversion.lead_grouped,992,1102,2.49330326,17.453123,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","14:00:00 - 14:59:59",inactive,50,Daily,"7-day click or 1-day view",,,1782,2128,,10.943635,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"14:00:00 - 14:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2200,2642,,28.983718,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"15:00:00 - 15:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",9,actions:onsite_conversion.lead_grouped,1307,1426,1.97,17.73,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"15:00:00 - 15:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",12,actions:onsite_conversion.lead_grouped,1054,1217,1.65112876,19.813545,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","15:00:00 - 15:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2030,2487,,12.204054,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"15:00:00 - 15:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2227,2832,,30.572277,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"16:00:00 - 16:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5,actions:onsite_conversion.lead_grouped,950,1067,2.992,14.96,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"16:00:00 - 16:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",12,actions:onsite_conversion.lead_grouped,1155,1361,1.84783063,22.173968,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","16:00:00 - 16:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2187,2532,,11.863941,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"16:00:00 - 16:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2200,2561,,26.935575,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"17:00:00 - 17:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",2,actions:onsite_conversion.lead_grouped,906,1019,6.74,13.48,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"17:00:00 - 17:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",7,actions:onsite_conversion.lead_grouped,1299,1441,3.25343927,22.774075,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","17:00:00 - 17:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2235,2768,,12.40412,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"17:00:00 - 17:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,1917,2236,,24.517768,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"18:00:00 - 18:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",8,actions:onsite_conversion.lead_grouped,1141,1311,2.05875,16.47,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"18:00:00 - 18:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",11,actions:onsite_conversion.lead_grouped,1353,1560,2.31586892,25.474558,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","18:00:00 - 18:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2766,3471,,17.195712,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"18:00:00 - 18:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2003,2386,,25.197152,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"19:00:00 - 19:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",4,actions:onsite_conversion.lead_grouped,1091,1211,4.0525,16.21,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"19:00:00 - 19:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",14,actions:onsite_conversion.lead_grouped,1422,1658,1.86461934,26.104671,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","19:00:00 - 19:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2972,3751,,17.735892,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"19:00:00 - 19:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2287,2726,,27.565004,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"20:00:00 - 20:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",8,actions:onsite_conversion.lead_grouped,1159,1347,2.09625,16.77,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"20:00:00 - 20:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",11,actions:onsite_conversion.lead_grouped,1619,1877,2.77231422,30.495456,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","20:00:00 - 20:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2735,3381,,15.855267,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"20:00:00 - 20:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2460,2941,,31.151752,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"21:00:00 - 21:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",11,actions:onsite_conversion.lead_grouped,1277,1478,1.64454545,18.09,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"21:00:00 - 21:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",12,actions:onsite_conversion.lead_grouped,1641,1987,2.91302122,34.956255,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","21:00:00 - 21:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2881,3710,,19.066334,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"21:00:00 - 21:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2763,3215,,34.698536,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"22:00:00 - 22:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",8,actions:onsite_conversion.lead_grouped,1299,1425,2.33,18.64,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"22:00:00 - 22:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",18,actions:onsite_conversion.lead_grouped,2395,2876,2.78216447,50.07896,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","22:00:00 - 22:59:59",inactive,50,Daily,"7-day click or 1-day view",,,3265,4088,,22.687536,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"22:00:00 - 22:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,2443,2679,,31.511426,Ongoing
+2025-05-01,2025-09-20,FB_US_LA_SunRose_0903_7PM_25-38_InstantForm,"23:00:00 - 23:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",5,actions:onsite_conversion.lead_grouped,904,969,2.61,13.05,Ongoing
+2025-05-01,2025-09-20,IG_US_LA_SunRose_0903_7PM_25-38_InstantForm,"23:00:00 - 23:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",7,actions:onsite_conversion.lead_grouped,1799,2056,5.31952323,37.236663,Ongoing
+2025-05-01,2025-09-20,"IG_FB_US_LA_SunRose_0903_7PM_Direct Sale","23:00:00 - 23:59:59",inactive,50,Daily,"7-day click or 1-day view",,,2735,3426,,19.766566,2025-09-03
+2025-05-01,2025-09-20,IG_FB_US_LA_SunRose_0920_7PM_25-38_InstantForm,"23:00:00 - 23:59:59",inactive,"Using ad set budget",0,"7-day click or 1-day view",,,1739,1927,,26.306146,Ongoing
