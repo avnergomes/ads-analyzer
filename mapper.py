@@ -1,4 +1,3 @@
-"""Campaign to show mapping helpers."""
 from __future__ import annotations
 
 import re
@@ -7,7 +6,26 @@ from pathlib import Path
 from typing import Optional
 
 import pandas as pd
-from fuzzywuzzy import process
+
+try:  # pragma: no cover - optional dependency
+    from fuzzywuzzy import process
+except ImportError:  # pragma: no cover - graceful fallback for environments without fuzzywuzzy
+    from difflib import SequenceMatcher
+
+    class _FallbackProcess:
+        @staticmethod
+        def extractOne(query: str, choices: list[str]) -> Optional[tuple[str, int]]:
+            if not choices:
+                return None
+
+            best_match: Optional[tuple[str, int]] = None
+            for candidate in choices:
+                ratio = int(SequenceMatcher(None, query, candidate).ratio() * 100)
+                if best_match is None or ratio > best_match[1]:
+                    best_match = (candidate, ratio)
+            return best_match
+
+    process = _FallbackProcess()
 
 from parser import contains_any, extract_city_tokens, normalize_show_id
 
