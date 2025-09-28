@@ -1,4 +1,3 @@
-"""Business metrics helpers used by the Streamlit dashboards."""
 from __future__ import annotations
 
 from datetime import datetime
