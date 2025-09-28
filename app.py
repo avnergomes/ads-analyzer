@@ -1,4 +1,3 @@
-"""Streamlit entry-point for the Ads Performance Analyzer."""
 from __future__ import annotations
 
 import tempfile
