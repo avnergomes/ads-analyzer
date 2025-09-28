@@ -1,41 +1,65 @@
-import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import streamlit as st
 
-def show_kpis(metrics_dict: dict):
-    st.subheader("🎯 Show KPIs")
+def show_kpis(df: pd.DataFrame):
+    st.subheader("📊 Health Indicators Summary")
+
     col1, col2, col3 = st.columns(3)
-    col1.metric("Days to Show", metrics_dict.get("days_to_show"))
-    col1.metric("Tickets Sold", metrics_dict.get("sold"))
-    col1.metric("Capacity", metrics_dict.get("capacity"))
-    col2.metric("Remaining", metrics_dict.get("remaining"))
-    col2.metric("Daily Sales Target", round(metrics_dict.get("daily_target", 0), 2))
-    col2.metric("Ticket Cost", f"${metrics_dict.get('ticket_cost'):.2f}" if metrics_dict.get("ticket_cost") else "-")
-    col3.metric("Total Spend", f"${metrics_dict.get('spend_total'):.2f}")
-    col3.metric("ROAS", round(metrics_dict.get("roas", 0), 2) if metrics_dict.get("roas") else "-")
 
-def plot_daily_sales(sales_df: pd.DataFrame, show_id: str):
-    df = sales_df.copy()
-    df = df[df["show_id"] == show_id]
-    if "date" not in df.columns or "daily_sales" not in df.columns:
-        st.info("No daily sales data available.")
-        return
-    df["date"] = pd.to_datetime(df["date"])
-    df = df.sort_values("date")
+    with col1:
+        total_spend = df['spend'].sum()
+        st.metric("Total Spend ($)", f"{total_spend:,.0f}")
+
+    with col2:
+        total_conversions = df['conversions'].sum()
+        st.metric("Total Conversions", int(total_conversions))
+
+    with col3:
+        cpa = total_spend / total_conversions if total_conversions else 0
+        st.metric("CPA ($)", f"{cpa:,.2f}")
+
+    st.divider()
+
+def plot_roas(df: pd.DataFrame):
+    df_grouped = df.groupby("show_id").agg({
+        "spend": "sum",
+        "conversions": "sum"
+    }).reset_index()
+    df_grouped["ROAS"] = df_grouped["conversions"] / df_grouped["spend"]
+    
     fig, ax = plt.subplots()
-    ax.plot(df["date"], df["daily_sales"], marker="o")
-    ax.set_title("Daily Sales Trend")
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Tickets Sold")
-    ax.grid(True)
+    ax.bar(df_grouped["show_id"], df_grouped["ROAS"])
+    ax.set_ylabel("ROAS")
+    ax.set_title("ROAS by Show")
+    ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
 
-def plot_funnel_efficiency(funnel_metrics: dict):
-    st.subheader("🔁 Funnel Efficiency")
-    labels = list(funnel_metrics.keys())
-    values = list(funnel_metrics.values())
+def plot_cpa(df: pd.DataFrame):
+    df_grouped = df.groupby("show_id").agg({
+        "spend": "sum",
+        "conversions": "sum"
+    }).reset_index()
+    df_grouped["CPA"] = df_grouped["spend"] / df_grouped["conversions"].replace(0, 1)
+    
     fig, ax = plt.subplots()
-    ax.bar(labels, values)
-    ax.set_ylabel("Per Ticket")
-    ax.set_title("Funnel: Views / Add to Cart / Sales")
+    ax.bar(df_grouped["show_id"], df_grouped["CPA"])
+    ax.set_ylabel("CPA")
+    ax.set_title("CPA by Show")
+    ax.tick_params(axis='x', rotation=45)
+    st.pyplot(fig)
+
+def plot_conversion_funnel(df: pd.DataFrame, show_id: str):
+    filtered = df[df["show_id"] == show_id]
+    steps = {
+        "Clicks": filtered["clicks"].sum(),
+        "LP Views": filtered["lp_views"].sum(),
+        "Add to Cart": filtered["add_to_cart"].sum(),
+        "Conversions": filtered["conversions"].sum()
+    }
+
+    fig, ax = plt.subplots()
+    ax.bar(steps.keys(), steps.values())
+    ax.set_ylabel("Count")
+    ax.set_title(f"Funnel Breakdown - {show_id}")
     st.pyplot(fig)

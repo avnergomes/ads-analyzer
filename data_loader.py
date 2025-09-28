@@ -1,39 +1,47 @@
-import pandas as pd
 import os
-import glob
-import streamlit as st
+import pandas as pd
+from parser import normalize_show_id, normalize_funnel_label
 
-@st.cache_data(show_spinner=False)
-def load_ads_data(samples_dir="samples"):
-    all_files = glob.glob(os.path.join(samples_dir, "*.csv"))
-    df_list = []
-    for file in all_files:
-        try:
-            df = pd.read_csv(file)
-            df["source_file"] = os.path.basename(file)
-            df_list.append(df)
-        except Exception as e:
-            st.warning(f"Error reading {file}: {e}")
-    if not df_list:
-        return pd.DataFrame()
-    return pd.concat(df_list, ignore_index=True)
-
-@st.cache_data(show_spinner=False)
-def load_sales_data_from_sheet(sheet_url: str) -> pd.DataFrame:
-    try:
-        return pd.read_csv(sheet_url)
-    except Exception as e:
-        st.error(f"Failed to load sheet: {e}")
+def load_ads_data(folder_path: str) -> pd.DataFrame:
+    \"\"\"Load and merge all campaign CSVs in a folder\"\"\"
+    all_data = []
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".csv"):
+            try:
+                df = pd.read_csv(os.path.join(folder_path, filename))
+                df['source_file'] = filename
+                all_data.append(df)
+            except Exception as e:
+                print(f"⚠️ Error loading {filename}: {e}")
+    if not all_data:
         return pd.DataFrame()
 
-def clean_ads_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
-    if "campaign_name" not in df.columns:
-        raise ValueError("Missing 'campaign_name' column in ads CSV")
-    return df.dropna(subset=["campaign_name"])
+    df = pd.concat(all_data, ignore_index=True)
 
-def clean_sales_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
-    if "show_id" not in df.columns:
-        raise ValueError("Missing 'show_id' column in sales data")
-    return df[df["show_id"].notnull()]
+    # Normalize field names
+    df.columns = [col.strip().lower().replace('\\n', '').replace('  ', ' ') for col in df.columns]
+
+    # Create normalized show ID
+    if 'campaign name' in df.columns:
+        df['show_id'] = df['campaign name'].apply(normalize_show_id)
+    elif 'campaign_name' in df.columns:
+        df['show_id'] = df['campaign_name'].apply(normalize_show_id)
+
+    # Funnel stage mapping
+    funnel_map = {
+        'clicks': ['link clicks', 'clicks_all'],
+        'lp_views': ['landing page views', 'landing_page_views_rate_per_link_clicks'],
+        'add_to_cart': ['adds to cart', 'adds_to_cart'],
+        'conversions': ['results', 'conversions'],
+        'spend': ['amount spent (usd)', 'amount_spent_usd'],
+    }
+
+    for key, variants in funnel_map.items():
+        for var in variants:
+            if var in df.columns:
+                df[key] = df[var]
+                break
+        else:
+            df[key] = 0
+
+    return df

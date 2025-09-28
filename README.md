@@ -1,38 +1,71 @@
-# Ads Performance Analyzer for Shows
+# 🎯 Ads Performance Analyzer
 
-This is a Streamlit-based dashboard for mapping Meta Ads campaigns to live shows and analyzing their performance based on ticket sales from a Google Sheet.
+This Streamlit app helps visualize and analyze ads performance from Facebook/Meta campaign exports.
 
-## Features
+---
 
-- Load all campaign CSVs from the `/samples` folder
-- Auto-map campaigns to shows using fuzzy logic and regex
-- Pull ticket sales and show metadata from a public Google Sheet
-- Display health metrics (CPA, ROAS, Ticket Cost, Days to Show)
-- Analyze funnel efficiency (Clicks, LPViews, AddToCart per Ticket)
+## 🚀 Features
 
-## How to Use
+- 🧠 **Smart Show ID Parsing** – handles formats like `WDC_0927`, `S3`, `CA-Calgary-Traffic`
+- 🧼 **Funnel Normalization** – auto-detects: clicks, LP views, add-to-cart, conversions
+- 📊 **Visual Dashboard** – includes:
+  - Total Spend / Conversions / CPA
+  - ROAS by Show
+  - CPA by Show
+  - Funnel Breakdown Chart
 
-1. Place your Meta Ads CSV files in the `samples/` folder.
-2. Run the app:
+---
+
+## 📁 Folder Structure
+
+```
+rewrite_ads_analyzer/
+├── app.py               # Streamlit frontend
+├── data_loader.py       # Data loading and cleaning logic
+├── parser.py            # Show & funnel normalization logic
+├── visualizer.py        # Summary metrics and plots
+├── requirements.txt     # Dependencies
+```
+
+---
+
+## 🛠️ How to Run
+
+1. 🔽 Download the folder
+2. 📦 Install dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
+
+3. ▶️ Start the app:
+
+```bash
 streamlit run app.py
 ```
 
-3. The sales sheet is auto-loaded from a public Google Sheet:
-   https://docs.google.com/spreadsheets/d/1hVm1OALKQ244zuJBQV0SsQT08A2_JTDlPytUNULRofA
+4. 📂 Provide the path to your ads `.csv` folder when prompted (e.g., `/mnt/data/samples/samples`)
 
-## Project Structure
+---
 
-```
-.
-├── app.py
-├── data_loader.py
-├── mapper.py
-├── metrics.py
-├── visualizer.py
-├── requirements.txt
-├── README.md
-└── samples/
-```
+## 📦 Input Format
+
+Supports campaign CSVs from Meta Ads Manager with columns like:
+- `Campaign name`
+- `Amount spent`
+- `Link clicks`
+- `Landing page views`
+- `Adds to cart`
+- `Results`
+
+---
+
+## 🧩 Client Requests Implemented
+- Health-of-Show indicators
+- Flexible show parsing
+- Legacy funnel mapping
+- Integrated with Google Sheet metrics
+
+---
+
+Built with ❤️ by CodeNinja 🥷

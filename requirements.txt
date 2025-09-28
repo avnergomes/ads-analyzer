@@ -1,6 +1,3 @@
 streamlit
 pandas
-numpy
 matplotlib
-fuzzywuzzy
-python-Levenshtein
