@@ -3,18 +3,29 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Iterable, Sequence
 
-import gspread
 import pandas as pd
 import streamlit as st
-from oauth2client.service_account import ServiceAccountCredentials
 from streamlit.runtime.uploaded_file_manager import UploadedFile
+
+try:  # pragma: no cover - optional dependency during local testing
+    import gspread
+    from oauth2client.service_account import ServiceAccountCredentials
+except ImportError:  # pragma: no cover - handled gracefully when missing
+    gspread = None
+    ServiceAccountCredentials = None
 
 ADS_COLUMN_ALIASES = {
     "campaign_name": ["campaign name", "campaign", "ad campaign"],
-    "amount_spent": ["amount spent", "amount spent (usd)", "spend"],
+    "amount_spent": [
+        "amount spent",
+        "amount spent (usd)",
+        "amount spent usd",
+        "spend",
+        "amount_spent_usd",
+    ],
     "clicks": ["link clicks", "clicks", "clicks_all"],
-    "lp_views": ["landing page views", "landing page view", "lp views"],
-    "add_to_cart": ["adds to cart", "add to cart"],
+    "lp_views": ["landing page views", "landing page view", "lp views", "landing_page_views"],
+    "add_to_cart": ["adds to cart", "add to cart", "adds_to_cart"],
     "conversions": ["results", "conversions", "purchases"],
 }
 
@@ -48,7 +59,12 @@ def _rename_ads_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 def _ensure_numeric(df: pd.DataFrame, columns: Sequence[str]) -> pd.DataFrame:
     for column in columns:
-        df[column] = pd.to_numeric(df.get(column, 0), errors="coerce").fillna(0.0)
+        if column not in df.columns:
+            df[column] = 0.0
+            continue
+
+        series = pd.to_numeric(df[column], errors="coerce")
+        df[column] = series.fillna(0.0)
     return df
 
 
@@ -95,6 +111,11 @@ def load_ads_data_from_files(files: Iterable[UploadedFile]) -> pd.DataFrame:
 @st.cache_data(show_spinner=False)
 def load_sales_data_from_sheet(sheet_url: str, credentials_json_path: str) -> pd.DataFrame:
     """Fetch the first worksheet from a Google Sheet using service credentials."""
+    if gspread is None or ServiceAccountCredentials is None:
+        raise RuntimeError(
+            "Google Sheets support requires 'gspread' and 'oauth2client' packages to be installed."
+        )
+
     credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_json_path, _SHEET_SCOPE)
     client = gspread.authorize(credentials)
     spreadsheet = client.open_by_url(sheet_url)
@@ -109,6 +130,7 @@ def clean_ads_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
     df = _normalize_columns(df)
     df = _rename_ads_columns(df)
+    df = df.loc[:, ~df.columns.duplicated()]
 
     required_columns = ["campaign_name", "amount_spent", "clicks", "lp_views", "add_to_cart", "conversions"]
     for column in required_columns:
