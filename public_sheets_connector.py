@@ -2,9 +2,10 @@
 Utility to fetch and clean Sales data from a public Google Sheet
 """
 
+import io
+import numpy as np
 import pandas as pd
 import requests
-import io
 
 class PublicSheetsConnector:
     def __init__(self):
@@ -24,7 +25,7 @@ class PublicSheetsConnector:
             print(f"Error fetching Google Sheet: {e}")
             return None
 
-        def _clean_sales_data(self, df: pd.DataFrame) -> pd.DataFrame:
+    def _clean_sales_data(self, df: pd.DataFrame) -> pd.DataFrame:
         """Clean and standardize sales data from Google Sheets"""
         if df is None or df.empty:
             return df
@@ -45,9 +46,19 @@ class PublicSheetsConnector:
                 df[col] = pd.to_datetime(df[col], errors="coerce")
 
         # Convert numerics
-        num_cols = ["capacity", "venue_holds", "wheelchair_&_companions", "camera",
-                    "artist's_hold", "kills", "yesterday", "today's_sold",
-                    "sales_to_date", "total_sold", "remaining"]
+        num_cols = [
+            "capacity",
+            "venue_holds",
+            "wheelchair_&_companions",
+            "camera",
+            "artist's_hold",
+            "kills",
+            "yesterday",
+            "today's_sold",
+            "sales_to_date",
+            "total_sold",
+            "remaining",
+        ]
         for col in num_cols:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors="coerce")
