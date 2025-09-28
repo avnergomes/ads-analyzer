@@ -6,10 +6,10 @@ from visualizer import show_kpis, plot_roas, plot_cpa, plot_conversion_funnel
 st.set_page_config(page_title="🎯 Ads Performance Analyzer", layout="wide")
 
 st.title("📈 Ads Performance Analyzer")
-st.markdown(\"""
+st.markdown("""
 Upload your folder of CSV campaign files.  
 The app will auto-parse shows, normalize funnel steps, and show ROAS, CPA, and health indicators.
-\""")
+""")
 
 # File upload
 folder = st.text_input("📂 Enter path to ads data folder:", value="/mnt/data/samples/samples")
