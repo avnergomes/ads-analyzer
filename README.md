@@ -16,6 +16,8 @@
 - ✅ City name fallback: "Washington DC #2" → `WDC_0927_S2`
 - ✅ Legacy patterns: "US-DC-Sales-2024 - Interest - 2nd - Support2"
 - ✅ Priority system to avoid conflicts
+- ✅ Dynamic token scoring using Google Sheet show catalog (city, date, time, sequence)
+- ✅ Confidence scoring with full mapping and unmatched campaign audit tables
 
 #### 3. **Improved Funnel Detection**
 - ✅ **F1**: `F1`, `Fun1`, `LPViews`, `LPViews_F1`, `LPViews_Fun1`
@@ -35,6 +37,12 @@
 - ✅ Direct loading from sheet: `https://docs.google.com/spreadsheets/d/1hVm1OALKQ244zuJBQV0SsQT08A2_JTDlPytUNULRofA/edit?gid=0#gid=0`
 - ✅ Automatic sales data processing
 - ✅ Caching for performance
+
+#### 6. **Meta Ads Multi-file Support & Mapping Overview**
+- ✅ Upload and consolidate up to **3 Meta Ads CSV exports** simultaneously
+- ✅ Automatic source tracking and aggregation of spend/results per show
+- ✅ Visual overview of mapped vs unmatched campaigns with confidence scores
+- ✅ Sample unmatched listings to speed up manual review
 
 ## 🚀 Installation and Setup
 
@@ -105,11 +113,11 @@ streamlit run app.py
 #### Option A: Google Sheets (Recommended)
 1. Paste sheet URL in sidebar
 2. Click "Load from Google Sheets"
-3. Upload Meta Ads CSV file
+3. Upload up to **three** Meta Ads CSV exports (e.g., main, device, time breakdown)
 
 #### Option B: File Upload
 1. Upload sales data CSV
-2. Upload Meta Ads data CSV
+2. Upload Meta Ads data CSV files (maximum of three per batch)
 
 ### 2. **Health Dashboard Interpretation**
 
